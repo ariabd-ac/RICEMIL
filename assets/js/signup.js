@@ -17,9 +17,9 @@ continueBtn.onclick = () => {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
         let data = xhr.response;
-        console.log('data: ', data)
+        console.log('data:', data)
         if (data === "success") {
-          location.href = "./src/index.php";
+          location.href = "./admin/index.php";
         } else {
           errorText.style.display = "block";
           errorText.textContent = data;

@@ -1,8 +1,8 @@
 <?php
 session_start();
-include_once "../config/koneksi.php";
+// include_once "../config/koneksi.php";
 if ($_SESSION['level'] != 'reseller') {
-  // if (empty($_SESSION['unique_id']) && empty($_SESSION['admin']) || empty($_SESSION['level'])) {
+  // if (empty($_SESSION['unique_id']) && empty($_SESSION['gudang']) || empty($_SESSION['level'])) {
   //   header("location: 404.php");
   // }
   header("location: 404.php");
@@ -21,20 +21,20 @@ if ($_SESSION['level'] != 'reseller') {
 
 <head>
   <?php
-  include './_partials/head.php';
+  include 'pages/gudang/_partials/head.php';
   ?>
 </head>
 
 <body>
   <?php
-  include './_partials/preloader.php';
+  include 'pages/gudang/_partials/preloader.php';
   ?>
   <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
     <?php
-    include './_partials/header.php';
+    include 'pages/gudang/_partials/header.php';
     ?>
     <?php
-    include './_partials/aside.php';
+    include 'pages/gudang/_partials/aside.php';
     ?>
     <div class="page-wrapper">
       <div class="container-fluid">
@@ -51,7 +51,7 @@ if ($_SESSION['level'] != 'reseller') {
                     <div class="d-flex flex-wrap align-items-center">
                       <div>
                         <h3 class="card-title">Sales Overview</h3>
-                        <h6 class="card-subtitle">Ample Admin Vs Pixel Admin</h6>
+                        <h6 class="card-subtitle">Ample gudang Vs Pixel gudang</h6>
                       </div>
                       <div class="ms-lg-auto mx-sm-auto mx-lg-0">
                         <ul class="list-inline d-flex">
@@ -77,13 +77,13 @@ if ($_SESSION['level'] != 'reseller') {
         </div>
       </div>
       <?php
-      include './_partials/footer.php';
+      include 'pages/gudang/_partials/footer.php';
       ?>
     </div>
 
   </div>
   <?php
-  include './_partials/script.php';
+  include 'pages/gudang/_partials/script.php';
   ?>
 </body>
 

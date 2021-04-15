@@ -2,7 +2,7 @@
 $hostname = "localhost";
 $username = "root";
 $password = "";
-$dbname = "ricemil";
+$dbname = "db_indri_ta";
 
 $conn = mysqli_connect($hostname, $username, $password, $dbname);
 if (!$conn) {
