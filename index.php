@@ -4,7 +4,14 @@
    
     include 'config/koneksi.php';
     $page=$_GET['url'];
-    switch ($page) {
+    $split=explode('/',$page);
+    $controller=$split[0];
+    $fungsi='home';
+
+    if(!empty($split[1])){
+        $fungsi=$split[1];
+    }
+    switch ($controller) {
         case '':
             require 'login.php';
             break;

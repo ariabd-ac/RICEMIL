@@ -9,9 +9,9 @@
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-profile.html" aria-expanded="false">
             <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
         </li>
-        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Laporan</span></a></li>
-        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Pengadaan Stock</span></a></li>
-        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Data Stock</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="gudang/laporan" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Laporan</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="gudang/pengadaanstock" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Pengadaan Stock</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="gudang/datastock" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Data Stock</span></a></li>
         </li>
 
       </ul>
