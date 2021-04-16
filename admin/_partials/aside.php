@@ -14,10 +14,8 @@
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span class="hide-menu">Transaksi</span></a></li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span class="hide-menu">Kasir</span></a></li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span class="hide-menu">Laporan</span></a></li>
-        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-blank.html" aria-expanded="false"><i class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a>
-        </li>
-        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-error-404.html" aria-expanded="false"><i class="mdi me-2 mdi-help-circle"></i><span class="hide-menu">Error 404</span></a>
-        </li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-blank.html" aria-expanded="false"><i class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="managament-user.php" aria-expanded="false"><i class="mdi me-2 mdi-help-circle"></i><span class="hide-menu">Management Users</span></a></li>
 
       </ul>
 
@@ -28,17 +26,21 @@
   <div class="sidebar-footer">
     <div class="row">
       <div class="col-4 link-wrap">
-        <!-- item-->
-        <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Settings"><i class="ti-settings"></i></a>
+        <?php
+        $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
+        if (mysqli_num_rows($sql) > 0) {
+          $row = mysqli_fetch_assoc($sql);
+        }
+        ?>
+        <a href="../php/logout.php?logout_id=<?php echo $row['unique_id']; ?>" alt class="link" title="" data-original-title="Logout"><i class="ti-settings"></i></a>
       </div>
       <div class="col-4 link-wrap">
-        <!-- item-->
-        <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i class="mdi mdi-gmail"></i></a>
+        <a href="" class="link" title="" data-original-title="Email"><i class="mdi mdi-gmail"></i></a>
       </div>
       <div class="col-4 link-wrap">
-        <!-- item-->
-        <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="mdi mdi-power"></i></a>
+        <a href="" class="link" title="" data-original-title="Logout"><i class="mdi mdi-power"></i></a>
       </div>
+
     </div>
   </div>
 </aside>

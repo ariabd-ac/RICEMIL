@@ -17,3 +17,5 @@
 <link href="../assets/plugins/c3-master/c3.min.css" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="../assets/css/style.min.css" rel="stylesheet">
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
