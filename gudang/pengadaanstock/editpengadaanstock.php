@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
     $harga=$_POST['harga'];
     $jumlah=$_POST['jumlah'];
 
-    $query="UPDATE tb_pengadaan_stock SET Nama_barang='$namaBarang',Harga='$harga',Jumlah='$jumlah' WHERE Id_barang='$id'";
+    $query="UPDATE tb_pengadaan_stock SET Harga='$harga',Jumlah='$jumlah' WHERE Id_barang='$id'";
 
     $insert=mysqli_query($conn,$query);
     if($insert){
@@ -21,12 +21,13 @@ if(isset($_POST['submit'])){
     
 }else{
   
-  $query="SELECT * FROM tb_pengadaan_stock WHERE Id_barang=$id";
+  $query="SELECT tp.*,tb.Nama_barang AS namaBarang FROM tb_pengadaan_stock tp LEFT JOIN tb_barang tb ON tb.Id_barang=tp.Nama_barang WHERE tp.Id_barang=$id";
 
   $insert=mysqli_query($conn,$query);
   if($insert){
+
       $hasil=mysqli_fetch_assoc($insert);
-      $namaBarang=$hasil['Nama_barang'];
+      $namaBarang=$hasil['namaBarang'];
       $harga=$hasil['Harga'];
       $jumlah=$hasil['Jumlah'];
       $total=$harga * $jumlah;
@@ -43,8 +44,12 @@ if(isset($_POST['submit'])){
               
                 <form action="" method="post">
                     <div class="form-group">
+                        <!-- <label for="namabarang">Kode Barang</label> -->
+                        <!-- <input type="text" name='Id_Barang' class='form-control' value="<?php echo $idBarang?>" > -->
+                    </div>
+                    <div class="form-group">
                         <label for="namabarang">Nama Barang</label>
-                        <input type="text" name='namabarang' class='form-control' value="<?php echo $namaBarang?>">
+                        <input type="text" name='namabarang' class='form-control' value="<?php echo $namaBarang?>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="namabarang">Jumlah</label>

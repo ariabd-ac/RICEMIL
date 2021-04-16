@@ -13,6 +13,9 @@ if(isset($_POST['submit'])){
     }else{
         die('error '.mysqli_error($conn));
     }  
+}else{
+    $query="SELECT * FROM tb_barang";
+    $res=mysqli_query($conn,$query);
 }
 
 
@@ -26,7 +29,14 @@ if(isset($_POST['submit'])){
     <form action="" method="post">
         <div class="form-group">
             <label for="namabarang">Nama Barang</label>
-            <input type="text" name='namabarang' class='form-control'>
+            <select name="namabarang" id="" class='form-control'>
+                <?php
+                    while($row=mysqli_fetch_assoc($res)){
+                ?>    
+                <option value="<?php echo $row['Id_barang']?>"><?php echo $row['Nama_barang'] ?></option>    
+                <?php    }
+                ?>
+            </select>
         </div>
         <div class="form-group">
             <label for="namabarang">Jumlah</label>

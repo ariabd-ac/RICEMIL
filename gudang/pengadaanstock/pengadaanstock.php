@@ -12,7 +12,7 @@
   </thead>
   <tbody>
       <?php
-          $query="SELECT * FROM tb_pengadaan_stock";
+          $query="SELECT tp.*,tb.Nama_barang AS namaBarang FROM tb_pengadaan_stock tp LEFT JOIN tb_barang tb on tb.Id_barang=tp.Nama_barang";
           $result=mysqli_query($conn,$query);
           
           while($row=mysqli_fetch_assoc($result)){
@@ -20,7 +20,7 @@
               <tr>
               
                   <td><?php echo $row['Id_barang']?></td>
-                  <td><?php echo $row['Nama_barang']?></td>
+                  <td><?php echo $row['namaBarang']?></td>
                   <td><?php echo $row['Jumlah']?></td>
                   <td><?php echo $row['Harga']?></td>
                   <td><?php echo ($row['Harga'] * $row['Jumlah']) ?></td>

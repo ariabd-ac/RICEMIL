@@ -38,7 +38,7 @@ if ($_SESSION['level'] != 'gudang') {
         <!-- ============================================================== -->
         <div class="row">
           <!-- Column -->
-          <div class="col-lg-8">
+          <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
                 <?php
