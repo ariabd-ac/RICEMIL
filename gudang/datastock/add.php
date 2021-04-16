@@ -37,7 +37,7 @@ if(isset($_POST['submit'])){
                 <?php    }
                 ?>
             </select>
-        </div> 
+        </div>
         <div class="form-group">
             <label for="namabarang">Jumlah</label>
             <input type="text" name='jumlah' class='form-control'>
