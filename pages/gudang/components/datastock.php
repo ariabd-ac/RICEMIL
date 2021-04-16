@@ -1,1 +1,0 @@
-<h1>Data Stock</h1>

@@ -1,14 +1,8 @@
 <?php
 session_start();
-// include_once "../config/koneksi.php";
-if ($_SESSION['level'] != 'reseller') {
-  // if (empty($_SESSION['unique_id']) && empty($_SESSION['admin']) || empty($_SESSION['level'])) {
-  //   header("location: 404.php");
-  // }
+include_once "../config/koneksi.php";
+if ($_SESSION['level'] != 'admin') {
   header("location: 404.php");
-  // if (isset($_SESSION['unique_id'])) {
-  //   header("location: 404.php");
-  // }
 }
 ?>
 
@@ -21,20 +15,20 @@ if ($_SESSION['level'] != 'reseller') {
 
 <head>
   <?php
-  include 'pages/admin/_partials/head.php';
+  include './_partials/head.php';
   ?>
 </head>
 
 <body>
   <?php
-  include 'pages/admin/_partials/preloader.php';
+  include './_partials/preloader.php';
   ?>
   <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
     <?php
-    include 'pages/admin/_partials/header.php';
+    include './_partials/header.php';
     ?>
     <?php
-    include 'pages/admin/_partials/aside.php';
+    include './_partials/aside.php';
     ?>
     <div class="page-wrapper">
       <div class="container-fluid">
@@ -77,13 +71,13 @@ if ($_SESSION['level'] != 'reseller') {
         </div>
       </div>
       <?php
-      include 'pages/admin/_partials/footer.php';
+      include './_partials/footer.php';
       ?>
     </div>
 
   </div>
   <?php
-  include 'pages/admin/_partials/script.php';
+  include './_partials/script.php';
   ?>
 </body>
 

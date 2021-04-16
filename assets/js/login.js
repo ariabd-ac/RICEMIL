@@ -18,13 +18,13 @@ continueBtn.onclick = () => {
       if (xhr.status === 200) {
         let data = xhr.response;
         if (data === "reseller") {
-          location.href = "./admin/";
+          location.href = "./reseller/";
         } if (data === "admin") {
           location.href = "./admin/";
         } if (data === "gudang") {
-          location.href = "./admin/";
+          location.href = "./gudang/";
         } if (data === "suplier") {
-          location.href = "./admin/";
+          location.href = "./suplier/";
         }
         else {
           errorText.style.display = "block";

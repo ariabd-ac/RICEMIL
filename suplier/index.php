@@ -1,14 +1,8 @@
 <?php
 session_start();
-// include_once "../config/koneksi.php";
-if ($_SESSION['level'] != 'reseller') {
-  // if (empty($_SESSION['unique_id']) && empty($_SESSION['supplier']) || empty($_SESSION['level'])) {
-  //   header("location: 404.php");
-  // }
+include_once "../config/koneksi.php";
+if ($_SESSION['level'] != 'suplier') {
   header("location: 404.php");
-  // if (isset($_SESSION['unique_id'])) {
-  //   header("location: 404.php");
-  // }
 }
 ?>
 
@@ -21,20 +15,20 @@ if ($_SESSION['level'] != 'reseller') {
 
 <head>
   <?php
-  include 'pages/supplier/_partials/head.php';
+  include './_partials/head.php';
   ?>
 </head>
 
 <body>
   <?php
-  include 'pages/supplier/_partials/preloader.php';
+  include './_partials/preloader.php';
   ?>
   <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
     <?php
-    include 'pages/supplier/_partials/header.php';
+    include './_partials/header.php';
     ?>
     <?php
-    include 'pages/supplier/_partials/aside.php';
+    include './_partials/aside.php';
     ?>
     <div class="page-wrapper">
       <div class="container-fluid">
@@ -51,7 +45,7 @@ if ($_SESSION['level'] != 'reseller') {
                     <div class="d-flex flex-wrap align-items-center">
                       <div>
                         <h3 class="card-title">Sales Overview</h3>
-                        <h6 class="card-subtitle">Ample supplier Vs Pixel supplier</h6>
+                        <h6 class="card-subtitle">Ample Admin Vs Pixel Admin</h6>
                       </div>
                       <div class="ms-lg-auto mx-sm-auto mx-lg-0">
                         <ul class="list-inline d-flex">
@@ -77,13 +71,13 @@ if ($_SESSION['level'] != 'reseller') {
         </div>
       </div>
       <?php
-      include 'pages/supplier/_partials/footer.php';
+      include './_partials/footer.php';
       ?>
     </div>
 
   </div>
   <?php
-  include 'pages/supplier/_partials/script.php';
+  include './_partials/script.php';
   ?>
 </body>
 
