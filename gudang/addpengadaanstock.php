@@ -19,16 +19,6 @@ if(isset($_POST['submit'])){
         die('error '.mysqli_error($conn));
     }
     
-}else{
-    $id=$_GET['id'];
-    $query="SELECT * FROM tb_pengadaan_stock WHERE Id_barang=$id";
-
-    $insert=mysqli_query($conn,$query);
-    if($insert){
-        die('Ketemu');
-    }else{
-        die('error '.mysqli_error($conn));
-    }
 }
 
 
