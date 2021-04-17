@@ -35,8 +35,39 @@ if ($_SESSION['level'] != 'reseller') {
       <div class="container-fluid">
         <!-- ============================================================== -->
         <!-- Sales chart -->
-        <!-- ============================================================== -->   
-                <?php include 'barang/index.php';?>
+        <!-- ============================================================== -->
+        <?php
+                  if(isset($_GET['page'])){
+                    $page=$_GET['page'];
+                    // die($page);
+                    if($page=="barang"){
+                      if(isset($_GET['modul'])){
+                        $modul=$_GET['modul'];
+                        // die($modul);
+                        switch ($modul) {
+                          case 'detail':
+                            include 'barang/detail.php';
+                            break;
+                          case 'pesan':
+                          
+                            break;
+                          default:
+                            
+                            break;
+                        }
+                      }else{
+                        include 'barang/index.php';
+                      }
+                    }
+                  }else{
+                    include 'barang/index.php';
+
+                  }
+
+                  
+                ?>
+                
+                
       </div>
       <?php
       include './_partials/footer.php';

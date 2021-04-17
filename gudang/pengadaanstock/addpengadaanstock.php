@@ -9,6 +9,11 @@ if(isset($_POST['submit'])){
 
     $insert=mysqli_query($conn,$query);
     if($insert){
+        $queryUpdate="UPDATE tb_barang SET stock=((SELECT stock FROM tb_barang WHERE Id_barang='$namaBarang') + $jumlah) WHERE Id_barang='$namaBarang'";
+        $update=mysqli_query($conn,$queryUpdate);
+        if(!$update){
+            die("Err Update Stock ".mysqli_error($conn));
+        }
         header('Location:/ricemil/gudang/index.php?page=pengadaanstock');
     }else{
         die('error '.mysqli_error($conn));

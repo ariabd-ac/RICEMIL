@@ -10,7 +10,7 @@
   </thead>
   <tbody>
       <?php
-          $query="SELECT tb.*,tbs.stock FROM tb_barang tb LEFT JOIN tb_data_stock tbs ON tbs.Id_barang=tb.Id_barang";
+          $query="SELECT tb.* FROM tb_barang tb";
           $result=mysqli_query($conn,$query);
             if(!$result){
                 die('err'.mysqli_error($conn));
