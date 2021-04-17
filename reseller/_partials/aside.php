@@ -9,7 +9,8 @@
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-profile.html" aria-expanded="false">
             <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
         </li>
-        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Data Produk</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ricemil/reseller/index.php?page=barang" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Data Produk</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ricemil/reseller/index.php?page=riwayatbelanja" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Riwayat Belanja</span></a></li>
 
 
       </ul>

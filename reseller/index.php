@@ -58,6 +58,9 @@ if ($_SESSION['level'] != 'reseller') {
                       }else{
                         include 'barang/index.php';
                       }
+                    }elseif($page=="riwayatbelanja"){
+                      
+                      include 'riwayatbelanja/riwayatorder.php';
                     }
                   }else{
                     include 'barang/index.php';
@@ -78,6 +81,7 @@ if ($_SESSION['level'] != 'reseller') {
   <?php
   include './_partials/script.php';
   ?>
+  
 </body>
 
 </html>

@@ -17,15 +17,15 @@
         $id=$_POST['id'];
         $jmlPesan=$_POST['jml'];
         $harga=$_POST['harga'];
-
+        $user=$_SESSION['unique_id'];
+        $metodeBayar=$_POST['metodebayar'];
 
         if($jmlPesan == null || $jmlPesan ==''){
           die('harap Masukan Jumlah Pesanan');
         }
         $total=(float)$harga * (float)$jmlPesan;
-        // die($total);
     
-        $queryInser="INSERT INTO tb_order_masuk(Id_barang,qty,total) VALUES ('$id','$jmlPesan','$total')";
+        $queryInser="INSERT INTO tb_order_masuk(Id_barang,qty,total,order_by,metode_bayar) VALUES ('$id','$jmlPesan','$total','$user','$metodeBayar')";
         $insert=mysqli_query($conn,$queryInser);
         if($insert){
             $updateQuey="UPDATE tb_barang tb SET tb.stock=(tb.stock - $jmlPesan) WHERE tb.Id_barang='$id'";
@@ -53,18 +53,54 @@
             </div>
             <div class="desc">
                 <h4><?php echo $r['Nama_barang']?></h4>
-                <p>Stock <?php echo $r['stock']?></p>
+                <p>Stock <span id='stock'><?php echo $r['stock']?></span></p>
                 <p>Rp. <?php echo $r['harga']?></p>
             </div>
         </div>
         <div class="card-footer">
             <form action="" method="post">
                 <input type="hidden" name="id" value="<?php echo $r['Id_barang'];?>">
-                <input type="text" class='form-control' name='jml'>
-                <input type="hidden" class='form-control' name='harga' value="<?php echo $r['harga']?>">
+                <input type="text" class='form-control' id='jml' name='jml'>
+                <input type="hidden" class='form-control'  name='harga' value="<?php echo $r['harga']?>">
                 <br>
-                <input type="submit" name="submit" class='btn btn-info form-control' value="Pesan Sekarang">
+                <div class="form-group" id="metodepembayaran" style="display:none;">
+                    <label for="">Metode Pembayaran</label>
+                    <select name="metodebayar" id="metodebayar" class='form-control'>
+                        <option value="0">....</option>
+                        <option value="1">COD</option>
+                        <option value="2">Upload Bukti Transaksi</option>
+                    </select>
+                </div>
+                <input type="submit" name="submit" id='submit' class='btn btn-info form-control' value="Pesan Sekarang">
             </form>
         </div>
     </div>
 </div>
+<script>
+    let stock=document.getElementById('stock');
+    let inputName=document.getElementById('jml');
+    let btnSubmit=document.getElementById('submit');
+    let inputMetode=document.getElementById('metodebayar');
+    let divMetode=document.getElementById('metodepembayaran');
+
+    inputName.addEventListener('input',(e)=>{
+        console.log(inputName.value);
+        if(Number(inputName.value) > Number(stock.innerHTML)){
+            alert('Stock Tidak Cukup');
+            inputName.value=''
+        }
+    })  
+
+    submit.addEventListener('click',(e)=>{
+        
+        if(inputName.value == '' || inputName.value ==null){
+        e.preventDefault();
+            alert('Masukan Jumlah Pesanan')
+        }
+        if(inputMetode.value== 0){
+            e.preventDefault();
+            divMetode.style.display='block';
+        }
+    })
+
+</script>
