@@ -1,6 +1,6 @@
 <div class="row">
 <?php
-    $query="SELECT tb.*,tbs.stock FROM tb_barang tb LEFT JOIN tb_data_stock tbs ON tbs.Id_barang=tb.Id_barang";
+    $query="SELECT * FROM tb_barang";
     $res=mysqli_query($conn,$query);
 
     if(!$res){
@@ -19,10 +19,11 @@
                     <h4><?php echo $r['Nama_barang']?></h4>
                     <p>Stock <?php echo $r['stock']?></p>
                     <p>Rp. <?php echo $r['harga']?></p>
+                  
                 </div>
             </div>
             <div class="card-footer">
-                <button class='btn btn-info'>Pesan</button>
+                <a class='btn btn-info' href="/ricemil/reseller/index.php?page=barang&modul=detail&id=<?php echo $r['Id_barang'];?>">Detail</a>
             </div>
         </div>
     </div>
