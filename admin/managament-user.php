@@ -55,46 +55,31 @@ if ($_SESSION['level'] != 'admin') {
                             <th class="border-top-0">Last Name</th>
                             <th class="border-top-0">Username</th>
                             <th class="border-top-0">Email</th>
-                            <th class="border-top-0">level</th>
+                            <th class="border-top-0">Level</th>
+                            <th class="border-top-0">Options</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Deshmukh</td>
-                            <td>Prohaska</td>
-                            <td>@Genelia</td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>Deshmukh</td>
-                            <td>Gaylord</td>
-                            <td>@Ritesh</td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>Sanghani</td>
-                            <td>Gusikowski</td>
-                            <td>@Govinda</td>
-                          </tr>
-                          <tr>
-                            <td>4</td>
-                            <td>Roshan</td>
-                            <td>Rogahn</td>
-                            <td>@Hritik</td>
-                          </tr>
-                          <tr>
-                            <td>5</td>
-                            <td>Joshi</td>
-                            <td>Hickle</td>
-                            <td>@Maruti</td>
-                          </tr>
-                          <tr>
-                            <td>6</td>
-                            <td>Nigam</td>
-                            <td>Eichmann</td>
-                            <td>@Sonu</td>
-                          </tr>
+                          <?php
+                          $no = 1;
+                          $q = "SELECT * FROM users ";
+                          $results = mysqli_query($conn, $q);
+                          var_dump($results);
+                          // die;
+                          foreach ($results as $res) { ?>
+                            <tr>
+                              <td><?= $no++ ?></td>
+                              <td><?= $res['fname'] ?></td>
+                              <td><?= $res['lname'] ?></td>
+                              <td><?= $res['username'] ?></td>
+                              <td><?= $res['email'] ?></td>
+                              <td><?= $res['level'] ?></td>
+                              <td> <a href="pakar.php?a=edit-gejala&kode=<?= $res['user_id'] ?>" class="btn btn-primary btn-round btn-sm">Edit</a>
+                                <hr>
+                                <a href="pakar.php?a=del-gejala&kode=<?= $res['user_id'] ?>" class="btn btn-danger btn-round btn-sm">Del</a>
+                              </td>
+                            </tr>
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>

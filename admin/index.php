@@ -42,45 +42,76 @@ if ($_SESSION['level'] != 'admin') {
             <div class="card">
               <div class="card-body">
                 <?php
-                if(isset($_GET['page'])){
-                  $page=$_GET['page'];
+                if (isset($_GET['page'])) {
+                  $page = $_GET['page'];
                   // die($page);
                   switch ($page) {
                     case 'databarang':
-                        if(isset($_GET['modul'])){
-                          $modul=$_GET['modul'];
-                          switch ($modul) {
-                            case 'add':
-                              include 'databarang/add.php';
-                              break;
-                              case 'edit':
-                                include 'databarang/edit.php';     
-                              break;
-                            case 'delete':
-                              if(isset($_GET['id'])){
-                                $id=$_GET['id'];
-                                $query="DELETE FROM tb_barang WHERE Id_barang='$id'";
-                        
-                                $insert=mysqli_query($conn,$query);
-                                if($insert){
-                                    header('location:/ricemil/admin/index.php?page=databarang');
-                                }else{
-                                    die('error '.mysqli_error($conn));
-                                }
+                      if (isset($_GET['modul'])) {
+                        $modul = $_GET['modul'];
+                        switch ($modul) {
+                          case 'add':
+                            include 'databarang/add.php';
+                            break;
+                          case 'edit':
+                            include 'databarang/edit.php';
+                            break;
+                          case 'delete':
+                            if (isset($_GET['id'])) {
+                              $id = $_GET['id'];
+                              $query = "DELETE FROM tb_barang WHERE Id_barang='$id'";
+
+                              $insert = mysqli_query($conn, $query);
+                              if ($insert) {
+                                header('location:/ricemil/admin/index.php?page=databarang');
+                              } else {
+                                die('error ' . mysqli_error($conn));
                               }
-                              break;
-                            
-                            default:
-                              include 'databarang/index.php';
-                              break;
-                          }
-                        }else{
-                          include 'databarang/index.php';
+                            }
+                            break;
+
+                          default:
+                            include 'databarang/index.php';
+                            break;
                         }
+                      } else {
+                        include 'databarang/index.php';
+                      }
                       break;
-                    
+
+                    case 'account':
+                      if (isset($_GET['modul'])) {
+                        $modul  = $_GET['modul'];
+                        switch ($modul) {
+                          case 'add':
+                            include 'management/add.php';
+                            break;
+                          case 'edit':
+                            include 'management/edit.php';
+                            break;
+                          case 'delete':
+                            if (isset($_GET['user_id'])) {
+                              $id = $_GET['user_id'];
+                              $query = "DELETE FROM users WHERE user_id = '$id'";
+
+                              $insert = mysqli_query($conn, $query);
+                              if ($insert) {
+                                header('location:/ricemil/admin/index.php?page=account');
+                              } else {
+                                die('error ' . mysqli_error($conn));
+                              }
+                            }
+                            break;
+                          default:
+                            include 'management/index.php';
+                            break;
+                        }
+                      } else {
+                        include 'management/index.php';
+                      }
+
                     default:
-                      # code...
+
                       break;
                   }
                 }
