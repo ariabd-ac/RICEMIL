@@ -28,7 +28,7 @@
         $queryInser="INSERT INTO tb_order_masuk(Id_barang,qty,total) VALUES ('$id','$jmlPesan','$total')";
         $insert=mysqli_query($conn,$queryInser);
         if($insert){
-            $updateQuey="UPDATE tb_barang SET stock=((SELECT stock FROM tb_barang WHERE Id_barang='$id') - $jmlPesan) WHERE Id_barang='$id'";
+            $updateQuey="UPDATE tb_barang tb SET tb.stock=(tb.stock - $jmlPesan) WHERE tb.Id_barang='$id'";
 
             $updateExec=mysqli_query($conn,$updateQuey);
             if($updateExec){

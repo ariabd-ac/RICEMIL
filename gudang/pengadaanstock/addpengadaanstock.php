@@ -9,7 +9,7 @@ if(isset($_POST['submit'])){
 
     $insert=mysqli_query($conn,$query);
     if($insert){
-        $queryUpdate="UPDATE tb_barang SET stock=((SELECT stock FROM tb_barang WHERE Id_barang='$namaBarang') + $jumlah) WHERE Id_barang='$namaBarang'";
+        $queryUpdate="UPDATE tb_barang tb SET tb.stock=(tb.stock + $jumlah) WHERE tb.Id_barang='$namaBarang'";
         $update=mysqli_query($conn,$queryUpdate);
         if(!$update){
             die("Err Update Stock ".mysqli_error($conn));
