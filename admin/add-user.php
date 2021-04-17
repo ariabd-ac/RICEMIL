@@ -139,14 +139,18 @@ if (isset($_POST['simpan-users'])) {
   }
   if ($insert_query) { ?>
     <script>
-      Swal.fire(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-      )
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      }, setTimeout(function() {
+        window.location.href = "managament-user.php";
+      }, 1000))
+      // window.location = "managament-user.php"
     </script>
 <?php
-    // header('location: managament-user.php');
   } else {
     die('err :' . mysqli_error($conn));
   }

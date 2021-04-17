@@ -54,6 +54,8 @@ if ($_SESSION['level'] != 'admin') {
                             <th class="border-top-0">First Name</th>
                             <th class="border-top-0">Last Name</th>
                             <th class="border-top-0">Username</th>
+                            <th class="border-top-0">Email</th>
+                            <th class="border-top-0">level</th>
                           </tr>
                         </thead>
                         <tbody>
