@@ -12,7 +12,7 @@
   </thead>
   <tbody>
       <?php
-          $query="SELECT tp.*,tb.Nama_barang AS namaBarang FROM tb_pengadaan_stock tp LEFT JOIN tb_barang tb on tb.Id_barang=tp.Nama_barang";
+          $query="SELECT tp.*,tb.Nama_barang AS namaBarang FROM tb_pengadaan_stock tp LEFT JOIN tb_barang tb on tb.Id_barang=tp.Nama_barang ORDER BY Id_barang DESC";
           $result=mysqli_query($conn,$query);
           
           while($row=mysqli_fetch_assoc($result)){
