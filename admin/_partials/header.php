@@ -20,6 +20,7 @@
         <li class="nav-item">
           <a class="nav-toggler nav-link waves-effect waves-light text-white " href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
         </li>
+        
       </ul>
       <!-- ============================================================== -->
       <!-- toggle and nav items -->
@@ -34,6 +35,9 @@
           <form class="app-search" style="display: none;">
             <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
           </form>
+        </li>
+        <li class="nav-item d-end">
+          <a class="nav-link" href="/ricemil/php/logout.php">Logout</a>
         </li>
       </ul>
 

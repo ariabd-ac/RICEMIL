@@ -35,6 +35,9 @@
             <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
           </form>
         </li>
+        <li class="nav-item d-end">
+          <a class="nav-link" href="/ricemil/php/logout.php">Logout</a>
+        </li>
       </ul>
 
       <!-- ============================================================== -->

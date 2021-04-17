@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once "../config/koneksi.php";
-if ($_SESSION['level'] != 'gudang') {
+if ($_SESSION['level'] != 'admin') {
   header("location: 404.php");
 }
 ?>
@@ -40,9 +40,31 @@ if ($_SESSION['level'] != 'gudang') {
           <div class="col-lg-8">
             <div class="card">
               <div class="card-body">
-                <table>
-                    
-                </table>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="d-flex flex-wrap align-items-center">
+                      <div>
+                        <h3 class="card-title">Sales Overview</h3>
+                        <h6 class="card-subtitle">Ample Admin Vs Pixel Admin</h6>
+                      </div>
+                      <div class="ms-lg-auto mx-sm-auto mx-lg-0">
+                        <ul class="list-inline d-flex">
+                          <li class="me-4">
+                            <h6 class="text-success"><i class="fa fa-circle font-10 me-2 "></i>Ample</h6>
+                          </li>
+                          <li>
+                            <h6 class="text-info"><i class="fa fa-circle font-10 me-2"></i>Pixel</h6>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="amp-pxl" style="height: 360px;">
+                      <div class="chartist-tooltip"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

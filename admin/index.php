@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include_once "../config/koneksi.php";
 if ($_SESSION['level'] != 'admin') {
@@ -21,7 +22,7 @@ if ($_SESSION['level'] != 'admin') {
 
 <body>
   <?php
-  include './_partials/preloader.php';
+  // include './_partials/preloader.php';
   ?>
   <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
     <?php
@@ -37,34 +38,53 @@ if ($_SESSION['level'] != 'admin') {
         <!-- ============================================================== -->
         <div class="row">
           <!-- Column -->
-          <div class="col-lg-8">
+          <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="d-flex flex-wrap align-items-center">
-                      <div>
-                        <h3 class="card-title">Sales Overview</h3>
-                        <h6 class="card-subtitle">Ample Admin Vs Pixel Admin</h6>
-                      </div>
-                      <div class="ms-lg-auto mx-sm-auto mx-lg-0">
-                        <ul class="list-inline d-flex">
-                          <li class="me-4">
-                            <h6 class="text-success"><i class="fa fa-circle font-10 me-2 "></i>Ample</h6>
-                          </li>
-                          <li>
-                            <h6 class="text-info"><i class="fa fa-circle font-10 me-2"></i>Pixel</h6>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="amp-pxl" style="height: 360px;">
-                      <div class="chartist-tooltip"></div>
-                    </div>
-                  </div>
-                </div>
+                <?php
+                if(isset($_GET['page'])){
+                  $page=$_GET['page'];
+                  // die($page);
+                  switch ($page) {
+                    case 'databarang':
+                        if(isset($_GET['modul'])){
+                          $modul=$_GET['modul'];
+                          switch ($modul) {
+                            case 'add':
+                              include 'databarang/add.php';
+                              break;
+                              case 'edit':
+                                include 'databarang/edit.php';     
+                              break;
+                            case 'delete':
+                              if(isset($_GET['id'])){
+                                $id=$_GET['id'];
+                                $query="DELETE FROM tb_barang WHERE Id_barang='$id'";
+                        
+                                $insert=mysqli_query($conn,$query);
+                                if($insert){
+                                    header('location:/ricemil/admin/index.php?page=databarang');
+                                }else{
+                                    die('error '.mysqli_error($conn));
+                                }
+                              }
+                              break;
+                            
+                            default:
+                              include 'databarang/index.php';
+                              break;
+                          }
+                        }else{
+                          include 'databarang/index.php';
+                        }
+                      break;
+                    
+                    default:
+                      # code...
+                      break;
+                  }
+                }
+                ?>
               </div>
             </div>
           </div>
