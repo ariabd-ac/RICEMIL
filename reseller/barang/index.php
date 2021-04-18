@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class='d-flex align-center justify-content-center'>
                         <a class='bg-image hover-overlay' href="/ricemil/reseller/index.php?page=barang&modul=detail&id=<?php echo $r['Id_barang']; ?>" style="text-decoration: none;">
-                            <img src="http://localhost/ricemil/assets/images/produk/<?php echo $r['gambar'] ?>" alt="" width="350px">
+                            <img src="http://localhost/ricemil/assets/images/produk/<?php echo $r['gambar'] ?>" alt="" width="100%">
                         </a>
                     </div>
                     <div class="desc">
