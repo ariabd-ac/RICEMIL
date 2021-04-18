@@ -11,8 +11,8 @@
         </li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ricemil/admin/index.php?page=databarang" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Data Barang</span></a></li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Data Supplier</span></a></li>
-        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html" aria-expanded="false"><i class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Kelola Pesanan</span></a></li>
-        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span class="hide-menu">Transaksi</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ricemil/admin/index.php?page=kelolapesanan" aria-expanded="false"><i class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Kelola Pesanan</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ricemil/admin/index.php?page=transaksi" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span class="hide-menu">Transaksi</span></a></li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span class="hide-menu">Kasir</span></a></li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html" aria-expanded="false"><i class="mdi me-2 mdi-earth"></i><span class="hide-menu">Laporan</span></a></li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-blank.html" aria-expanded="false"><i class="mdi me-2 mdi-book-open-variant"></i><span class="hide-menu">Blank</span></a></li>
