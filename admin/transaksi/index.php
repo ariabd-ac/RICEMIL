@@ -1,3 +1,20 @@
+<?php
+
+if(isset($_POST['submit'])){
+    $id=$_POST['id'];
+    $status=$_POST['status'];
+    $queryUpdate="UPDATE tb_transaksi SET status='$status' WHERE Id_transaksi='$id'";
+
+    $updateExec=mysqli_query($conn,$queryUpdate);
+    if(!$updateExec){
+        die('Err'.mysqli_error($conn));
+    }else{
+        header('location:/ricemil/admin/index.php?page=transaksi');
+    }
+
+}
+?>
+
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Menunggu Di Kirim</button>
@@ -23,7 +40,6 @@
             <th class="border-top-0">Oleh</th>
             <th class="border-top-0">Status</th>
             <th class="border-top-0">Action</th>
-            
         </tr>
     </thead>
     <tbody>
@@ -53,7 +69,11 @@
                         <td><?php echo $row['oleh'] ?></td>
                         <td><?php echo $row['status'] ? 'Diproses' : 'Dikirim' ?></td>
                         <td>
-                            <a class='btn btn-info' href="/ricemil/admin/index.php?page=transaksi&modul=detail&id=<?php echo $row['Id_order'] ?>">Detail</a>
+                            <form action="" method="post">
+                                <input type="hidden" value="<?php echo $row['Id_transaksi']?>" name='id'>
+                                <input type="hidden" value="2" name='status'>
+                                <input type="submit" value="Dikirim" class='btn btn-info' name='submit'>
+                            </form>
                         </td>
                     </tr>
         <?php    
@@ -74,27 +94,19 @@
             <th class="border-top-0">Total</th>
             <th class="border-top-0">Oleh</th>
             <th class="border-top-0">Status</th>
-            <th class="border-top-0">Action</th>
+            <th class="border-top-0">Actionya</th>
             
         </tr>
     </thead>
     <tbody>
         <?php
-        //   die('Halo');
-            $query="SELECT 
-                    T.Tanggal_transaksi AS date,T.Jumlah_pesanan AS Jumlah,T.Harga,T.Total_bayar,T.status,T.Id_transaksi,
-                    CONCAT(U.fname,' ',U.lname) AS oleh,
-                    TB.Nama_barang AS namaBarang
-                    FROM tb_transaksi T 
-                    LEFT JOIN tb_barang TB ON TB.Id_barang=T.id_barang
-                    LEFT JOIN users U ON U.unique_id=T.Id_pelanggan
-                    ORDER BY T.Tanggal_transaksi DESC";
-            $result=mysqli_query($conn,$query);
+             $result=mysqli_query($conn,$query);
             if(!$result){
                 die('Err'.mysqli_error($conn));
             }
             while($row=mysqli_fetch_assoc($result)){
-                if($row['status']=='2'){?>
+                
+                if($row['status']==='2'){?>
                     <tr>
                         <td><?php echo $row['Id_transaksi']?></td>
                         <td><?php echo $row['namaBarang']?></td>
@@ -103,9 +115,13 @@
                         <td><?php echo $row['Harga']?></td>
                         <td><?php echo $row['Total_bayar'] ?></td>
                         <td><?php echo $row['oleh'] ?></td>
-                        <td><?php echo $row['status'] ? 'Diproses' : 'Dikirim' ?></td>
+                        <td>Sedang Dikirim</td>
                         <td>
-                            <a class='btn btn-info' href="/ricemil/admin/index.php?page=transaksi&modul=detail&id=<?php echo $row['Id_order'] ?>">Detail</a>
+                        <form action="" method="post">
+                                <input type="hidden" value="<?php echo $row['Id_transaksi']?>" name='id'>
+                                <input type="hidden" value="3" name='status'>
+                                <input type="submit" value="Tandai Selesai" class='btn btn-info' name='submit'>
+                            </form>
                         </td>
                     </tr>
         <?php    
@@ -126,27 +142,18 @@
             <th class="border-top-0">Total</th>
             <th class="border-top-0">Oleh</th>
             <th class="border-top-0">Status</th>
-            <th class="border-top-0">Action</th>
             
         </tr>
     </thead>
     <tbody>
         <?php
         //   die('Halo');
-            $query="SELECT 
-                    T.Tanggal_transaksi AS date,T.Jumlah_pesanan AS Jumlah,T.Harga,T.Total_bayar,T.status,T.Id_transaksi,
-                    CONCAT(U.fname,' ',U.lname) AS oleh,
-                    TB.Nama_barang AS namaBarang
-                    FROM tb_transaksi T 
-                    LEFT JOIN tb_barang TB ON TB.Id_barang=T.id_barang
-                    LEFT JOIN users U ON U.unique_id=T.Id_pelanggan
-                    ORDER BY T.Tanggal_transaksi DESC";
             $result=mysqli_query($conn,$query);
             if(!$result){
                 die('Err'.mysqli_error($conn));
             }
             while($row=mysqli_fetch_assoc($result)){
-                if($row['status']=='3'){?>
+                if($row['status']=='3' || $row['status']=='4'){?>
                     <tr>
                         <td><?php echo $row['Id_transaksi']?></td>
                         <td><?php echo $row['namaBarang']?></td>
@@ -155,10 +162,8 @@
                         <td><?php echo $row['Harga']?></td>
                         <td><?php echo $row['Total_bayar'] ?></td>
                         <td><?php echo $row['oleh'] ?></td>
-                        <td><?php echo $row['status'] ? 'Diproses' : 'Dikirim' ?></td>
-                        <td>
-                            <a class='btn btn-info' href="/ricemil/admin/index.php?page=transaksi&modul=detail&id=<?php echo $row['Id_order'] ?>">Detail</a>
-                        </td>
+                        <td><?php echo $row['status'] == '3' ? 'Menunggu Konfirmasi Pelanggan' : 'Transaksi Telah Selesai' ?></td>
+                        
                     </tr>
         <?php    
             }}

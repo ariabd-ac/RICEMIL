@@ -18,6 +18,8 @@ if (isset($_POST['update-users'])) {
 
   $encrypt_pass = md5($password);
 
+  // die(gettype($encrypt_pass));
+
   $query = "UPDATE users SET username='$username',fname='$fname', lname = '$lname', email = '$email', level = '$level' , password = '$encrypt_pass' , alamat = '$alamat' WHERE user_id='$id'";
 
   $insert = mysqli_query($conn, $query);
