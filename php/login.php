@@ -20,9 +20,9 @@ if (!empty($username) && !empty($password)) {
       } else if ($_SESSION['level'] == 'gudang') {
         $_SESSION['unique_id'] = $row['unique_id'];
         echo "gudang";
-      } else if ($_SESSION['level'] == 'suplier') {
+      } else if ($_SESSION['level'] == 'supplier') {
         $_SESSION['unique_id'] = $row['unique_id'];
-        echo "suplier";
+        echo "supplier";
       }
     } else {
       echo "Email or Password is Incorrect!";

@@ -23,8 +23,8 @@ continueBtn.onclick = () => {
           location.href = "./admin/";
         } if (data === "gudang") {
           location.href = "./gudang/";
-        } if (data === "suplier") {
-          location.href = "./suplier/";
+        } if (data === "supplier") {
+          location.href = "./supplier/";
         }
         else {
           errorText.style.display = "block";

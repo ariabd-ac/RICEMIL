@@ -37,40 +37,49 @@ if ($_SESSION['level'] != 'reseller') {
         <!-- Sales chart -->
         <!-- ============================================================== -->
         <?php
-                  if(isset($_GET['page'])){
-                    $page=$_GET['page'];
-                    // die($page);
-                    if($page=="barang"){
-                      if(isset($_GET['modul'])){
-                        $modul=$_GET['modul'];
-                        // die($modul);
-                        switch ($modul) {
-                          case 'detail':
-                            include 'barang/detail.php';
-                            break;
-                          case 'pesan':
-                          
-                            break;
-                          default:
-                            
-                            break;
-                        }
-                      }else{
-                        include 'barang/index.php';
-                      }
-                    }elseif($page=="riwayatbelanja"){
-                      
-                      include 'riwayatbelanja/riwayatorder.php';
-                    }
-                  }else{
-                    include 'barang/index.php';
+        if (isset($_GET['page'])) {
+          $page = $_GET['page'];
+          // die($page);
+          if ($page == "barang") {
+            if (isset($_GET['modul'])) {
+              $modul = $_GET['modul'];
+              // die($modul);
+              switch ($modul) {
+                case 'detail':
+                  include 'barang/detail.php';
+                  break;
+                case 'pesan':
 
-                  }
+                  break;
+                default:
 
-                  
-                ?>
-                
-                
+                  break;
+              }
+            } else {
+              include 'barang/index.php';
+            }
+          } elseif ($page == "riwayatbelanja") {
+            include 'riwayatbelanja/riwayatorder.php';
+          } else if ($page == 'profile') {
+            if (isset($_GET['modul'])) {
+              $modul = $_GET['modul'];
+              switch ($modul) {
+                case 'edit':
+                  include 'profile/edit.php';
+                  break;
+              }
+            } else {
+              include 'profile/index.php';
+            }
+          }
+        } else {
+          include 'barang/index.php';
+        }
+
+
+        ?>
+
+
       </div>
       <?php
       include './_partials/footer.php';
@@ -81,7 +90,7 @@ if ($_SESSION['level'] != 'reseller') {
   <?php
   include './_partials/script.php';
   ?>
-  
+
 </body>
 
 </html>

@@ -7,8 +7,8 @@ if (isset($_SESSION['unique_id']) && $_SESSION['level']  == 'admin') {
     header("location: ./reseller/index.php");
 } else if (isset($_SESSION['unique_id']) && $_SESSION['level']  == 'gudang') {
     header("location: ./gudang/index.php");
-} else if (isset($_SESSION['unique_id']) && $_SESSION['level']  == 'suplier') {
-    header("location: ./suplier/index.php");
+} else if (isset($_SESSION['unique_id']) && $_SESSION['level']  == 'supplier') {
+    header("location: ./supplier/index.php");
 }
 
 ?>

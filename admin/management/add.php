@@ -21,7 +21,7 @@
       <select class="form-select" aria-label="Default select example" name="level">
         <option selected>Status</option>
         <option value="gudang">Gudang</option>
-        <option value="suplier">Suplier</option>
+        <option value="supplier">Supplier</option>
         <option value="admin">Admin</option>
         <option value="reseller">Reseller</option>
       </select>
@@ -78,16 +78,6 @@ if (isset($_POST['simpan-users'])) {
   }
   if ($insert_query) { ?>
     <script>
-      // Swal.fire({
-      //   position: 'top-end',
-      //   icon: 'success',
-      //   title: 'Your work has been saved',
-      //   showConfirmButton: false,
-      //   timer: 1500
-      // }, setTimeout(function() {
-      //   window.location.href = "index.php?page=account";
-      //   // window.location = "index.php?page=account"
-      // }, 3000))
       window.location = "index.php?page=account"
     </script>
 <?php

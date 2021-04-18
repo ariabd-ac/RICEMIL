@@ -42,116 +42,127 @@ if ($_SESSION['level'] != 'gudang') {
             <div class="card">
               <div class="card-body">
                 <?php
-                  if(isset($_GET['page'])){
-                    $page=$_GET['page'];
-                    // die($page);
-                    if($page=="pengadaanstock"){
-                      if(isset($_GET['modul'])){
-                        $modul=$_GET['modul'];
-                        
-                        switch ($modul) {
-                          case 'add':
-                            include 'pengadaanstock/addpengadaanstock.php';
-                            break;
-                          case 'edit':
-                            # code...
-                            include 'pengadaanstock/editpengadaanstock.php';
-                            break;
-                          case 'delete':
-                            # code...
-                            
-                            if(isset($_GET['id'])){
-                              $id=$_GET['id'];
-                              $query="DELETE FROM tb_pengadaan_stock WHERE Id_barang='$id'";
-                      
-                              $insert=mysqli_query($conn,$query);
-                              if($insert){
-                                  header('location:/ricemil/gudang/index.php?page=pengadaanstock');
-                              }else{
-                                  die('error '.mysqli_error($conn));
-                              }
+                if (isset($_GET['page'])) {
+                  $page = $_GET['page'];
+                  // die($page);
+                  if ($page == "pengadaanstock") {
+                    if (isset($_GET['modul'])) {
+                      $modul = $_GET['modul'];
+
+                      switch ($modul) {
+                        case 'add':
+                          include 'pengadaanstock/addpengadaanstock.php';
+                          break;
+                        case 'edit':
+                          # code...
+                          include 'pengadaanstock/editpengadaanstock.php';
+                          break;
+                        case 'delete':
+                          # code...
+
+                          if (isset($_GET['id'])) {
+                            $id = $_GET['id'];
+                            $query = "DELETE FROM tb_pengadaan_stock WHERE Id_barang='$id'";
+
+                            $insert = mysqli_query($conn, $query);
+                            if ($insert) {
+                              header('location:/ricemil/gudang/index.php?page=pengadaanstock');
+                            } else {
+                              die('error ' . mysqli_error($conn));
                             }
-                            break;
-                          default:
-                            include 'pengadaanstock/pengadaanstock.php';
-                            break;
-                        }
-                      }else{
-                        include 'pengadaanstock/pengadaanstock.php';
+                          }
+                          break;
+                        default:
+                          include 'pengadaanstock/pengadaanstock.php';
+                          break;
                       }
-                    }else if($page=="datastock"){
-                      
-                      if(isset($_GET['modul'])){
-                        $modul=$_GET['modul'];
-                        
-                        switch ($modul) {
-                          case 'add':
-                            include 'datastock/add.php';
-                            break;
-                          case 'edit':
-                            # code...
-                            include 'datastock/edit.php';
-                            break;
-                          case 'delete':
-                            # code...
-                            
-                            if(isset($_GET['id'])){
-                              $id=$_GET['id'];
-                              $query="DELETE FROM tb_pengadaan_stock WHERE Id_barang='$id'";
-                      
-                              $insert=mysqli_query($conn,$query);
-                              if($insert){
-                                  header('location:/ricemil/gudang/index.php?page=datastock');
-                              }else{
-                                  die('error '.mysqli_error($conn));
-                              }
+                    } else {
+                      include 'pengadaanstock/pengadaanstock.php';
+                    }
+                  } else if ($page == "datastock") {
+
+                    if (isset($_GET['modul'])) {
+                      $modul = $_GET['modul'];
+
+                      switch ($modul) {
+                        case 'add':
+                          include 'datastock/add.php';
+                          break;
+                        case 'edit':
+                          # code...
+                          include 'datastock/edit.php';
+                          break;
+                        case 'delete':
+                          # code...
+
+                          if (isset($_GET['id'])) {
+                            $id = $_GET['id'];
+                            $query = "DELETE FROM tb_pengadaan_stock WHERE Id_barang='$id'";
+
+                            $insert = mysqli_query($conn, $query);
+                            if ($insert) {
+                              header('location:/ricemil/gudang/index.php?page=datastock');
+                            } else {
+                              die('error ' . mysqli_error($conn));
                             }
-                            break;
-                          default:
-                            include 'datastock/index.php';
-                            break;
-                        }
-                      }else{
-                        include 'datastock/index.php';
+                          }
+                          break;
+                        default:
+                          include 'datastock/index.php';
+                          break;
                       }
-                    }else if($page == "laporan"){
-                      if(isset($_GET['modul'])){
-                        $modul=$_GET['modul'];
-                        
-                        switch ($modul) {
-                          case 'add':
-                            include 'pengadaanstock/addpengadaanstock.php';
-                            break;
-                          case 'edit':
-                            # code...
-                            include 'pengadaanstock/editpengadaanstock.php';
-                            break;
-                          case 'delete':
-                            # code...
-                            
-                            if(isset($_GET['id'])){
-                              $id=$_GET['id'];
-                              $query="DELETE FROM tb_pengadaan_stock WHERE Id_barang='$id'";
-                      
-                              $insert=mysqli_query($conn,$query);
-                              if($insert){
-                                  header('location:/ricemil/gudang/index.php?page=pengadaanstock');
-                              }else{
-                                  die('error '.mysqli_error($conn));
-                              }
+                    } else {
+                      include 'datastock/index.php';
+                    }
+                  } else if ($page == "laporan") {
+                    if (isset($_GET['modul'])) {
+                      $modul = $_GET['modul'];
+
+                      switch ($modul) {
+                        case 'add':
+                          include 'pengadaanstock/addpengadaanstock.php';
+                          break;
+                        case 'edit':
+                          # code...
+                          include 'pengadaanstock/editpengadaanstock.php';
+                          break;
+                        case 'delete':
+                          # code...
+
+                          if (isset($_GET['id'])) {
+                            $id = $_GET['id'];
+                            $query = "DELETE FROM tb_pengadaan_stock WHERE Id_barang='$id'";
+
+                            $insert = mysqli_query($conn, $query);
+                            if ($insert) {
+                              header('location:/ricemil/gudang/index.php?page=pengadaanstock');
+                            } else {
+                              die('error ' . mysqli_error($conn));
                             }
-                            break;
-                          default:
-                            include 'pengadaanstock/pengadaanstock.php';
-                            break;
-                        }
-                      }else{
-                        include 'pengadaanstock/pengadaanstock.php';
+                          }
+                          break;
+                        default:
+                          include 'pengadaanstock/pengadaanstock.php';
+                          break;
                       }
+                    } else {
+                      include 'pengadaanstock/pengadaanstock.php';
+                    }
+                  } else if ($page == 'profile') {
+                    if (isset($_GET['modul'])) {
+                      $modul = $_GET['modul'];
+                      switch ($modul) {
+                        case 'edit':
+                          include 'profile/edit.php';
+                          break;
+                      }
+                    } else {
+                      include 'profile/index.php';
                     }
                   }
+                }
 
-                  
+
                 ?>
               </div>
             </div>

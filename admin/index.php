@@ -109,37 +109,67 @@ if ($_SESSION['level'] != 'admin') {
                       } else {
                         include 'management/index.php';
                       }
-                    break;
+                      break;
                     case 'kelolapesanan':
-                      if(isset($_GET['modul'])){
-                        $modul=$_GET['modul'];
+                      if (isset($_GET['modul'])) {
+                        $modul = $_GET['modul'];
                         switch ($modul) {
                           case 'detail':
                             include 'kelolapesanan/detail.php';
                             break;
-                          
+
                           default:
                             include 'kelolapesanan/index.php';
                             break;
                         }
-                      }else{
+                      } else {
                         include 'kelolapesanan/index.php';
                       }
                       break;
                     case 'transaksi':
-                      if(isset($_GET['modul'])){
+                      if (isset($_GET['modul'])) {
                         switch ($modul) {
                           case 'value':
                             # code...
                             break;
-                          
+
                           default:
                             include 'transaksi/index.php';
                             break;
-                          }
-                        }else{
-                          include 'transaksi/index.php';  
                         }
+                      } else {
+                        include 'transaksi/index.php';
+                      }
+                      break;
+                    case 'profile':
+                      if (isset($_GET['modul'])) {
+                        $modul = $_GET['modul'];
+                        switch ($modul) {
+                          case 'edit':
+                            include 'profile/edit.php';
+                            break;
+
+                          default:
+                            include 'kelolapesanan/index.php';
+                            break;
+                        }
+                      } else {
+                        include 'profile/index.php';
+                      }
+                      break;
+                    case 'dtsupplier':
+                      if (isset($_GET['modul'])) {
+                        switch ($modul) {
+                          case 'value':
+
+                            break;
+                          default:
+                            include 'transaksi/index.php';
+                            break;
+                        }
+                      } else {
+                        include 'supplier/index.php';
+                      }
                       break;
                     default:
 
