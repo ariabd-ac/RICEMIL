@@ -12,13 +12,13 @@ if (isset($_POST['update-users'])) {
   $lname = $_POST['lname'];
   $email = $_POST['email'];
   $level = $_POST['level'];
-  $password = $_POST['password'];
+  // $password = $_POST['password'];
   $alamat = $_POST['alamat'];
 
 
-  $encrypt_pass = md5($password);
+  // $encrypt_pass = md5($password);
 
-  $query = "UPDATE users SET username='$username',fname='$fname', lname = '$lname', email = '$email', level = '$level' , password = '$encrypt_pass' , alamat = '$alamat' WHERE user_id='$id'";
+  $query = "UPDATE users SET username='$username',fname='$fname', lname = '$lname', email = '$email', level = '$level'  , alamat = '$alamat' WHERE user_id='$id'";
 
   $insert = mysqli_query($conn, $query);
   if ($insert) {
@@ -38,8 +38,11 @@ if (isset($_POST['update-users'])) {
     $lname = $hasil['lname'];
     $email = $hasil['email'];
     $level = $hasil['level'];
-    $password = $hasil['password'];
+    // $password = $hasil['password'];
     $alamat = $hasil['alamat'];
+
+    // var_dump($password);
+    // die;
   } else {
     die('error ' . mysqli_error($conn));
   }
@@ -74,7 +77,7 @@ if (isset($_POST['update-users'])) {
 
         <div class="input-group mb-3">
           <span class="input-group-text">Password</span>
-          <input type="password" name="password" id="password" class="form-control" aria-label="Amount (to the nearest dollar)" value="<?php echo $password ?>">
+          <input type="password" name="" id="password" class="form-control" aria-label="Amount (to the nearest dollar)" value="" disabled>
         </div>
 
         <div class="input-group">

@@ -66,8 +66,8 @@ if (isset($_POST['update-users'])) {
       <span class="input-group-text" id="basic-addon3">Email</span>
       <input type="text" name="email" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" value="<?php echo $email ?>">
       <span class="input-group-text" id="basic-addon2">Status user</span>
-      <select class="form-select" aria-label="Default select example" name="level" value="<?php echo $level ?>">
-        <option selected>Status</option>
+      <select class="form-select" id="level" aria-label="Default select example" name="level" value="<?php echo $level ?>" required>
+        <option value>Status</option>
         <option value="gudang">Gudang</option>
         <option value="suplier">Suplier</option>
         <option value="admin">Admin</option>
@@ -75,21 +75,57 @@ if (isset($_POST['update-users'])) {
       </select>
     </div>
 
+    <small style="color: red;">Harap masukan password!</small>
     <div class="input-group mb-3">
       <span class="input-group-text">Password</span>
-      <input type="password" name="password" id="password" class="form-control" aria-label="Amount (to the nearest dollar)" value="<?php echo $password ?>">
+      <input type="password" name="password" id="pwd" class="form-control" aria-label="Amount (to the nearest dollar)" value="">
     </div>
 
     <div class="input-group">
       <span class="input-group-text">Alamat</span>
-      <textarea name="alamat" class="form-control" aria-label="With textarea" value="<?php echo $alamat ?>"></textarea>
+      <input name="alamat" class="form-control" aria-label="With textarea" value="<?php echo $alamat ?>"></input>
     </div>
 
     <div class="col-12 pt-4">
       <div class="col-6">
-        <button type="submit" name="update-users" class="btn btn-warning">Simpan</button>
+        <button type="submit" name="update-users" id="submit" class="btn btn-warning">Simpan</button>
 
       </div>
     </div>
   </div>
 </form>
+
+<script>
+  let pwd = document.getElementById('pwd');
+  let btnSubmit = document.getElementById('submit');
+  let level = document.getElementById('level').value;
+
+
+  console.log('level: ', level);
+
+
+
+
+
+  submit.addEventListener('click', (e) => {
+    if (pwd.value == '' || pwd.value == null) {
+      e.preventDefault();
+      // alert('password di isi dong bos');
+      e.preventDefault();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Masukan password!',
+      })
+    }
+
+    if (level == 'Status') {
+      e.preventDefault();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Pilih level!',
+      })
+    }
+  })
+</script>
