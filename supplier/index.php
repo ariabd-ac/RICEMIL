@@ -43,6 +43,23 @@ if ($_SESSION['level'] != 'supplier') {
             <div class="card">
               <div class="card-body">
                 <?php
+                $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
+
+                if (mysqli_num_rows($sql) > 0) {
+
+                  $row = mysqli_fetch_assoc($sql);
+                  // var_dump($row);
+                  // die;
+
+                  // echo $row['phone'];
+                  if ($row['phone'] == '') {
+                    echo '<div class="alert alert-danger" role="alert">
+                    NT BELUM NGISI NOMOR TELEPON! ISI LAH BIAR DPT NOTIF DARI GUDANG TERCINTA. ISINE NING PROFILE YA
+                  </div>';
+                  }
+                }
+                ?>
+                <?php
                 if (isset($_GET['page'])) {
                   $page = $_GET['page'];
                   // die($page);
@@ -57,6 +74,18 @@ if ($_SESSION['level'] != 'supplier') {
                         }
                       } else {
                         include 'profile/index.php';
+                      }
+                      break;
+                    case 'dashboard':
+                      if (isset($_GET['modul'])) {
+                        $modul = $_GET['modul'];
+                        switch ($modul) {
+                          case 'edit':
+                            include 'dashboard/edit.php';
+                            break;
+                        }
+                      } else {
+                        include 'dashboard/index.php';
                       }
                       break;
                     default:

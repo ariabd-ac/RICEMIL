@@ -10,6 +10,7 @@ if (mysqli_num_rows($sql) > 0) {
 
 ?>
 
+
 <!-- <form action="" method="post"> -->
 <div class="row">
   <h3>Detail Users</h3>
@@ -36,6 +37,8 @@ if (mysqli_num_rows($sql) > 0) {
 
 
   <div class="input-group">
+    <span class="input-group-text">Phone</span>
+    <input name="alamat" class="form-control" aria-label="With textarea" value="<?php echo $row['phone']  ?>" readonly></input>
     <span class="input-group-text">Alamat</span>
     <input name="alamat" class="form-control" aria-label="With textarea" value="<?php echo $row['alamat']  ?>" readonly></input>
   </div>
