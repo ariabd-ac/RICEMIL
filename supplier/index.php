@@ -22,9 +22,9 @@ if ($_SESSION['level'] != 'supplier') {
 </head>
 
 <body>
-  <?php
-  include './_partials/preloader.php';
-  ?>
+  <!-- <?php
+        include './_partials/preloader.php';
+        ?> -->
   <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
     <?php
     include './_partials/header.php';
@@ -70,6 +70,9 @@ if ($_SESSION['level'] != 'supplier') {
                         switch ($modul) {
                           case 'edit':
                             include 'profile/edit.php';
+                            break;
+                          case 'changepwd':
+                            include 'profile/changepwd.php';
                             break;
                         }
                       } else {

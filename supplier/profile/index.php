@@ -46,6 +46,7 @@ if (mysqli_num_rows($sql) > 0) {
   <div class="col-12 pt-4">
     <div class="col-6">
       <a class='btn btn-info' href="/ricemil/supplier/index.php?page=profile&modul=edit&user_id=<?php echo $row['user_id']; ?>">Edit</a>
+      <a class='btn btn-danger' href="/ricemil/supplier/index.php?page=profile&modul=changepwd&user_id=<?php echo $row['user_id']; ?>">Change Password</a>
     </div>
   </div>
 </div>
