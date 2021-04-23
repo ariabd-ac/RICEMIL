@@ -40,26 +40,29 @@ if (isset($_POST['submit'])) {
 
 
 
+<div class="card">
+    <div class="card-body">
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="namabarang">Nama Barang</label>
+                <input type="text" name='namabarang' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for="namabarang">Harga Barang</label>
+                <input type="text" name='harga' class='form-control'>
+            </div>
+            <div class="form-group">
+                <label for="namabarang">Gambar</label>
+                <input type="file" name='gambar' class='form-control'>
+            </div>
+            <div class="form-group">
+                <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
+            </div>
+            <!-- <div class="form-group">
+                    <label for="namabarang">Nama Barang</label>
+                    <input type="text" name='namabarang' class='form-control'>
+                </div> -->
 
-<form action="" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="namabarang">Nama Barang</label>
-        <input type="text" name='namabarang' class='form-control'>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="namabarang">Harga Barang</label>
-        <input type="text" name='harga' class='form-control'>
-    </div>
-    <div class="form-group">
-        <label for="namabarang">Gambar</label>
-        <input type="file" name='gambar' class='form-control'>
-    </div>
-    <div class="form-group">
-        <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
-    </div>
-    <!-- <div class="form-group">
-            <label for="namabarang">Nama Barang</label>
-            <input type="text" name='namabarang' class='form-control'>
-        </div> -->
-
-</form>
+</div>

@@ -46,93 +46,96 @@ if (isset($_POST['submit'])) {
 
 
 
-
-
-<form action="" method="post">
-    <div class="row">
-        <div class="col-md-6">
-        <div class="form-group">
-            <label for="namabarang">Kode Pesanan</label>
-            <input type="hidden" name='kodepesanan' class='form-control' value="<?php echo $res['Id_order'] ?>">
-            <input type="text" name='' class='form-control' value="<?php echo $res['Id_order'] ?>" disabled>
-        </div>
-        <div class="form-group">
-            <label for="namabarang">Nama Barang</label>
-            <input type="text" name='namabarang' class='form-control' value="<?php echo $res['namaBarang'] ?>" disabled>
-        </div>
-        <div class="form-group">
-            <label for="namabarang">Tanggal Order</label>
-            <input type="text" name='harga' class='form-control' value="<?php echo $res['date'] ?>" disabled>
-        </div>
-        <div class="form-group">
-            <label for="namabarang">Harga Barang</label>
-            <input type="text" name='harga' class='form-control' value="<?php echo $res['Harga'] ?>" disabled>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-            <label for="namabarang">Jumlah Order</label>
-            <input type="text" name='harga' class='form-control' value="<?php echo $res['Jumlah'] ?>" disabled>
-        </div>
-        <div class="form-group">
-            <label for="namabarang">Total</label>
-            <input type="text" name='harga' class='form-control' value="<?php echo ($res['Harga'] * $res['Jumlah'] )?>" disabled>
-        </div>
-        <div class="form-group">
-            <label for="namabarang">Oleh</label>
-            <input type="text" name='harga' class='form-control' value="<?php echo $res['oleh']?>" disabled>
-        </div>
-        <div class="form-group">
+<div class="card">
+    <div class="card-body">
+        <form action="" method="post">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="namabarang">Metode Pembayaran</label>
-                    <input type="text" name='harga' class='form-control' value="<?php echo $res['descr']?>" disabled>
+                <div class="form-group">
+                    <label for="namabarang">Kode Pesanan</label>
+                    <input type="hidden" name='kodepesanan' class='form-control' value="<?php echo $res['Id_order'] ?>">
+                    <input type="text" name='' class='form-control' value="<?php echo $res['Id_order'] ?>" disabled>
                 </div>
-                <div class="col-md-6 d-flex align-items-center justify-content-center">
-                    <?php
-                        if($res['metode_bayar']=='2'){
-                            ?>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Lihat Bukti Pembayaran
-                                </button>
+                <div class="form-group">
+                    <label for="namabarang">Nama Barang</label>
+                    <input type="text" name='namabarang' class='form-control' value="<?php echo $res['namaBarang'] ?>" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="namabarang">Tanggal Order</label>
+                    <input type="text" name='harga' class='form-control' value="<?php echo $res['date'] ?>" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="namabarang">Harga Barang</label>
+                    <input type="text" name='harga' class='form-control' value="<?php echo $res['Harga'] ?>" disabled>
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="namabarang">Jumlah Order</label>
+                    <input type="text" name='harga' class='form-control' value="<?php echo $res['Jumlah'] ?>" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="namabarang">Total</label>
+                    <input type="text" name='harga' class='form-control' value="<?php echo ($res['Harga'] * $res['Jumlah'] )?>" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="namabarang">Oleh</label>
+                    <input type="text" name='harga' class='form-control' value="<?php echo $res['oleh']?>" disabled>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="namabarang">Metode Pembayaran</label>
+                            <input type="text" name='harga' class='form-control' value="<?php echo $res['descr']?>" disabled>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center justify-content-center">
                             <?php
-                        }
-                    ?>
+                                if($res['metode_bayar']=='2'){
+                                    ?>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            Lihat Bukti Pembayaran
+                                        </button>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
                 </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" class='btn btn-success' name='submit' value='Approve' class='form-control'>
+            </div>
+        </form>
+
+        <!-- Button trigger modal -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Foto Bukti Pembayaran</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php
+                    if($res['struk_gambar']){
+                ?>
+                <img src="http://localhost/ricemil/assets/images/struk/<?php echo $res['struk_gambar'] ?>" alt="Foto Struk" style='width:100%'>
+                <?php
+                    }else{
+                        echo "Customer Belum Mengupload Gambarnya";
+                    }
+                ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
             </div>
         </div>
         </div>
+    
     </div>
-    <div class="form-group">
-        <input type="submit" class='btn btn-success' name='submit' value='Approve' class='form-control'>
-    </div>
-</form>
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Foto Bukti Pembayaran</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <?php
-            if($res['struk_gambar']){
-        ?>
-        <img src="http://localhost/ricemil/assets/images/struk/<?php echo $res['struk_gambar'] ?>" alt="Foto Struk" style='width:100%'>
-        <?php
-            }else{
-                echo "Customer Belum Mengupload Gambarnya";
-            }
-        ?>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
 </div>

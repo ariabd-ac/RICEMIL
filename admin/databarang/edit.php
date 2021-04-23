@@ -38,27 +38,30 @@ if (isset($_POST['submit'])) {
 
 
 
+<div class="card">
+    <div class="card-body">
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="namabarang">Kode Barang</label>
+                <input type="text" name='koedbarang' class='form-control' value="<?php echo $kodebarang ?>" disabled>
+            </div>
+            <div class="form-group">
+                <label for="namabarang">Nama Barang</label>
+                <input type="text" name='namabarang' class='form-control' value="<?php echo $namaBarang ?>">
+            </div>
+            <div class="form-group">
+                <label for="namabarang">Harga Barang</label>
+                <input type="text" name='harga' class='form-control' value="<?php echo $harga ?>">
+            </div>
 
-<form action="" method="post">
-    <div class="form-group">
-        <label for="namabarang">Kode Barang</label>
-        <input type="text" name='koedbarang' class='form-control' value="<?php echo $kodebarang ?>" disabled>
-    </div>
-    <div class="form-group">
-        <label for="namabarang">Nama Barang</label>
-        <input type="text" name='namabarang' class='form-control' value="<?php echo $namaBarang ?>">
-    </div>
-    <div class="form-group">
-        <label for="namabarang">Harga Barang</label>
-        <input type="text" name='harga' class='form-control' value="<?php echo $harga ?>">
-    </div>
+            <div class="form-group">
+                <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
+            </div>
+            <!-- <div class="form-group">
+                                <label for="namabarang">Nama Barang</label>
+                                <input type="text" name='namabarang' class='form-control'>
+                            </div> -->
 
-    <div class="form-group">
-        <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
+        </form>
     </div>
-    <!-- <div class="form-group">
-                        <label for="namabarang">Nama Barang</label>
-                        <input type="text" name='namabarang' class='form-control'>
-                    </div> -->
-
-</form>
+</div>

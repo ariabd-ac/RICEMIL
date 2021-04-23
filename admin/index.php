@@ -39,8 +39,6 @@ if ($_SESSION['level'] != 'admin') {
         <div class="row">
           <!-- Column -->
           <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
                 <?php
                 if (isset($_GET['page'])) {
                   $page = $_GET['page'];
@@ -171,14 +169,40 @@ if ($_SESSION['level'] != 'admin') {
                         include 'supplier/index.php';
                       }
                       break;
+                    case 'kasir':
+                      if (isset($_GET['modul'])) {
+                        switch ($modul) {
+                          case 'value':
+
+                            break;
+                          default:
+                            include 'kasir/index.php';
+                            break;
+                        }
+                      } else {
+                        include 'kasir/index.php';
+                      }
+                      break;
+                    case 'laporan':
+                      if (isset($_GET['modul'])) {
+                        switch ($modul) {
+                          case 'value':
+
+                            break;
+                          default:
+                            include 'laporan/index.php';
+                            break;
+                        }
+                      } else {
+                        include 'laporan/index.php';
+                      }
+                      break;
                     default:
 
                       break;
                   }
                 }
                 ?>
-              </div>
-            </div>
           </div>
         </div>
       </div>

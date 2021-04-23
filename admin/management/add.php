@@ -1,50 +1,54 @@
-<form action="" method="post">
-  <div class="row">
-    <h3>Tambah user</h3>
-    <hr>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1">Username</span>
-      <input type="text" name="username" id="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-    </div>
+<div class="card">
+  <div class="card-body">
+    <form action="" method="post">
+      <div class="row">
+        <h3>Tambah user</h3>
+        <hr>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Username</span>
+          <input type="text" name="username" id="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
 
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon3">Frist Name</span>
-      <input type="text" name="fname" id="fname" class="form-control" placeholder="Enter frist name" aria-label="Username">
-      <span class="input-group-text" id="basic-addon3">Last Name</span>
-      <input type="text" name="lname" id="lname" class="form-control" placeholder="Enter last name" aria-label="Server">
-    </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon3">Frist Name</span>
+          <input type="text" name="fname" id="fname" class="form-control" placeholder="Enter frist name" aria-label="Username">
+          <span class="input-group-text" id="basic-addon3">Last Name</span>
+          <input type="text" name="lname" id="lname" class="form-control" placeholder="Enter last name" aria-label="Server">
+        </div>
 
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon3">Email</span>
-      <input type="text" name="email" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-      <span class="input-group-text" id="basic-addon2">Status user</span>
-      <select class="form-select" aria-label="Default select example" name="level">
-        <option selected>Status</option>
-        <option value="gudang">Gudang</option>
-        <option value="supplier">Supplier</option>
-        <option value="admin">Admin</option>
-        <option value="reseller">Reseller</option>
-      </select>
-    </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon3">Email</span>
+          <input type="text" name="email" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <span class="input-group-text" id="basic-addon2">Status user</span>
+          <select class="form-select" aria-label="Default select example" name="level">
+            <option selected>Status</option>
+            <option value="gudang">Gudang</option>
+            <option value="supplier">Supplier</option>
+            <option value="admin">Admin</option>
+            <option value="reseller">Reseller</option>
+          </select>
+        </div>
 
-    <div class="input-group mb-3">
-      <span class="input-group-text">Password</span>
-      <input type="password" name="password" id="password" class="form-control" aria-label="Amount (to the nearest dollar)">
-    </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">Password</span>
+          <input type="password" name="password" id="password" class="form-control" aria-label="Amount (to the nearest dollar)">
+        </div>
 
-    <div class="input-group">
-      <span class="input-group-text">Alamat</span>
-      <textarea name="alamat" class="form-control" aria-label="With textarea"></textarea>
-    </div>
+        <div class="input-group">
+          <span class="input-group-text">Alamat</span>
+          <textarea name="alamat" class="form-control" aria-label="With textarea"></textarea>
+        </div>
 
-    <div class="col-12 pt-4">
-      <div class="col-6">
-        <button type="submit" name="simpan-users" class="btn btn-warning">Simpan</button>
+        <div class="col-12 pt-4">
+          <div class="col-6">
+            <button type="submit" name="simpan-users" class="btn btn-warning">Simpan</button>
 
+          </div>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
-</form>
+</div>
 
 <?php
 if (isset($_POST['simpan-users'])) {
