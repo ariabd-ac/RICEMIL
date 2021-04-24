@@ -161,7 +161,17 @@
     const btnTambahKeranjang=document.getElementsByClassName('tambah-keranjang-kasir');
     const tbodyKeranjang=document.getElementById('tbodyKeranjang');
     let subTotalDetail=document.getElementById('subtotal');
+    const diskonElement=document.getElementById('diskon');
+    const bayarElement=document.getElementById('bayar');
+    const kembalianElement=document.getElementById('kembalian');
+    const totalElement=document.getElementById('total');
 
+    // initialized
+    diskonElement.value=0
+    bayarElement.value=0
+    kembalianElement.value=0
+    // initialized
+    
     let dataKeranjangItem=[]
     // EVENT HANDLER
     // tambah keranjang event
@@ -212,8 +222,22 @@
             await hitungSubtotal()
         }
     })
-
+    
     // End tbody Keranjang Event On Input Qty
+
+    // Diskon On Input
+    diskonElement.addEventListener('input',(e)=>{
+        let target=e.target;
+        hitungTotal()
+    })
+    // End Diskon On Input
+
+    // bayar event on input
+    bayarElement.addEventListener('input',(e)=>{
+        let target=e.target;
+        hitungKembalian()
+    })
+    // bayar on Input
 
     // END EVENT HANDLER
 
@@ -245,15 +269,37 @@
         }
         return html;
     }
-    //end  function generate tr on keranjang
+    //end  function generate tr keranjang
 
     // Hitung SubTotal Function
     function hitungSubtotal(){  
         subTotalDetail.value=dataKeranjangItem.reduce((total,num)=>{    
             return total + (num.qty * num.hargaBarang)
         },0)
+        
+        hitungTotal()
+        hitungKembalian()
     }
     // Hitung SubTotal Function End
+
+    // function hitungTotal
+    function hitungTotal(){
+        let diskon=diskonElement.value
+        let subTotal=subTotalDetail.value
+
+        let total=subTotal - diskon
+        totalElement.value=total
+    }
+    // function hitungTotal End
+
+
+    // function hitungKembalian
+    function hitungKembalian(){
+        let total=totalElement.value
+        let bayar=bayarElement.value
+        kembalianElement.value=  bayar - total
+    }
+    // function hitungKembalian End
 
     // END LIST OF FUNCTION
 
