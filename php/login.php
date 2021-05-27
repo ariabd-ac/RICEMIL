@@ -11,19 +11,24 @@ if (!empty($username) && !empty($password)) {
     $enc_pass = $row['password'];
     if ($user_pass === $enc_pass) {
       $_SESSION['level'] = $row['level'];
-      if ($_SESSION['level'] == 'reseller') {
-        $_SESSION['unique_id'] = $row['unique_id'];
-        echo "reseller";
-      } else if ($_SESSION['level'] == 'admin') {
-        $_SESSION['unique_id'] = $row['unique_id'];
-        echo "admin";
-      } else if ($_SESSION['level'] == 'gudang') {
-        $_SESSION['unique_id'] = $row['unique_id'];
-        echo "gudang";
-      } else if ($_SESSION['level'] == 'supplier') {
-        $_SESSION['unique_id'] = $row['unique_id'];
-        echo "supplier";
-      }
+      $_SESSION['unique_id'] = $row['unique_id'];
+      echo $row['level'];
+      // if ($_SESSION['level'] == 'reseller') {
+      //   $_SESSION['unique_id'] = $row['unique_id'];
+      //   echo "reseller";
+      // } else if ($_SESSION['level'] == 'admin') {
+      //   $_SESSION['unique_id'] = $row['unique_id'];
+      //   echo "admin";
+      // } else if ($_SESSION['level'] == 'gudang') {
+      //   $_SESSION['unique_id'] = $row['unique_id'];
+      //   echo "gudang";
+      // } else if ($_SESSION['level'] == 'kasir') {
+      //   $_SESSION['unique_id'] = $row['unique_id'];
+      //   echo "kasir";
+      // } else if ($_SESSION['level'] == 'supplier') {
+      //   $_SESSION['unique_id'] = $row['unique_id'];
+      //   echo "supplier";
+      // }
     } else {
       echo "Email or Password is Incorrect!";
     }

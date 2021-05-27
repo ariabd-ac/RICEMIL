@@ -8,7 +8,7 @@ $hostname = "localhost";
 $username = "root";
 $password = "";
 $dbname = "db_indri_ta";
-
+$base_url = "http://localhost/ricemil/";
 
 
 $conn = mysqli_connect($hostname, $username, $password, $dbname);

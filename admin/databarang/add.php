@@ -1,5 +1,6 @@
 <?php
 $succesUpload = false;
+
 if (isset($_POST['submit'])) {
     $namaBarang = $_POST['namabarang'];
     $harga = $_POST['harga'];
@@ -7,7 +8,8 @@ if (isset($_POST['submit'])) {
     $root = realpath(dirname(__FILE__));
     // die(var_dump($gambar));
     if ($gambar) {
-        $targetDir = 'C:/xampp/htdocs/RICEMIL/assets/images/produk/';
+        $targetDir =  $_SERVER["DOCUMENT_ROOT"] . '/ricemil/assets/images/produk/';
+
         $targetFile = $targetDir . basename($gambar['name']);
         $asal = $gambar['tmp_name'];
 
@@ -32,8 +34,6 @@ if (isset($_POST['submit'])) {
         die('error ' . mysqli_error($conn));
     }
 }
-
-
 ?>
 
 
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="form-group">
                 <label for="namabarang">Harga Barang</label>
-                <input type="text" name='harga' class='form-control'>
+                <input type="number" name='harga' class='form-control'>
             </div>
             <div class="form-group">
                 <label for="namabarang">Gambar</label>

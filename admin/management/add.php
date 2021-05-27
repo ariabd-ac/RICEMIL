@@ -22,6 +22,7 @@
           <span class="input-group-text" id="basic-addon2">Status user</span>
           <select class="form-select" aria-label="Default select example" name="level">
             <option selected>Status</option>
+            <option value="kasir">Kasir</option>
             <option value="gudang">Gudang</option>
             <option value="supplier">Supplier</option>
             <option value="admin">Admin</option>
@@ -63,8 +64,8 @@ if (isset($_POST['simpan-users'])) {
   $alamat = $_POST['alamat'];
 
   // var_dump($username);
-  // die;
-
+  // die;s
+  // $insert_query = false;
   if (!empty($username) && !empty($fname) && !empty($lname) && !empty($email) && !empty($level)  && !empty($password) && !empty($alamat)) {
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $sql = mysqli_query($conn, "SELECT * FROM users WHERE email = '{$email}'");
@@ -75,18 +76,18 @@ if (isset($_POST['simpan-users'])) {
         $encrypt_pass = md5($password);
         $insert_query = mysqli_query($conn, "INSERT INTO users (unique_id, username, fname, lname, email, password, alamat, level)
                               VALUES ({$ran_id}, '{$username}', '{$fname}', '{$lname}', '{$email}', '{$encrypt_pass}', '{$alamat}', '{$level}')");
+        if ($insert_query) { ?>
+          <script>
+            window.location = "index.php?page=account"
+          </script>
+<?php
+        } else {
+          die('err :' . mysqli_error($conn));
+        }
       }
     }
   } else {
     echo "$email is not a valid email!";
-  }
-  if ($insert_query) { ?>
-    <script>
-      window.location = "index.php?page=account"
-    </script>
-<?php
-  } else {
-    die('err :' . mysqli_error($conn));
   }
 }
 ?>
