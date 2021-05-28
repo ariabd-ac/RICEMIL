@@ -16,9 +16,13 @@ if (isset($_POST['submit'])) {
 
     $insert = mysqli_query($conn, $query);
     if ($insert) {
-        $queryUpdate = "UPDATE tb_barang tb SET tb.stock=(tb.stock + $jumlah) WHERE tb.Id_barang='$namaBarang'";
-        $send->sendMessage($np_sup, $msg);
+        $last_id = mysqli_insert_id($conn);
+        $linkMessage = "SEGERA CEK LINK <a href='http://localhost/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=$last_id'>http://localhost/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=" . $last_id . "</a>";
+        // <a href="https://meet.google.com/vmu-mxrt-pux" title="https://meet.google.com/vmu-mxrt-pux" target="_blank" rel="noopener noreferrer" class="_3-8er selectable-text copyable-text">https://meet.google.com/vmu-mxrt-pux</a>
+        $send->sendMessage($np_sup, $linkMessage . ',' . $msg); //kie ngirim wa
         $update = mysqli_query($conn, $queryUpdate);
+        // update after get response OK from Supplier
+        $queryUpdate = "UPDATE tb_barang tb SET tb.stock=(tb.stock + $jumlah) WHERE tb.Id_barang='$namaBarang'";
         if (!$update) {
             die("Err Update Stock " . mysqli_error($conn));
         }
@@ -84,8 +88,8 @@ if (isset($_POST['submit'])) {
         </select>
     </div>
     <div class="form-group">
-        <label for="namabarang">Pesan</label>
-        <input type="text" name='msg' class='form-control' value="SEGERA CEK LINK http://localhost/ricemil/" readonly>
+        <label for="namabarang">Memo</label>
+        <input type="text" name='msg' class='form-control'>
     </div>
     <div class="form-group">
         <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>

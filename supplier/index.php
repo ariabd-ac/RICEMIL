@@ -91,6 +91,21 @@ if ($_SESSION['level'] != 'supplier') {
                         include 'dashboard/index.php';
                       }
                       break;
+                    case 'datapesanan':
+                      if (isset($_GET['modul'])) {
+                        $modul = $_GET['modul'];
+                        switch ($modul) {
+                          case 'edit':
+                            include 'datapesanan/edit.php';
+                            break;
+                          case 'konf':
+                            include 'datapesanan/edit.php';
+                            break;
+                        }
+                      } else {
+                        include 'datapesanan/index.php';
+                      }
+                      break;
                     default:
                       break;
                   }
