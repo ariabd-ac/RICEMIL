@@ -19,7 +19,8 @@ if (isset($_POST['submit'])) {
         $last_id = mysqli_insert_id($conn);
         $linkMessage = "SEGERA CEK LINK <a href='http://localhost/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=$last_id'>http://localhost/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=" . $last_id . "</a>";
         // <a href="https://meet.google.com/vmu-mxrt-pux" title="https://meet.google.com/vmu-mxrt-pux" target="_blank" rel="noopener noreferrer" class="_3-8er selectable-text copyable-text">https://meet.google.com/vmu-mxrt-pux</a>
-        $send->sendMessage($np_sup, $linkMessage . ',' . $msg); //kie ngirim wa
+        $send->sendMessage($np_sup,  $msg); //kie ngirim wa
+        // $send->sendMessage($np_sup, $linkMessage . ',' . $msg); //kie ngirim wa
         $update = mysqli_query($conn, $queryUpdate);
         // update after get response OK from Supplier
         $queryUpdate = "UPDATE tb_barang tb SET tb.stock=(tb.stock + $jumlah) WHERE tb.Id_barang='$namaBarang'";
@@ -89,7 +90,8 @@ if (isset($_POST['submit'])) {
     </div>
     <div class="form-group">
         <label for="namabarang">Memo</label>
-        <input type="text" name='msg' class='form-control'>
+        <!-- <input type="url" name='msg' class='form-control'> -->
+        <input type="url" name="msg" id="msg" placeholder="https://example.com" pattern="https://.*" size="30" required>
     </div>
     <div class="form-group">
         <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>

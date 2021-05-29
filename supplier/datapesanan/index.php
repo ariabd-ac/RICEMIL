@@ -20,16 +20,23 @@
                 while ($row = mysqli_fetch_assoc($result)) {
                 ?>
                     <tr>
-                        <td><?php echo $row['Id_barang'] ?></td>
+                        <td><?php echo $row['Id'] ?></td>
                         <td><?php echo $row['Nama_barang'] ?></td>
                         <td><?php echo $row['Jumlah'] ?></td>
                         <!-- <td><img src="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>" alt="alter" height="100px" width="100px"></td> -->
                         <td><?php echo $row['Harga'] ?></td>
                         <td><?php echo ($row['Harga'] *  $row['Jumlah']) ?></td>
                         <td>
-
-                            <a class='btn btn-info' href="/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=<?php echo $row['Id_barang']; ?>">Konfirmasi</a>
-                            <a class='btn btn-danger' href="/ricemil/admin/index.php?page=databarang&modul=delete&id=<?php echo $row['Id_barang']; ?>">Delete</a>
+                            <?php
+                            if ($row['is_approve'] != NULL) {
+                            ?>
+                                <span>Telah di konfirmasi</span>
+                            <?php   } else { ?>
+                                <a class='btn btn-info' href="/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=<?php echo $row['Id']; ?>">Konfirmasi</a>
+                            <?php
+                            }
+                            ?>
+                            <a class='btn btn-danger' href="/ricemil/admin/index.php?page=databarang&modul=delete&id=<?php echo $row['Id']; ?>">Delete</a>
                         </td>
                     </tr>
                 <?php
