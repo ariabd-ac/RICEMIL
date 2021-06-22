@@ -39,170 +39,170 @@ if ($_SESSION['level'] != 'admin') {
         <div class="row">
           <!-- Column -->
           <div class="col-lg-12">
-                <?php
-                if (isset($_GET['page'])) {
-                  $page = $_GET['page'];
-                  // die($page);
-                  switch ($page) {
-                    case 'databarang':
-                      if (isset($_GET['modul'])) {
-                        $modul = $_GET['modul'];
-                        switch ($modul) {
-                          case 'add':
-                            include 'databarang/add.php';
-                            break;
-                          case 'edit':
-                            include 'databarang/edit.php';
-                            break;
-                          case 'delete':
-                            if (isset($_GET['id'])) {
-                              $id = $_GET['id'];
-                              $query = "DELETE FROM tb_barang WHERE Id_barang='$id'";
+            <?php
+            if (isset($_GET['page'])) {
+              $page = $_GET['page'];
+              // die($page);
+              switch ($page) {
+                case 'databarang':
+                  if (isset($_GET['modul'])) {
+                    $modul = $_GET['modul'];
+                    switch ($modul) {
+                      case 'add':
+                        include 'databarang/add.php';
+                        break;
+                      case 'edit':
+                        include 'databarang/edit.php';
+                        break;
+                      case 'delete':
+                        if (isset($_GET['id'])) {
+                          $id = $_GET['id'];
+                          $query = "DELETE FROM tb_barang WHERE Id_barang='$id'";
 
-                              $insert = mysqli_query($conn, $query);
-                              if ($insert) {
-                                header('location:/ricemil/admin/index.php?page=databarang');
-                              } else {
-                                die('error ' . mysqli_error($conn));
-                              }
-                            }
-                            break;
-
-                          default:
-                            include 'databarang/index.php';
-                            break;
+                          $insert = mysqli_query($conn, $query);
+                          if ($insert) {
+                            header('location:/ricemil/admin/index.php?page=databarang');
+                          } else {
+                            die('error ' . mysqli_error($conn));
+                          }
                         }
-                      } else {
+                        break;
+
+                      default:
                         include 'databarang/index.php';
-                      }
-                      break;
-
-                    case 'account':
-                      if (isset($_GET['modul'])) {
-                        $modul  = $_GET['modul'];
-                        switch ($modul) {
-                          case 'add':
-                            include 'management/add.php';
-                            break;
-                          case 'edit':
-                            include 'management/edit.php';
-                            break;
-                          case 'delete':
-                            if (isset($_GET['user_id'])) {
-                              $id = $_GET['user_id'];
-                              $query = "DELETE FROM users WHERE user_id = '$id'";
-
-                              $insert = mysqli_query($conn, $query);
-                              if ($insert) {
-                                header('location:/ricemil/admin/index.php?page=account');
-                              } else {
-                                die('error ' . mysqli_error($conn));
-                              }
-                            }
-                            break;
-                          default:
-                            include 'management/index.php';
-                            break;
-                        }
-                      } else {
-                        include 'management/index.php';
-                      }
-                      break;
-                    case 'kelolapesanan':
-                      if (isset($_GET['modul'])) {
-                        $modul = $_GET['modul'];
-                        switch ($modul) {
-                          case 'detail':
-                            include 'kelolapesanan/detail.php';
-                            break;
-
-                          default:
-                            include 'kelolapesanan/index.php';
-                            break;
-                        }
-                      } else {
-                        include 'kelolapesanan/index.php';
-                      }
-                      break;
-                    case 'transaksi':
-                      if (isset($_GET['modul'])) {
-                        switch ($modul) {
-                          case 'value':
-                            # code...
-                            break;
-
-                          default:
-                            include 'transaksi/index.php';
-                            break;
-                        }
-                      } else {
-                        include 'transaksi/index.php';
-                      }
-                      break;
-                    case 'profile':
-                      if (isset($_GET['modul'])) {
-                        $modul = $_GET['modul'];
-                        switch ($modul) {
-                          case 'edit':
-                            include 'profile/edit.php';
-                            break;
-
-                          default:
-                            include 'kelolapesanan/index.php';
-                            break;
-                        }
-                      } else {
-                        include 'profile/index.php';
-                      }
-                      break;
-                    case 'dtsupplier':
-                      if (isset($_GET['modul'])) {
-                        switch ($modul) {
-                          case 'value':
-
-                            break;
-                          default:
-                            include 'transaksi/index.php';
-                            break;
-                        }
-                      } else {
-                        include 'supplier/index.php';
-                      }
-                      break;
-                    case 'kasir':
-                      if (isset($_GET['modul'])) {
-                        switch ($modul) {
-                          case 'value':
-
-                            break;
-                          default:
-                            include 'kasir/index.php';
-                            break;
-                        }
-                      } else {
-                        include 'kasir/index.php';
-                      }
-                      break;
-                    case 'laporan':
-                      if (isset($_GET['modul'])) {
-                        switch ($modul) {
-                          case 'value':
-
-                            break;
-                          default:
-                            include 'laporan/index.php';
-                            break;
-                        }
-                      } else {
-                        include 'laporan/index.php';
-                      }
-                      break;
-                    default:
-
-                      break;
+                        break;
+                    }
+                  } else {
+                    include 'databarang/index.php';
                   }
-                }
-                ?>
+                  break;
+
+                case 'account':
+                  if (isset($_GET['modul'])) {
+                    $modul  = $_GET['modul'];
+                    switch ($modul) {
+                      case 'add':
+                        include 'management/add.php';
+                        break;
+                      case 'edit':
+                        include 'management/edit.php';
+                        break;
+                      case 'delete':
+                        if (isset($_GET['user_id'])) {
+                          $id = $_GET['user_id'];
+                          $query = "DELETE FROM users WHERE user_id = '$id'";
+
+                          $insert = mysqli_query($conn, $query);
+                          if ($insert) {
+                            header('location:/ricemil/admin/index.php?page=account');
+                          } else {
+                            die('error ' . mysqli_error($conn));
+                          }
+                        }
+                        break;
+                      default:
+                        include 'management/index.php';
+                        break;
+                    }
+                  } else {
+                    include 'management/index.php';
+                  }
+                  break;
+                case 'kelolapesanan':
+                  if (isset($_GET['modul'])) {
+                    $modul = $_GET['modul'];
+                    switch ($modul) {
+                      case 'detail':
+                        include 'kelolapesanan/detail.php';
+                        break;
+
+                      default:
+                        include 'kelolapesanan/index.php';
+                        break;
+                    }
+                  } else {
+                    include 'kelolapesanan/index.php';
+                  }
+                  break;
+                case 'transaksi':
+                  if (isset($_GET['modul'])) {
+                    switch ($modul) {
+                      case 'value':
+                        # code...
+                        break;
+
+                      default:
+                        include 'transaksi/index.php';
+                        break;
+                    }
+                  } else {
+                    include 'transaksi/index.php';
+                  }
+                  break;
+                case 'profile':
+                  if (isset($_GET['modul'])) {
+                    $modul = $_GET['modul'];
+                    switch ($modul) {
+                      case 'edit':
+                        include 'profile/edit.php';
+                        break;
+
+                      default:
+                        include 'kelolapesanan/index.php';
+                        break;
+                    }
+                  } else {
+                    include 'profile/index.php';
+                  }
+                  break;
+                case 'dtsupplier':
+                  if (isset($_GET['modul'])) {
+                    switch ($modul) {
+                      case 'value':
+
+                        break;
+                      default:
+                        include 'transaksi/index.php';
+                        break;
+                    }
+                  } else {
+                    include 'supplier/index.php';
+                  }
+                  break;
+                case 'kasir':
+                  if (isset($_GET['modul'])) {
+                    switch ($modul) {
+                      case 'value':
+
+                        break;
+                      default:
+                        include 'kasir/index.php';
+                        break;
+                    }
+                  } else {
+                    include 'kasir/index.php';
+                  }
+                  break;
+                case 'laporan':
+                  if (isset($_GET['modul'])) {
+                    switch ($modul) {
+                      case 'value':
+
+                        break;
+                      default:
+                        include 'laporan/index.php';
+                        break;
+                    }
+                  } else {
+                    include 'laporan/index.php';
+                  }
+                  break;
+                default:
+
+                  break;
+              }
+            }
+            ?>
           </div>
         </div>
       </div>

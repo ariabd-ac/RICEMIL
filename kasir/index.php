@@ -40,12 +40,46 @@ include_once "../config/koneksi.php";
         <div class="row">
           <!-- Column -->
           <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
+            <?php
+            if (isset($_GET['page'])) {
+              $page = $_GET['page'];
+              // die($page);
+              switch ($page) {
+                case 'kasir':
+                  if (isset($_GET['modul'])) {
+                    switch ($modul) {
+                      case 'value':
 
-                chekk
-              </div>
-            </div>
+                        break;
+                      default:
+                        include 'transaksi/index.php';
+                        break;
+                    }
+                  } else {
+                    include 'transaksi/index.php';
+                  }
+                  break;
+                case 'profile':
+                  if (isset($_GET['modul'])) {
+                    $modul = $_GET['modul'];
+                    switch ($modul) {
+                      case 'edit':
+                        include 'profile/edit.php';
+                        break;
+                      case 'changepwd':
+                        include 'profile/changepwd.php';
+                        break;
+                    }
+                  } else {
+                    include 'profile/index.php';
+                  }
+                  break;
+                default:
+
+                  break;
+              }
+            }
+            ?>
           </div>
         </div>
       </div>
