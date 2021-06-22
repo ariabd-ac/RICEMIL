@@ -4,7 +4,7 @@ class Whatsapp
 {
 
     // public $base_url = 'http://localhost:3000/'; // masukan link
-    public $base_url = 'http://wa-api.ariabd.tech/'; // masukan link
+    public $base_url = 'http://wa-api.tripujiindri.website/'; // masukan link
 
 
     private function connect($x, $n = '')
