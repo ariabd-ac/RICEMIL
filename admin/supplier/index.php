@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <a href="/ricemil/admin/index.php?page=account&modul=add" class="btn btn-danger d-none d-md-inline-block text-white">Tambah Akun</a>
+    <!-- <a href="/ricemil/admin/index.php?page=account&modul=add" class="btn btn-danger d-none d-md-inline-block text-white">Tambah Akun</a> -->
     <table class="table user-table">
       <thead>
         <tr>

@@ -26,7 +26,7 @@
             <option value="gudang">Gudang</option>
             <option value="supplier">Supplier</option>
             <option value="admin">Admin</option>
-            <option value="reseller">Reseller</option>
+            <!-- <option value="reseller">Reseller</option> -->
           </select>
         </div>
 

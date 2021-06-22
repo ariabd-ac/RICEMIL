@@ -40,7 +40,7 @@ if(isset($_POST['submit'])){
                     <th class="border-top-0">Total</th>
                     <th class="border-top-0">Oleh</th>
                     <th class="border-top-0">Status</th>
-                    <!-- <th class="border-top-0">Action</th> -->
+                    <th class="border-top-0">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,13 +69,13 @@ if(isset($_POST['submit'])){
                                 <td><?php echo $row['Total_bayar'] ?></td>
                                 <td><?php echo $row['oleh'] ?></td>
                                 <td><?php echo $row['status'] ? 'Diproses' : 'Dikirim' ?></td>
-                                <!-- <td>
+                                <td>
                                     <form action="" method="post">
                                         <input type="hidden" value="<?php echo $row['Id_transaksi']?>" name='id'>
                                         <input type="hidden" value="2" name='status'>
                                         <input type="submit" value="Dikirim" class='btn btn-info' name='submit'>
                                     </form>
-                                </td> -->
+                                </td>
                             </tr>
                 <?php    
                     }}

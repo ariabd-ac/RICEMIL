@@ -72,7 +72,7 @@ if (isset($_POST['update-users'])) {
             <option value="gudang">Gudang</option>
             <option value="suplier">Suplier</option>
             <option value="admin">Admin</option>
-            <option value="reseller">Reseller</option>
+            <!-- <option value="reseller">Reseller</option> -->
           </select>
         </div>
 

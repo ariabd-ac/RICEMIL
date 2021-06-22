@@ -5,8 +5,8 @@
 // $dbname = "db_indri_ta";
 
 $hostname = "localhost";
-$username = "root";
-$password = "";
+$username = "rizalazky";
+$password = "Margasari2021";
 $dbname = "db_indri_ta";
 $base_url = "http://localhost/ricemil/";
 
