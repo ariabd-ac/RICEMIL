@@ -90,8 +90,8 @@ if (isset($_POST['submit'])) {
     </div>
     <div class="form-group">
         <label for="namabarang">Memo</label>
-        <!-- <input type="url" name='msg' class='form-control'> -->
-        <input type="url" name="msg" id="msg" placeholder="https://example.com" pattern="https://.*" size="30" required>
+        <!-- <input type="text" name='msg' class='form-control'> -->
+        <input type="url" name="msg" class='form-control' id="msg" placeholder="https://example.com" pattern="https://.*" size="30" required>
     </div>
     <div class="form-group">
         <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
