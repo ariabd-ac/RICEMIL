@@ -75,79 +75,79 @@
         <h3>Detail</h3>
       </div>
       <div class="card-body">
-        <form action="">
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <label for="tanggal">Tanggal</label>
-              </div>
-              <div class="col-md-6">
-                <input type="text" name="tanggal" id="tanggal" class="form-control" value="<?php echo date('d-m-Y') ?>" readonly>
-              </div>
+        <!-- <form action=""> -->
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="tanggal">Tanggal</label>
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="tanggal" id="tanggal" class="form-control" value="<?php echo date('d-m-Y') ?>" readonly>
             </div>
           </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <label for="subtotal">Subtotal</label>
-              </div>
-              <div class="col-md-6">
-                <input type="text" name="subtotal" id="subtotal" class="form-control" readonly>
-              </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="subtotal">Subtotal</label>
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="subtotal" id="subtotal" class="form-control" readonly>
             </div>
           </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <label for="diskon">Diskon</label>
-              </div>
-              <div class="col-md-6">
-                <input type="text" name="diskon" id="diskon" class="form-control">
-              </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="diskon">Diskon</label>
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="diskon" id="diskon" class="form-control">
             </div>
           </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <label for="total">Total</label>
-              </div>
-              <div class="col-md-6">
-                <input type="text" name="total" id="total" class="form-control" readonly>
-              </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="total">Total</label>
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="total" id="total" class="form-control" readonly>
             </div>
           </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <label for="bayar">Bayar</label>
-              </div>
-              <div class="col-md-6">
-                <input type="text" name="bayar" id="bayar" class="form-control">
-              </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="bayar">Bayar</label>
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="bayar" id="bayar" class="form-control">
             </div>
           </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-4">
-                <label for="kembalian">Kembalian</label>
-              </div>
-              <div class="col-md-6">
-                <input type="text" name="kembalian" id="kembalian" class="form-control" readonly>
-              </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="kembalian">Kembalian</label>
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="kembalian" id="kembalian" class="form-control" readonly>
             </div>
           </div>
+        </div>
 
       </div>
       <div class="card-footer">
         <div class="form-group">
           <div class="row">
             <div class="col-md-12 d-flex justify-content-end">
-              <input type="submit" value="Simpan" class='btn btn-primary' style="margin-right:5px;">
+              <input type="submit" value="Simpan" onClick="submitOnDb()" class='btn btn-primary' style="margin-right:5px;">
               <button type="button" class='btn btn-primary'>Reset</button>
             </div>
           </div>
         </div>
-        </form>
+        <!-- </form> -->
       </div>
     </div>
   </div>
@@ -313,4 +313,47 @@
   }
 
   // END LIST OF FUNCTION
+
+  // submit 
+  function submitOnDb() {
+    let subTotalDetail = document.getElementById('subtotal');
+    let total = document.getElementById('total');
+    let diskon = document.getElementById('diskon');
+    let itemList = [];
+    // const result = itemList.filter(itemList => itemList.length);
+
+
+
+
+    // for (let index = 0; index < dataKeranjangItem.length; index++) {
+    //   const data = dataKeranjangItem[index];
+    //   let obj = new Object(data);
+    // }
+
+    // itemList.push(obj);
+
+
+    let data = {
+      subTotalDetail: subTotalDetail.value,
+      total: total.value,
+      diskon: diskon.value,
+      itemList: dataKeranjangItem,
+    }
+
+
+    $.ajax({
+      type: "post",
+      url: "process.php",
+      data: "data",
+      dataType: "json",
+      success: function(response) {
+        console.log('s', response);
+      },
+      error: function(error) {
+        console.log('err', error);
+      }
+    });
+
+
+  }
 </script>
