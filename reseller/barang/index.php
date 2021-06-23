@@ -21,7 +21,6 @@
                         <h4><?php echo $r['Nama_barang'] ?></h4>
                         <p>Stock <?php echo $r['stock'] ?></p>
                         <p>Rp. <?php echo $r['harga'] ?></p>
-
                     </div>
                 </div>
                 <div class="card-footer">

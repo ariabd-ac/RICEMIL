@@ -297,5 +297,20 @@
   }
   // function hitungKembalian End
 
+
+  function submit(){
+    let subTotal=//get by element
+    let total=//get by element
+    let discount=//get by element
+    let itemlist=[]
+    
+    let data={
+      subtotal:subtotal
+      subtotal:subtotal
+      luistItem:dataKeranjangItem
+    }
+    
+  }
+
   // END LIST OF FUNCTION
 </script>
