@@ -5,6 +5,50 @@ include_once "../config/koneksi.php";
 if ($_SESSION['level'] != 'reseller') {
   header("location: 404.php");
 }
+if(isset($_POST['save'])){
+  $subTotalDetail = $_POST['subTotalDetail'];
+  $total = $_POST['total'];
+  $diskon = $_POST['diskon'];
+  $listData = $_POST['itemList'];
+  $user = $_SESSION['unique_id'];
+  $metodeBayar= $_POST['metodeBayar'];;
+  $response;
+  $queryInser = "INSERT INTO tb_order_masuk(diskon,subtotal,total,metode_bayar,order_by) VALUES ('$diskon','$subTotalDetail','$total','$metodeBayar','$user')";
+    $insert = mysqli_query($conn, $queryInser);
+    if ($insert) {
+      $idTrx=mysqli_insert_id($conn);
+      for ($i=0; $i < count($listData) ;$i++) { 
+        $idItem=$listData[$i]['idItem'];
+        $harga=$listData[$i]['hargaItem'];
+        $qty=$listData[$i]['itemQty'];
+        $insertDetail="INSERT INTO tb_order_masuk_detail(id_order_masuk,id_item,harga,qty) VALUES ('$idTrx','$idItem','$harga','$qty')";
+        $insertDetailExec = mysqli_query($conn, $insertDetail);
+        if($insertDetailExec){
+          $updateQuey = "UPDATE tb_barang tb SET tb.stock=(tb.stock - $qty) WHERE tb.Id_barang='$idItem'";
+          $updateExec = mysqli_query($conn, $updateQuey);
+          if($updateExec){
+            $response=array(
+              "status"=>"OK",
+              "idTrx"=>$idTrx
+            );
+          }else{
+            $response=array(
+              "status"=>"Fail",
+              "idTrx"=>$idTrx
+            );
+          }
+        }
+      }
+    } else {
+      $response=array(
+        "status"=>"Fail",
+        "idTrx"=>$idTrx
+      );
+    }
+  
+  echo json_encode($response);
+  die;
+}
 ?>
 
 
@@ -37,6 +81,7 @@ if ($_SESSION['level'] != 'reseller') {
         <!-- Sales chart -->
         <!-- ============================================================== -->
         <?php
+        
         if (isset($_GET['page'])) {
           $page = $_GET['page'];
           // die($page);

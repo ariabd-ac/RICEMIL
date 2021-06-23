@@ -1,13 +1,13 @@
 <?php
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_indri_ta";
-
 // $hostname = "localhost";
-// $username = "rizalazky";
-// $password = "Margasari2021";
+// $username = "root";
+// $password = "";
 // $dbname = "db_indri_ta";
+
+$hostname = "localhost";
+$username = "rizalazky";
+$password = "Margasari2021";
+$dbname = "db_indri_ta";
 $base_url = "http://localhost/ricemil/";
 
 
