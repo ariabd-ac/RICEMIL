@@ -83,9 +83,9 @@
             <tr>
             
                 <th class="border-top-0">#</th>
+                <th class="border-top-0">Tanggal Transaksi</th>
                 <th class="border-top-0">Subtotal</th>
                 <th class="border-top-0">Diskon</th>
-                <th class="border-top-0">Tanggal</th>
                 <th class="border-top-0">Total</th>
                 <th class="border-top-0">Metode Bayar</th>
                 <th class="border-top-0">Upload Bukti Pembayaran</th>
@@ -112,9 +112,9 @@
                     ?>
                         <tr>
                             <td><?php echo $row['Id_order']?></td>
+                            <td><?php echo $row['date']?></td>
                             <td><?php echo $row['subtotal']?></td>
                             <td><?php echo $row['diskon']?></td>
-                            <td><?php echo $row['date']?></td>
                             <td><?php echo $row['total']  ?></td>
                             <td><?php echo $row['descr'] ?></td>
                             <td>
@@ -149,6 +149,7 @@
         <thead>
             <tr>
             <th class="border-top-0">#</th>
+            <th class="border-top-0">Tanggal Transaksi</th>
                 <th class="border-top-0">Subtotal</th>
                 <th class="border-top-0">Diskon</th>
                 <th class="border-top-0">Tanggal</th>
@@ -177,6 +178,7 @@
                     ?>
                         <tr>
                             <td><?php echo $row['Id_order']?></td>
+                            <td><?php echo $row['date']?></td>
                             <td><?php echo $row['subtotal']?></td>
                             <td><?php echo $row['diskon']?></td>
                             <td><?php echo $row['date']?></td>
@@ -194,23 +196,21 @@
     <thead>
         <tr>
             <th class="border-top-0">#</th>
-            <th class="border-top-0">Nama Barang</th>
             <th class="border-top-0">Tanggal</th>
-            <th class="border-top-0">Jumlah Order</th>
-            <th class="border-top-0">Harga</th>
+            <th class="border-top-0">Subtotal</th>
+            <th class="border-top-0">Diskon</th>
             <th class="border-top-0">Total</th>
-            <th class="border-top-0">Oleh</th>
             <th class="border-top-0">Status</th>
-            <th class="border-top-0">Action</th>
+            <!-- <th class="border-top-0">Action</th> -->
         </tr>
     </thead>
     <tbody>
         <?php
         //   die('Halo');
             $query="SELECT 
-                    T.Tanggal_transaksi AS date,T.Total_bayar,T.status,T.Id_transaksi,
+                    T.Tanggal_transaksi AS date,T.Total_bayar,T.status,T.Id_transaksi,T.subtotal,T.diskon,
                     CONCAT(U.fname,' ',U.lname) AS oleh
-                    FROM tb_transaksi T 
+                    FROM tb_transaksi T
                     LEFT JOIN users U ON U.unique_id=T.Id_pelanggan
                     WHERE T.Id_pelanggan='$_SESSION[unique_id]'
                     ORDER BY T.Tanggal_transaksi DESC";
@@ -223,15 +223,17 @@
                     <tr>
                         <td><?php echo $row['Id_transaksi']?></td>
                         <td><?php echo $row['date']?></td>
+                        <td><?php echo $row['subtotal']?></td>
+                        <td><?php echo $row['diskon']?></td>
                         <td><?php echo $row['Total_bayar'] ?></td>
                         <td>Dikirim</td>
-                        <td>
+                        <!-- <td>
                             <form action="" method="post">
                                 <input type="hidden" value="<?php echo $row['Id_transaksi']?>" name='id'>
                                 <input type="hidden" value="2" name='status'>
                                 <input type="submit" value="Dikirim" class='btn btn-info' name='submit'>
                             </form>
-                        </td>
+                        </td> -->
                     </tr>
         <?php    
             }}
@@ -243,13 +245,11 @@
   <table class="table user-table">
     <thead>
         <tr>
-            <th class="border-top-0">#</th>
-            <th class="border-top-0">Nama Barang</th>
+        <th class="border-top-0">#</th>
             <th class="border-top-0">Tanggal</th>
-            <th class="border-top-0">Jumlah Order</th>
-            <th class="border-top-0">Harga</th>
+            <th class="border-top-0">Subtotal</th>
+            <th class="border-top-0">Diskon</th>
             <th class="border-top-0">Total</th>
-            <th class="border-top-0">Oleh</th>
             <th class="border-top-0">Status</th>
             <th class="border-top-0">Action</th>
         </tr>
@@ -258,9 +258,9 @@
         <?php
         //   die('Halo');
             $query="SELECT 
-                    T.Tanggal_transaksi AS date,T.Total_bayar,T.status,T.Id_transaksi,
+                    T.Tanggal_transaksi AS date,T.Total_bayar,T.status,T.Id_transaksi,T.subtotal,T.diskon,
                     CONCAT(U.fname,' ',U.lname) AS oleh
-                    FROM tb_transaksi T 
+                    FROM tb_transaksi T
                     LEFT JOIN users U ON U.unique_id=T.Id_pelanggan
                     WHERE T.Id_pelanggan='$_SESSION[unique_id]'
                     ORDER BY T.Tanggal_transaksi DESC";
@@ -273,9 +273,10 @@
                     <tr>
                         <td><?php echo $row['Id_transaksi']?></td>
                         <td><?php echo $row['date']?></td>
+                        <td><?php echo $row['subtotal']?></td>
+                        <td><?php echo $row['diskon']?></td>
                         
                         <td><?php echo $row['Total_bayar'] ?></td>
-                        <td><?php echo $row['oleh'] ?></td>
                         <td><?php echo $row['status'] == '3' ? 'Menunggu Konfirmasi Pelanggan' : 'Transaksi Telah Selesai' ?></td>
                         <td>
                         <?php if($row['status'] == '3'){?>

@@ -159,6 +159,17 @@ if ($_SESSION['level'] != 'gudang') {
                     } else {
                       include 'profile/index.php';
                     }
+                  }else if ($page == 'transaksi') {
+                    if (isset($_GET['modul'])) {
+                      $modul = $_GET['modul'];
+                      switch ($modul) {
+                        case 'detail':
+                          include 'transaksi/detail.php';
+                          break;
+                      }
+                    } else {
+                      include 'transaksi/index.php';
+                    }
                   }
                 }
 

@@ -4,17 +4,17 @@
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $query="SELECT TOM.date,TOM.Id_order,TOM.is_approve,TOM.total,TOM.diskon,TOM.subtotal,TOM.metode_bayar,TOM.struk_gambar,TOM.order_by,TOMD.id_item,
+    $query="SELECT TOM.Tanggal_transaksi AS date,TOM.Id_transaksi,TOM.status,TOM.Total_bayar AS total,TOM.diskon,TOM.subtotal,TOM.metode_bayar,TOM.struk_gambar,
             CONCAT(U.fname,' ',U.lname) AS oleh,
             TB.Nama_barang,
             TMB.descr,
             TOMD.id_detail,TOMD.harga,TOMD.qty
-            FROM tb_order_masuk TOM
-            LEFT JOIN tb_order_masuk_detail TOMD ON TOMD.id_order_masuk=TOM.Id_order
+            FROM tb_transaksi TOM
+            LEFT JOIN tb_transaksi_detail TOMD ON TOMD.id_transaksi=TOM.Id_transaksi
             LEFT JOIN tb_barang TB ON TB.Id_barang=TOMD.id_item
             LEFT JOIN users U ON U.unique_id=TOM.order_by
             LEFT JOIN tb_rf_metodebayar TMB ON TMB.id=TOM.metode_bayar
-            WHERE TOM.Id_order='$id'";
+            WHERE TOM.Id_transaksi='$id'";
     $result=mysqli_query($conn,$query);
     // var_dump($result);
     // die;
@@ -28,25 +28,23 @@ if (isset($_GET['id'])) {
 if (isset($_POST['submit'])) {
     $id=$_POST['kodepesanan'];
     
-    $queryUpdate = "UPDATE tb_order_masuk SET is_approve=TRUE WHERE Id_order='$id'";
+    $query = "UPDATE tb_order_masuk SET is_approve=TRUE WHERE Id_order='$id'";
 
-    $insert = mysqli_query($conn, $queryUpdate);
+    $insert = mysqli_query($conn, $query);
     if ($insert) {
         
-        $queryInsertTransaksi="INSERT INTO tb_transaksi (Id_pelanggan,subtotal,diskon,metode_bayar,Total_bayar,status,order_by,struk_gambar) 
-        VALUES ('$res[order_by]','$res[subtotal]','$res[diskon]','$res[metode_bayar]','$res[total]','1','$res[order_by]','$res[struk_gambar]')";
+        $queryInsertTransaksi="INSERT INTO tb_transaksi (Id_pelanggan,Total_bayar,status) 
+        VALUES ('$res[unique_id]','$res[total]','1')";
+
         
 
         if(mysqli_query($conn,$queryInsertTransaksi)){
-            $idTrx=mysqli_insert_id($conn);
-            // die($idTrx."ID TRX");
             $resultDetail=mysqli_query($conn,$query);
+            $idTrx=mysqli_insert_id($conn);
             while ($row=mysqli_fetch_assoc($resultDetail)) {
                 
                 $queryInsertTransaksiDetail="INSERT INTO tb_transaksi_detail (id_transaksi,id_item,harga,qty) VALUES ('$idTrx','$row[id_item]','$row[harga]','$row[qty]')";
-                if(!mysqli_query($conn,$queryInsertTransaksiDetail)){
-                    die('Err'.mysqli_error($conn)."Id Trx".$idTrx);
-                }
+                mysqli_query($conn,$queryInsertTransaksiDetail);
             }
             header('location:/ricemil/admin/index.php?page=kelolapesanan');
         }else{
@@ -72,8 +70,8 @@ if (isset($_POST['submit'])) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="namabarang">Kode Pesanan</label>
-                                <input type="hidden" name='kodepesanan' class='form-control' value="<?php echo $res['Id_order'] ?>">
-                                <input type="text" name='' class='form-control' value="<?php echo $res['Id_order'] ?>" disabled>
+                                <input type="hidden" name='kodepesanan' class='form-control' value="<?php echo $res['Id_transaksi'] ?>">
+                                <input type="text" name='' class='form-control' value="<?php echo $res['Id_transaksi'] ?>" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="namabarang">Customer</label>
@@ -164,11 +162,11 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
             </div>
-            <?php if(!$res['is_approve']) { ?>
+            <!-- <?php if(!$res['is_approve']) { ?>
             <div class="form-group">
                 <input type="submit" class='btn btn-success' name='submit' value='Approve' class='form-control'>
             </div>
-            <?php } ?>
+            <?php } ?> -->
         </form>
         
 

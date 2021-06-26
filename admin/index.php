@@ -126,9 +126,11 @@ if ($_SESSION['level'] != 'admin') {
                   break;
                 case 'transaksi':
                   if (isset($_GET['modul'])) {
+                    $modul = $_GET['modul'];
                     switch ($modul) {
-                      case 'value':
+                      case 'detail':
                         # code...
+                        include 'transaksi/detail.php';
                         break;
 
                       default:
