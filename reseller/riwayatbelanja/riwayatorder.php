@@ -64,7 +64,7 @@
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Menunggu Konfirmasi</button>
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Pembayaran</button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Diproses</button>
@@ -81,12 +81,13 @@
     <table class="table user-table">
         <thead>
             <tr>
+            
                 <th class="border-top-0">#</th>
-                <th class="border-top-0">Nama Barang</th>
+                <th class="border-top-0">Subtotal</th>
+                <th class="border-top-0">Diskon</th>
                 <th class="border-top-0">Tanggal</th>
-                <th class="border-top-0">Jumlah Order</th>
-                <th class="border-top-0">Harga</th>
                 <th class="border-top-0">Total</th>
+                <th class="border-top-0">Metode Bayar</th>
                 <th class="border-top-0">Upload Bukti Pembayaran</th>
                 
             </tr>
@@ -94,12 +95,13 @@
         <tbody>
             <?php
             //   die('Halo');
-                $query="SELECT TB.Nama_barang AS namaBarang,TB.Harga,TB.Id_barang,TOM.date,TOM.qty AS Jumlah,TOM.is_approve,
-                TOM.metode_bayar,TBRM.descr,TOM.struk_gambar,TOM.Id_order 
-                FROM tb_order_masuk TOM 
-                LEFT JOIN tb_barang TB ON TB.Id_barang=TOM.Id_barang 
-                LEFT JOIN tb_rf_metodebayar TBRM ON TBRM.id=TOM.metode_bayar
-                WHERE TOM.order_by='$_SESSION[unique_id]' ORDER BY TOM.date DESC";
+                $query="SELECT TOM.date,TOM.Id_order,TOM.is_approve,TOM.total,TOM.diskon,TOM.subtotal,TOM.struk_gambar,TOM.metode_bayar,
+                        CONCAT(U.fname,' ',U.lname) AS oleh,
+                        TMB.descr
+                        FROM tb_order_masuk TOM
+                        LEFT JOIN users U ON U.unique_id=TOM.order_by
+                        LEFT JOIN tb_rf_metodebayar TMB ON TMB.id=TOM.metode_bayar 
+                        WHERE TOM.order_by='$_SESSION[unique_id]' ORDER BY TOM.date DESC";
                 $result=mysqli_query($conn,$query);
                 if(!$result){
                     die('Err'.mysqli_error($conn));
@@ -110,16 +112,16 @@
                     ?>
                         <tr>
                             <td><?php echo $row['Id_order']?></td>
-                            <td><?php echo $row['namaBarang']?></td>
+                            <td><?php echo $row['subtotal']?></td>
+                            <td><?php echo $row['diskon']?></td>
                             <td><?php echo $row['date']?></td>
-                            <td><?php echo $row['Jumlah']?></td>
-                            <td><?php echo $row['Harga']?></td>
-                            <td><?php echo ($row['Harga'] * $row['Jumlah']) ?></td>
+                            <td><?php echo $row['total']  ?></td>
+                            <td><?php echo $row['descr'] ?></td>
                             <td>
                                 <?php
                                     if($row['metode_bayar'] != 1){
                                         if($row['struk_gambar']){
-                                            echo 'Sudah Menguplod Bukti Pembayaran';   
+                                            echo 'Menunggu Konfirmasi Pembayaran';   
                                         }else{
                                             
                                 ?>      
@@ -146,22 +148,25 @@
   <table class="table user-table">
         <thead>
             <tr>
-                <th class="border-top-0">#</th>
-                <th class="border-top-0">Nama Barang</th>
+            <th class="border-top-0">#</th>
+                <th class="border-top-0">Subtotal</th>
+                <th class="border-top-0">Diskon</th>
                 <th class="border-top-0">Tanggal</th>
-                <th class="border-top-0">Jumlah Order</th>
-                <th class="border-top-0">Harga</th>
                 <th class="border-top-0">Total</th>
+                <th class="border-top-0">Metode Bayar</th>
                 
             </tr>
         </thead>
         <tbody>
             <?php
             //   die('Halo');
-                $query="SELECT TB.Nama_barang AS namaBarang,TB.Harga,TB.Id_barang,TOM.date,TOM.qty AS Jumlah,TOM.is_approve 
-                FROM tb_order_masuk TOM 
-                LEFT JOIN tb_barang TB ON TB.Id_barang=TOM.Id_barang 
-                WHERE TOM.order_by='$_SESSION[unique_id]' ORDER BY TOM.date DESC";
+                $query="SELECT TOM.date,TOM.Id_order,TOM.is_approve,TOM.total,TOM.diskon,TOM.subtotal,TOM.struk_gambar,TOM.metode_bayar,
+                        CONCAT(U.fname,' ',U.lname) AS oleh,
+                        TMB.descr
+                        FROM tb_order_masuk TOM
+                        LEFT JOIN users U ON U.unique_id=TOM.order_by
+                        LEFT JOIN tb_rf_metodebayar TMB ON TMB.id=TOM.metode_bayar 
+                        WHERE TOM.order_by='$_SESSION[unique_id]' ORDER BY TOM.date DESC";
                 $result=mysqli_query($conn,$query);
                 if(!$result){
                     die('Err'.mysqli_error($conn));
@@ -171,12 +176,12 @@
                         
                     ?>
                         <tr>
-                            <td><?php echo $row['Id_barang']?></td>
-                            <td><?php echo $row['namaBarang']?></td>
+                            <td><?php echo $row['Id_order']?></td>
+                            <td><?php echo $row['subtotal']?></td>
+                            <td><?php echo $row['diskon']?></td>
                             <td><?php echo $row['date']?></td>
-                            <td><?php echo $row['Jumlah']?></td>
-                            <td><?php echo $row['Harga']?></td>
-                            <td><?php echo ($row['Harga'] * $row['Jumlah']) ?></td>
+                            <td><?php echo $row['total']  ?></td>
+                            <td><?php echo $row['descr'] ?></td>
                         </tr>
             <?php   }    
                 }
@@ -203,11 +208,9 @@
         <?php
         //   die('Halo');
             $query="SELECT 
-                    T.Tanggal_transaksi AS date,T.Jumlah_pesanan AS Jumlah,T.Harga,T.Total_bayar,T.status,T.Id_transaksi,
-                    CONCAT(U.fname,' ',U.lname) AS oleh,
-                    TB.Nama_barang AS namaBarang
+                    T.Tanggal_transaksi AS date,T.Total_bayar,T.status,T.Id_transaksi,
+                    CONCAT(U.fname,' ',U.lname) AS oleh
                     FROM tb_transaksi T 
-                    LEFT JOIN tb_barang TB ON TB.Id_barang=T.id_barang
                     LEFT JOIN users U ON U.unique_id=T.Id_pelanggan
                     WHERE T.Id_pelanggan='$_SESSION[unique_id]'
                     ORDER BY T.Tanggal_transaksi DESC";
@@ -219,12 +222,8 @@
                 if($row['status']=='2'){?>
                     <tr>
                         <td><?php echo $row['Id_transaksi']?></td>
-                        <td><?php echo $row['namaBarang']?></td>
                         <td><?php echo $row['date']?></td>
-                        <td><?php echo $row['Jumlah']?></td>
-                        <td><?php echo $row['Harga']?></td>
                         <td><?php echo $row['Total_bayar'] ?></td>
-                        <td><?php echo $row['oleh'] ?></td>
                         <td>Dikirim</td>
                         <td>
                             <form action="" method="post">
@@ -259,11 +258,9 @@
         <?php
         //   die('Halo');
             $query="SELECT 
-                    T.Tanggal_transaksi AS date,T.Jumlah_pesanan AS Jumlah,T.Harga,T.Total_bayar,T.status,T.Id_transaksi,
-                    CONCAT(U.fname,' ',U.lname) AS oleh,
-                    TB.Nama_barang AS namaBarang
+                    T.Tanggal_transaksi AS date,T.Total_bayar,T.status,T.Id_transaksi,
+                    CONCAT(U.fname,' ',U.lname) AS oleh
                     FROM tb_transaksi T 
-                    LEFT JOIN tb_barang TB ON TB.Id_barang=T.id_barang
                     LEFT JOIN users U ON U.unique_id=T.Id_pelanggan
                     WHERE T.Id_pelanggan='$_SESSION[unique_id]'
                     ORDER BY T.Tanggal_transaksi DESC";
@@ -275,10 +272,8 @@
                 if($row['status']=='3' || $row['status']==4){?>
                     <tr>
                         <td><?php echo $row['Id_transaksi']?></td>
-                        <td><?php echo $row['namaBarang']?></td>
                         <td><?php echo $row['date']?></td>
-                        <td><?php echo $row['Jumlah']?></td>
-                        <td><?php echo $row['Harga']?></td>
+                        
                         <td><?php echo $row['Total_bayar'] ?></td>
                         <td><?php echo $row['oleh'] ?></td>
                         <td><?php echo $row['status'] == '3' ? 'Menunggu Konfirmasi Pelanggan' : 'Transaksi Telah Selesai' ?></td>
