@@ -142,7 +142,7 @@
         <div class="form-group">
           <div class="row">
             <div class="col-md-12 d-flex justify-content-end">
-              <input type="submit" value="Simpan" onClick="submitOnDb()" class='btn btn-primary' style="margin-right:5px;">
+              <input type="submit" onclick="save()" value="Simpan" id="save" class='btn btn-primary' style="margin-right:5px;">
               <button type="button" class='btn btn-primary'>Reset</button>
             </div>
           </div>
@@ -298,62 +298,101 @@
   // function hitungKembalian End
 
 
-  function submit(){
-    let subTotal=//get by element
-    let total=//get by element
-    let discount=//get by element
-    let itemlist=[]
-    
-    let data={
-      subtotal:subtotal
-      subtotal:subtotal
-      luistItem:dataKeranjangItem
+  function submit() {
+    let subTotal = [] //get by element
+    let total = [] //get by element
+    let discount = [] //get by element
+    let itemlist = []
+
+    let data = {
+      subtotal: subtotal,
+      subtotal: subtotal,
+      luistItem: dataKeranjangItem
     }
-    
+
   }
 
   // END LIST OF FUNCTION
 
   // submit 
-  function submitOnDb() {
+  // function submitOnDb() {
+  //   let subTotalDetail = document.getElementById('subtotal');
+  //   let total = document.getElementById('total');
+  //   let diskon = document.getElementById('diskon');
+  //   let itemList = [];
+  //   // const result = itemList.filter(itemList => itemList.length);
+
+
+
+
+  //   // for (let index = 0; index < dataKeranjangItem.length; index++) {
+  //   //   const data = dataKeranjangItem[index];
+  //   //   let obj = new Object(data);
+  //   // }
+
+  //   // itemList.push(obj);
+
+
+  //   let data = {
+  //     subTotalDetail: subTotalDetail.value,
+  //     total: total.value,
+  //     diskon: diskon.value,
+  //     itemList: dataKeranjangItem,
+  //   }
+
+
+  //   console.log('data: ', data);
+
+
+  // }
+
+  async function save() {
+    let url = "http://localhost/ricemil/kasir/";
+    // let subTotal = await getSubTotal()
+    // let total = await getTotal(subTotal)
+    // let metodeBayar = document.getElementById('metodeBayar').value
+
+
     let subTotalDetail = document.getElementById('subtotal');
+    // let qty = document.getElementById('qty');
     let total = document.getElementById('total');
     let diskon = document.getElementById('diskon');
     let itemList = [];
-    // const result = itemList.filter(itemList => itemList.length);
 
-
-
-
-    // for (let index = 0; index < dataKeranjangItem.length; index++) {
-    //   const data = dataKeranjangItem[index];
-    //   let obj = new Object(data);
+    // let data = {
+    //   save: "save",
+    //   subTotalDetail: subTotalDetail.value,
+    //   total: total.value,
+    //   diskon: diskon.value,
+    //   itemList: dataKeranjangItem,
+    //   // metodeBayar: metodeBayar
     // }
 
-    // itemList.push(obj);
+    // console.log('d', data);
 
-
-    let data = {
-      subTotalDetail: subTotalDetail.value,
-      total: total.value,
-      diskon: diskon.value,
-      itemList: dataKeranjangItem,
-    }
 
 
     $.ajax({
       type: "post",
-      url: "process.php",
-      data: "data",
+      url: url,
+      data: {
+        save: "save",
+        subTotalDetail: subTotalDetail.value,
+        total: total.value,
+        diskon: diskon.value,
+        itemList: dataKeranjangItem,
+        // metodeBayar: metodeBayar
+      },
       dataType: "json",
       success: function(response) {
         console.log('s', response);
+        if (response.status == "OK") {
+          window.location.href = "http://localhost/ricemil/kasir/index.php?page=dashboard";
+        }
       },
       error: function(error) {
-        console.log('err', error);
+        console.log('err', error.responseText);
       }
     });
-
-
   }
 </script>

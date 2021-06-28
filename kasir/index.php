@@ -8,6 +8,71 @@ include_once "../config/koneksi.php";
 // }
 ?>
 
+<?php
+if (isset($_POST['save'])) {
+
+  $subTotalDetail = $_POST['subTotalDetail'];
+  $diskon = $_POST['diskon'];
+  $total = $_POST['total'];
+  $listData = $_POST['itemList'];
+  $user = $_SESSION['unique_id'];
+  $response;
+  $date     = date("Y/m/d h:i:s");
+
+
+  $queryInser = "INSERT INTO tb_transaksi(Id_pelanggan,Tanggal_transaksi,subtotal,diskon) VALUES ('$user','$date','$subTotalDetail','$diskon')";
+  $insert = mysqli_query($conn, $queryInser);
+  if ($insert) {
+    $idTrx = mysqli_insert_id($conn);
+    for ($i = 0; $i < count($listData); $i++) {
+      $idItem = $listData[$i]['idBarang'];
+      $harga = $listData[$i]['hargaBarang'];
+      // $nama = $listData[$i]['namaBarang'];
+      $qty = $listData[$i]['qty'];
+      $insertDetail = "INSERT INTO tb_transaksi_detail(id_transaksi,id_item,harga,qty) VALUES ('$idTrx','$idItem','$harga','$qty')";
+      $insertDetailExec = mysqli_query($conn, $insertDetail);
+      // ==================================================================
+      if ($insertDetailExec) {
+        $response = array(
+          "status" => "OK",
+          "idTrx" => $idTrx
+        );
+      } else {
+        $response = array(
+          "status" => "Fail",
+          "idTrx" => $idTrx
+        );
+      }
+
+      // if ($insertDetailExec) {
+      //   $updateQuey = "UPDATE tb_barang tb SET tb.stock=(tb.stock - $qty) WHERE tb.Id_barang='$idItem'";
+      //   $updateExec = mysqli_query($conn, $updateQuey);
+      //   if ($updateExec) {
+      //     $response = array(
+      //       "status" => "OK",
+      //       "idTrx" => $idTrx
+      //     );
+      //   } else {
+      //     $response = array(
+      //       "status" => "Fail",
+      //       "idTrx" => $idTrx
+      //     );
+      //   }
+      // }
+    }
+  } else {
+    $response = array(
+      "status" => "Fail",
+      "idTrx" => $idTrx
+    );
+  }
+
+  echo json_encode($response);
+  die;
+}
+?>
+
+
 
 
 
