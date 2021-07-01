@@ -3,7 +3,7 @@
     <thead>
         <tr>
             <th class="border-top-0">#</th>
-            <!-- <th class="border-top-0">Id Barng</th> -->
+            <th class="border-top-0">Id Barng</th>
             <th class="border-top-0">Nama Barang</th>
             <th class="border-top-0">Jumlah </th>
             <th class="border-top-0">Harga</th>

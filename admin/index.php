@@ -141,6 +141,23 @@ if ($_SESSION['level'] != 'admin') {
                     include 'transaksi/index.php';
                   }
                   break;
+                case 'transaksihis':
+                  if (isset($_GET['modul'])) {
+                    $modul = $_GET['modul'];
+                    switch ($modul) {
+                      case 'detail':
+                        # code...
+                        include 'transaksi/detail.php';
+                        break;
+
+                      default:
+                        include 'transaksihis/index.php';
+                        break;
+                    }
+                  } else {
+                    include 'transaksihis/index.php';
+                  }
+                  break;
                 case 'profile':
                   if (isset($_GET['modul'])) {
                     $modul = $_GET['modul'];

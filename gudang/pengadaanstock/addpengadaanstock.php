@@ -9,6 +9,7 @@ if (isset($_POST['submit'])) {
     $harga = $_POST['harga'];
     $jumlah = $_POST['jumlah'];
     $np_sup = $_POST['np_sup'];
+    $namabarangreal = $_POST['namabarangreal'];
     $msg = $_POST['msg'];
 
 
@@ -17,13 +18,13 @@ if (isset($_POST['submit'])) {
     $insert = mysqli_query($conn, $query);
     if ($insert) {
         $last_id = mysqli_insert_id($conn);
-        $linkMessage = "SEGERA CEK LINK <a href='http://localhost/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=$last_id'>http://localhost/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=" . $last_id . "</a>";
+        $linkMessage = "Terdapat Pesanan Barang "+$namabarangreal+" dengan jumlah "+$jumlah+" unit,Mohon Cek disini yaa... http://127.0.0.1/ricemil/supplier/index.php?page=datapesanan&modul=konf&id="+$last_id+",Thank You ..";
         // <a href="https://meet.google.com/vmu-mxrt-pux" title="https://meet.google.com/vmu-mxrt-pux" target="_blank" rel="noopener noreferrer" class="_3-8er selectable-text copyable-text">https://meet.google.com/vmu-mxrt-pux</a>
-        $send->sendMessage($np_sup,  $msg); //kie ngirim wa
+        $send->sendMessage($np_sup,  $linkMessage); //kie ngirim wa
         // $send->sendMessage($np_sup, $linkMessage . ',' . $msg); //kie ngirim wa
-        $update = mysqli_query($conn, $queryUpdate);
         // update after get response OK from Supplier
         $queryUpdate = "UPDATE tb_barang tb SET tb.stock=(tb.stock + $jumlah) WHERE tb.Id_barang='$namaBarang'";
+        $update = mysqli_query($conn, $queryUpdate);
         if (!$update) {
             die("Err Update Stock " . mysqli_error($conn));
         }
@@ -39,31 +40,74 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-
-
-
-
-
-<form action="" method="post">
-    <div class="form-group">
+<form action="" method="post" class='container-add-gudang'>  
+    <button class="btn-add btn-primary">Add</button>
+    <table class="table user-table">
+        <thead>
+            <tr>
+                <th class="border-top-0">#</th>
+                <th class="border-top-0">Nama Barang</th>
+                <th class="border-top-0">Gambar</th>
+                <th class="border-top-0">Harga</th>
+                <th class="border-top-0">Qty</th>
+                <th class="border-top-0">Total</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyTable">
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan='5'>Total</th>
+                <th id='totalVal'>0</th>
+            </tr>
+        </tfoot>
+    </table>
+    <select id='listDataBarang' class='form-control select-item' style='display:none;'>
+            <option>Pilih Item</option>
+            <?php
+            while ($row = mysqli_fetch_assoc($res)) {
+            ?>
+                <option class="select-item-list"
+                        value="<?php echo $row['Id_barang'] ?>" 
+                        id="item-opt-<?php echo $row['Id_barang'] ?>" 
+                        data-hargabeli="<?php echo $row['harga_beli'] ?>"
+                        data-namabarangreal="<?php echo $row['Nama_barang'] ?>"
+                        data-imgurl="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>"
+                        >
+                            <?php echo $row['Nama_barang'] ?>
+                </option>
+            <?php 
+               }
+            ?>
+    </select>
+    <!-- <div class="form-group">
         <label for="namabarang">Nama Barang</label>
         <select name="namabarang" id="" class='form-control'>
             <?php
             while ($row = mysqli_fetch_assoc($res)) {
             ?>
-                <option value="<?php echo $row['Id_barang'] ?>"><?php echo $row['Nama_barang'] ?></option>
+                <option value="<?php echo $row['Id_barang'] ?>" 
+                        id="item-opt-<?php echo $row['Id_barang'] ?>" 
+                        data-hargabeli="<?php echo $row['harga_beli'] ?>"
+                        data-namabarangreal="<?php echo $row['Nama_barang'] ?>"
+                        >
+                            <?php echo $row['Nama_barang'] ?>
+                        </option>
             <?php    }
             ?>
         </select>
-    </div>
-    <div class="form-group">
+    </div> -->
+    
+    <!-- <div class="form-group">
+        <label for="namabarang">Harga</label>
+        <input type="text" name='harga' id="harga" class='form-control' readonly>
+        <input type="hidden" name='namabarangreal' id="namabarangreal" class='form-control' >
+    </div> -->
+    <!-- <div class="form-group">
         <label for="namabarang">Jumlah</label>
         <input type="text" name='jumlah' class='form-control'>
-    </div>
-    <div class="form-group">
-        <label for="namabarang">Harga</label>
-        <input type="text" name='harga' class='form-control'>
-    </div>
+    </div> -->
     <div class="form-group">
         <label for="namabarang">Pilih Supplier</label>
         <!-- <input type="text" name='no_sup' class='form-control'> -->
@@ -90,15 +134,114 @@ if (isset($_POST['submit'])) {
     </div>
     <div class="form-group">
         <label for="namabarang">Memo</label>
-        <!-- <input type="text" name='msg' class='form-control'> -->
-        <input type="url" name="msg" class='form-control' id="msg" placeholder="https://example.com" pattern="https://.*" size="30" required>
+        <input type="text" name='msg' class='form-control'>
+        <!-- <input type="url" name="msg" class='form-control' id="msg" placeholder="https://example.com" pattern="https://.*" size="30" required> -->
     </div>
     <div class="form-group">
         <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
     </div>
-    <!-- <div class="form-group">
-            <label for="namabarang">Nama Barang</label>
-            <input type="text" name='namabarang' class='form-control'>
-        </div> -->
+   
 
 </form>
+<script>
+    const listDataBarangEl=document.getElementById('listDataBarang');
+    const containerGudang=document.getElementsByClassName('container-add-gudang');
+    const tbodyTable=document.getElementById('tbodyTable');
+    const totalVal=document.getElementById('totalVal');
+    let num=0;
+
+    function selectChange(val){
+        // console.log(val.value)
+        let opt=document.getElementById("item-opt-"+val.value);
+        let harga=opt.dataset.hargabeli;
+        let namabarangreal=opt.dataset.namabarangreal;
+        let imgurl=opt.dataset.imgurl;
+        let parent=val.parentElement.parentElement;
+       
+        let td3=parent.childNodes[5]
+        let td4=parent.childNodes[7]
+        let td5=parent.childNodes[9]
+        let td6=parent.childNodes[11]
+        
+        let img=`<img src='${imgurl}' width='50px' height='50px'/>`;
+        let inpQty=`<input type='number' style='width:50px;' class='form-control inpt-qty' data-harga='${harga}' value='1'/>`;
+        td3.innerHTML=img
+        td4.innerHTML=harga
+        td5.innerHTML=inpQty
+        td6.innerHTML=getSubTotal(harga,1)
+        generateTotal()
+        // parent.childNodes[1].innerHTML='OKe'
+        // document.getElementById("harga").value=harga
+        // document.getElementById("namabarangreal").value=namabarangreal
+    }
+
+    function generateTotal(){
+        let child=tbodyTable.rows;
+        // console.log(child)
+        let total=0
+        for (let index = 0; index < child.length; index++) {
+            const el = child[index];
+            total +=Number(el.childNodes[11].innerText)
+            console.log(el.childNodes[11])
+            
+        }
+        totalVal.innerHTML=total
+    }
+
+    function getSubTotal(harga,qty){
+        return Number(harga) * Number(qty);
+    }
+
+    function qtyChange(target){
+        let parent=target.parentElement.parentElement;
+        let td6=parent.childNodes[11]
+
+        let valu=target.value
+        let harga=target.dataset.harga
+        td6.innerHTML=getSubTotal(harga,valu)
+        generateTotal()
+    }
+
+    function addRow(param){
+        num+=1;
+        listDataBarangEl.style.display='block';
+        trEl=`
+            <tr>
+                <td>${num}</td>
+                <td>${listDataBarangEl.outerHTML}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        `;
+        tbodyTable.insertAdjacentHTML("beforeend",trEl);
+        listDataBarangEl.style.display='none';
+    }
+
+    // event handler
+
+    
+    // click event on container gudang
+    containerGudang[0].addEventListener('click',(e)=>{
+        
+        e.preventDefault();
+        const target=e.target;
+
+        if(target.classList.contains('btn-add')){
+            addRow()
+        }
+    })
+      // change event on container gudang
+    containerGudang[0].addEventListener('change',(e)=>{
+        const target=e.target;
+        if(target.classList.contains('select-item')){
+            selectChange(target)
+        }
+
+        if(target.classList.contains('inpt-qty')){
+            qtyChange(target)
+        }
+    })
+
+</script>
