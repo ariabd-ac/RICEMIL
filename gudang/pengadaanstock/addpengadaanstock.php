@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
     <div class="form-group">
         <label for="namabarang">Pilih Supplier</label>
         <!-- <input type="text" name='no_sup' class='form-control'> -->
-        <select name="np_sup" id="" class='form-control'>
+        <select name="np_sup" id="np_sup" class='form-control'>
 
 
             <?php
@@ -138,12 +138,11 @@ if (isset($_POST['submit'])) {
         <!-- <input type="url" name="msg" class='form-control' id="msg" placeholder="https://example.com" pattern="https://.*" size="30" required> -->
     </div>
     <div class="form-group">
-        <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
+        <input type="submit" class='btn btn-success' id='submit' name='submit' value='submit' class='form-control'>
     </div>
-   
-
 </form>
 <script>
+
     const listDataBarangEl=document.getElementById('listDataBarang');
     const containerGudang=document.getElementsByClassName('container-add-gudang');
     const tbodyTable=document.getElementById('tbodyTable');
@@ -219,6 +218,43 @@ if (isset($_POST['submit'])) {
         listDataBarangEl.style.display='none';
     }
 
+    function postData(param){
+        let itemList=[];
+        for (let index = 0; index < tbodyTable.rows.length; index++) {
+            const element = tbodyTable.rows[index];
+            console.log(element.children[1].children[0].value)
+            let item={
+                "idItem" : element.children[1].children[0].value,
+                "harga":element.children[3].innerHTML,
+                "qty":element.children[4].children[0].value,
+            }
+            itemList.push(item)
+        }
+        let dataToPush={
+            "submit":"submit",
+            "total":totalVal.innerHTML,
+            "itemList":itemList,
+            "supplier":document.getElementById('np_sup').value
+        }
+        let url="http://localhost/ricemil/gudang/pengadaanstock/proses_add.php";
+        $.ajax({
+            type: "post",
+            url: url,
+            data: dataToPush,
+            dataType: "json",
+            success: function(response) {
+                console.log(response);
+                if(response.status == "OK"){
+                    alert("Pesanan Berhasil Diterima Supplier")
+                    window.location.href="http://localhost/ricemil/gudang/index.php?page=pengadaanstock";
+                }
+            },
+            error: function(error) {
+                console.log('err', error.responseText);
+            }
+        });
+    }
+
     // event handler
 
     
@@ -230,6 +266,10 @@ if (isset($_POST['submit'])) {
 
         if(target.classList.contains('btn-add')){
             addRow()
+        }
+
+        if(target.id == 'submit'){
+            postData();
         }
     })
       // change event on container gudang

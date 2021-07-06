@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2021 at 09:39 PM
+-- Generation Time: Jul 07, 2021 at 12:59 AM
 -- Server version: 5.7.34-log
 -- PHP Version: 7.4.13
 
@@ -31,6 +31,7 @@ CREATE TABLE `tb_barang` (
   `Id_barang` int(11) NOT NULL,
   `Nama_barang` varchar(40) NOT NULL,
   `stock` int(11) DEFAULT NULL,
+  `harga_beli` double NOT NULL,
   `harga` double NOT NULL,
   `gambar` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -39,11 +40,11 @@ CREATE TABLE `tb_barang` (
 -- Dumping data for table `tb_barang`
 --
 
-INSERT INTO `tb_barang` (`Id_barang`, `Nama_barang`, `stock`, `harga`, `gambar`) VALUES
-(3, 'Sabun', -4, 20000, '68796579_2433907643333859_4463231603417546752_n.jpg'),
-(4, 'henbody', 2147483627, 12323, 'gbr.png'),
-(5, 'nnnn', 16, 9999, 'b-parakankidang1.jpeg'),
-(6, 'Test barang', NULL, 5000, '085220733720-16191440719251806262855064103899.jpg');
+INSERT INTO `tb_barang` (`Id_barang`, `Nama_barang`, `stock`, `harga_beli`, `harga`, `gambar`) VALUES
+(3, 'Sabun', 26, 15000, 20000, '68796579_2433907643333859_4463231603417546752_n.jpg'),
+(4, 'henbody', 2147483627, 20000, 12323, 'gbr.png'),
+(5, 'nnnn', 16, 0, 9999, 'b-parakankidang1.jpeg'),
+(6, 'Test barang', NULL, 0, 5000, '085220733720-16191440719251806262855064103899.jpg');
 
 -- --------------------------------------------------------
 
@@ -140,59 +141,54 @@ CREATE TABLE `tb_pelanggan` (
 
 CREATE TABLE `tb_pengadaan_stock` (
   `Id` int(11) NOT NULL,
-  `Nama_barang` varchar(40) DEFAULT NULL,
-  `Jumlah` varchar(20) DEFAULT NULL,
-  `Harga` varchar(20) DEFAULT NULL,
-  `is_approve` tinyint(1) DEFAULT NULL
+  `tanggal_transaksi` datetime DEFAULT CURRENT_TIMESTAMP,
+  `Total` double DEFAULT NULL,
+  `is_approve` tinyint(1) DEFAULT NULL,
+  `supplier_nohp` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_pengadaan_stock`
 --
 
-INSERT INTO `tb_pengadaan_stock` (`Id`, `Nama_barang`, `Jumlah`, `Harga`, `is_approve`) VALUES
-(1, '3', '5', '20000', 0),
-(3, '3', '10', '20', 1),
-(4, '5', '20', '10000', NULL),
-(5, '3', '90', '30000', 1),
-(6, '4', '10', '2000', NULL),
-(7, '4', '10', '2000', NULL),
-(8, '4', '1', '1000', NULL),
-(9, '3', '1', '1000', 1),
-(10, '3', '10', '1000', 0),
-(11, '3', '1', '10', NULL),
-(12, '3', '10', '1', NULL),
-(13, '3', '1', '10', NULL),
-(14, '3', '10', '1', NULL),
-(15, '5', '10', '1', NULL),
-(16, '3', '10', '1', NULL),
-(17, '4', '1', '1', NULL),
-(18, '5', '10', '1', NULL),
-(19, '3', '1', '1', NULL),
-(20, '3', '1', '1', NULL),
-(21, '5', '1', '1', NULL),
-(22, '4', '1', '1', NULL),
-(23, '5', '1', '1', NULL),
-(24, '5', '1', '1', NULL),
-(25, '5', '1', '1', NULL),
-(26, '5', '1', '1', NULL),
-(27, '3', '1', '1', NULL),
-(28, '5', '1', '1', NULL),
-(29, '4', '1', '1', NULL),
-(30, '3', '1', '1', NULL),
-(31, '4', '1', '1', NULL),
-(32, '4', '1', '1', NULL),
-(33, '5', '1', '1', NULL),
-(34, '3', '1', '1', NULL),
-(35, '4', '1', '1', NULL),
-(36, '4', '1', '1', NULL),
-(37, '4', '1', '1', NULL),
-(38, '5', '1', '1', NULL),
-(39, '5', '1', '1', NULL),
-(40, '5', '1', '1', NULL),
-(41, '3', '2', '2', NULL),
-(42, '5', '1', '1', NULL),
-(43, '4', '1', '1000', NULL);
+INSERT INTO `tb_pengadaan_stock` (`Id`, `tanggal_transaksi`, `Total`, `is_approve`, `supplier_nohp`) VALUES
+(38, '2021-07-07 02:38:06', 15000, NULL, '087888187620'),
+(39, '2021-07-07 02:39:30', 50000, NULL, '087888187620'),
+(40, '2021-07-07 02:40:36', 35000, NULL, '087888187620'),
+(41, '2021-07-07 02:42:15', 35000, NULL, '087888187620'),
+(42, '2021-07-07 02:42:48', 35000, NULL, '087888187620'),
+(43, '2021-07-07 02:43:48', 35000, NULL, '087888187620');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pengadaan_stock_detail`
+--
+
+CREATE TABLE `tb_pengadaan_stock_detail` (
+  `id` int(11) NOT NULL,
+  `id_pengadaan_stock` int(11) NOT NULL,
+  `id_item` varchar(40) NOT NULL,
+  `harga` double NOT NULL,
+  `qty` int(11) NOT NULL,
+  `appproved_by` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pengadaan_stock_detail`
+--
+
+INSERT INTO `tb_pengadaan_stock_detail` (`id`, `id_pengadaan_stock`, `id_item`, `harga`, `qty`, `appproved_by`) VALUES
+(22, 39, '3', 15000, 2, NULL),
+(23, 39, '4', 20000, 1, NULL),
+(24, 40, '3', 15000, 1, NULL),
+(25, 40, '4', 20000, 1, NULL),
+(26, 41, '3', 15000, 1, NULL),
+(27, 41, '4', 20000, 1, NULL),
+(28, 42, '3', 15000, 1, NULL),
+(29, 42, '4', 20000, 1, NULL),
+(30, 43, '3', 15000, 1, '336577275'),
+(31, 43, '4', 20000, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -373,6 +369,12 @@ ALTER TABLE `tb_pengadaan_stock`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Indexes for table `tb_pengadaan_stock_detail`
+--
+ALTER TABLE `tb_pengadaan_stock_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_pengiriman_produk`
 --
 ALTER TABLE `tb_pengiriman_produk`
@@ -453,6 +455,12 @@ ALTER TABLE `tb_pelanggan`
 --
 ALTER TABLE `tb_pengadaan_stock`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `tb_pengadaan_stock_detail`
+--
+ALTER TABLE `tb_pengadaan_stock_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tb_pengiriman_produk`
