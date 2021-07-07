@@ -10,7 +10,7 @@
             <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
         </li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ricemil/supplier/index.php?page=datapesanan" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Order Masuk</span></a></li>
-        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Pengiriman Produk</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ricemil/supplier/index.php?page=transaksi" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Transaksi</span></a></li>
       </ul>
 
     </nav>

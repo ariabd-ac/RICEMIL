@@ -106,6 +106,21 @@ if ($_SESSION['level'] != 'supplier') {
                         include 'datapesanan/index.php';
                       }
                       break;
+                      case 'transaksi':
+                        if (isset($_GET['modul'])) {
+                          $modul = $_GET['modul'];
+                          switch ($modul) {
+                            case 'edit':
+                              include 'transaksi/edit.php';
+                              break;
+                            case 'konf':
+                              include 'transaksi/edit.php';
+                              break;
+                          }
+                        } else {
+                          include 'transaksi/index.php';
+                        }
+                        break;
                     default:
                       break;
                   }
