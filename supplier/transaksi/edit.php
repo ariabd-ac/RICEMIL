@@ -77,10 +77,10 @@ if(isset($_POST['submit'])){
             ?>
         </tbody>
         <tfoot>
-            <tr>
+            <!-- <tr>
                 <th colspan='5'>Total</th>
                 <th id='totalVal'>0</th>
-            </tr>
+            </tr> -->
         </tfoot>
     </table>
     <select id='listDataBarang' class='form-control select-item' style='display:none;'>

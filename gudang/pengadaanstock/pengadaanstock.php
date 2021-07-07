@@ -28,7 +28,7 @@
                         <td><?php echo $row['tanggal_transaksi'] ?></td>
                         <td><?php echo $row['Total'] ?></td>
                         <td>
-                            <a class='btn btn-info' href="/ricemil/gudang/index.php?page=datapesanan&modul=edit&id=<?php echo $row['Id']; ?>">Detail</a>
+                            <a class='btn btn-info' href="/ricemil/gudang/index.php?page=pengadaanstock&modul=edit&id=<?php echo $row['Id']; ?>">Detail</a>
                         </td>
                     </tr>
                 <?php

@@ -1,74 +1,216 @@
 <?php
 
+$id;
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $query = "SELECT 
+                TPS.Total,TPS.tanggal_transaksi,TPS.Id,
+                TPSD.harga,TPSD.qty,TPSD.appproved_by,TPSD.id_pengadaan_stock,TPSD.id AS id_detail_pengadaan_stock,TPSD.status,
+                TB.Nama_barang,TB.gambar,TB.Id_barang,
+                IFNULL(CONCAT(U.fname,' ', U.lname),'Menunggu Di Approve Supplier') AS namaSupplier
+                FROM tb_pengadaan_stock TPS 
+                LEFT JOIN tb_pengadaan_stock_detail TPSD ON TPSD.id_pengadaan_stock=TPS.Id
+                LEFT JOIN tb_barang TB ON TPSD.id_item=TB.Id_barang
+                LEFT JOIN users U ON U.unique_id=TPSD.appproved_by"; 
+                // -- WHERE TPS.Id='$id' AND TPSD.appproved_by IS NULL";
+    $result=mysqli_query($conn,$query);
 
-if(isset($_GET['id'])){
-  $id=$_GET['id'];
+    if(!$result){
+        die(mysqli_error($conn));
+    }
 }
+
 
 if(isset($_POST['submit'])){
-    $namaBarang=$_POST['namabarang'];
-    $harga=$_POST['harga'];
-    $jumlah=$_POST['jumlah'];
-
-    $query="UPDATE tb_pengadaan_stock SET Harga='$harga',Jumlah='$jumlah' WHERE Id_barang='$id'";
-
-    $insert=mysqli_query($conn,$query);
-    if($insert){
-        header('location:/ricemil/gudang/index.php?page=pengadaanstock');
-    }else{
-        die('error '.mysqli_error($conn));
-    }
+    // die($_POST['status']);
+    $statusPost=(int)$_POST['status'] + 1;
     
-}else{
-  
-  $query="SELECT tp.*,tb.Nama_barang AS namaBarang FROM tb_pengadaan_stock tp LEFT JOIN tb_barang tb ON tb.Id_barang=tp.Nama_barang WHERE tp.Id_barang=$id";
+    $queryUpdateStatus="UPDATE tb_pengadaan_stock_detail TAB SET TAB.status=(TAB.status + 1) WHERE TAB.id_pengadaan_stock='$id' AND TAB.appproved_by='$_SESSION[unique_id]'";
+    $execUpdateStatus=mysqli_query($conn,$queryUpdateStatus);
 
-  $insert=mysqli_query($conn,$query);
-  if($insert){
-
-      $hasil=mysqli_fetch_assoc($insert);
-      $namaBarang=$hasil['namaBarang'];
-      $harga=$hasil['Harga'];
-      $jumlah=$hasil['Jumlah'];
-      $total=$harga * $jumlah;
-  }else{
-      die('error '.mysqli_error($conn));
-  }
+    if(!$execUpdateStatus){
+        die(mysqli_error($conn));
+    }
 }
+
+    
 ?>
 
+<form action="" method="post" class='container-add-gudang'>  
+    <!-- <button class="btn-add btn-primary">Add</button> -->
 
-
-
-
-              
-                <form action="" method="post">
-                    <div class="form-group">
-                        <!-- <label for="namabarang">Kode Barang</label> -->
-                        <!-- <input type="text" name='Id_Barang' class='form-control' value="<?php echo $idBarang?>" > -->
-                    </div>
-                    <div class="form-group">
-                        <label for="namabarang">Nama Barang</label>
-                        <input type="text" name='namabarang' class='form-control' value="<?php echo $namaBarang?>" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="namabarang">Jumlah</label>
-                        <input type="text" name='jumlah' class='form-control' value="<?php echo $jumlah?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="namabarang">Harga</label>
-                        <input type="text" name='harga' class='form-control' value="<?php echo $harga?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="namabarang">Total</label>
-                        <input type="text" name='harga' class='form-control' value="<?php echo $total?>" disabled>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
-                    </div>
-                    <!-- <div class="form-group">
-                        <label for="namabarang">Nama Barang</label>
-                        <input type="text" name='namabarang' class='form-control'>
-                    </div> -->
+    <table class="table user-table">
+        <thead>
+            <tr>
+                <th class="border-top-0">#</th>
+                <th class="border-top-0">Nama Barang</th>
+                <th class="border-top-0">Gambar</th>
+                <th class="border-top-0">Harga</th>
+                <th class="border-top-0">Qty</th>
+                <th class="border-top-0">Total</th>
+                <th class="border-top-0">Di Proses Oleh</th>
+                <!-- <th class="border-top-0">Action</th> -->
+            </tr>
+        </thead>
+        <tbody id="tbodyTable">
+            <?php
+                $num=0;
+                while ($row =mysqli_fetch_assoc($result)) {
+                    // var_dump($row);
                     
-                </form>
+         
+                    $num++;
+            ?>
+                <tr>
+                    <td><?= $row['Id'] ?></td>
+                    <td><?= $row['Nama_barang']?></td>
+                    <td><img src="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>" width="50px" height="50px" alt=""></td>
+                    <td><?= $row['harga']?></td>
+                    <td><?= $row['qty']?></td>
+                    <td><?= $row['harga'] * $row['qty']?></td>
+                    <td><?= $row['namaSupplier']?></td>
+                    <!-- <td>
+                        <input type="checkbox" name="" data-idparenttrxt="<?php echo $id ?>" data-id="<?php echo $row['id_detail_pengadaan_stock']?>" class="check-item">
+                    </td> -->
+                </tr>
+            <?php
+                }
+            ?>
+        </tbody>
+        <tfoot>
+            <!-- <tr>
+                <th colspan='5'>Total</th>
+                <th id='totalVal'><?php echo $total ?></th>
+            </tr> -->
+        </tfoot>
+    </table>
+    <select id='listDataBarang' class='form-control select-item' style='display:none;'>
+            <option>Pilih Item</option>
+            <?php
+            $status;
+            while ($row = mysqli_fetch_assoc($res)) {
+                // $status=$row['status'] ? $row['status'] : 0;
+            ?>
+                <option class="select-item-list"
+                        value="<?php echo $row['Id_barang'] ?>" 
+                        id="item-opt-<?php echo $row['Id_barang'] ?>" 
+                        data-hargabeli="<?php echo $row['harga_beli'] ?>"
+                        data-namabarangreal="<?php echo $row['Nama_barang'] ?>"
+                        data-imgurl="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>"
+                        >
+                            <?php echo $row['Nama_barang'] ?>
+                </option>
+            <?php 
+               }
+            ?>
+    </select>
+    
+    
+</form>
+<script>
+
+    const listDataBarangEl=document.getElementById('listDataBarang');
+    const containerGudang=document.getElementsByClassName('container-add-gudang');
+    const tbodyTable=document.getElementById('tbodyTable');
+    const totalVal=document.getElementById('totalVal');
+    let num=0;
+
+    function selectChange(val){
+        // console.log(val.value)
+    }
+
+    function generateTotal(){
+    }
+
+    function getSubTotal(harga,qty){
+    }
+
+    function qtyChange(target){
+
+    }
+
+    function addRow(param){
+
+    }
+
+    function postData(param){
+        let itemList=[];
+        let itemListUnchecked=[];
+        let idparentTrx;
+        for (let index = 0; index < tbodyTable.rows.length; index++) {
+            const element = tbodyTable.rows[index];
+            let checkList=element.children[6].children[0];
+            idparentTrx=checkList.dataset.idparenttrxt
+            // let item={
+            //     "idItem" : element.children[0].innerHTML,
+            //     "harga":element.children[3].innerHTML,
+            //     "qty":element.children[4].children[0].value,
+            // }
+            if(checkList.checked){
+                itemList.push(checkList.dataset.id)
+            }else{
+                itemListUnchecked.push(checkList.dataset.id)
+            }
+        }
+        let dataToPush={
+            "submit":"updateDetail",
+            "idParentTrx":idparentTrx,
+            "itemList":itemList,
+            "uncheckedList":itemListUnchecked
+        }
+        let url="http://localhost/ricemil/supplier/datapesanan/proses_update_detail.php";
+        $.ajax({
+            type: "post",
+            url: url,
+            data: dataToPush,
+            dataType: "json",
+            success: function(response) {
+                console.log('response', response);
+                if(response.status == "OK"){
+                    alert("Sukses");
+                    window.location.href="http://localhost/ricemil/supplier/index.php?page=datapesanan";
+                }
+            },
+            error: function(error) {
+                console.log('err', error.responseText);
+            }
+        });
+    }
+
+    // event handler
+
+    
+    // click event on container gudang
+    // containerGudang[0].addEventListener('click',(e)=>{
+        
+    //     const target=e.target;
+    //     if(target.classList.contains('check-item')){
+    //         let id_detail=target.dataset.id
+    //         console.log(id_detail)
+    //         return true;
+    //     }
+    //     e.preventDefault();
+    //     if(target.classList.contains('btn-add')){
+    //         addRow()
+    //     }
+
+    //     if(target.id == 'submit'){
+    //         postData();
+    //     }
+    // })
+      // change event on container gudang
+    containerGudang[0].addEventListener('change',(e)=>{
+        const target=e.target;
+        if(target.classList.contains('select-item')){
+            selectChange(target)
+        }
+
+        if(target.classList.contains('inpt-qty')){
+            qtyChange(target)
+        }
+    })
+
+</script>
+
+
+
