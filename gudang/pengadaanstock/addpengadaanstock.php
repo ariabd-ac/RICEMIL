@@ -181,7 +181,7 @@ if (isset($_POST['submit'])) {
         for (let index = 0; index < child.length; index++) {
             const el = child[index];
             total +=Number(el.childNodes[11].innerText)
-            console.log(el.childNodes[11])
+            // console.log(el.childNodes[11])
             
         }
         totalVal.innerHTML=total
@@ -222,7 +222,7 @@ if (isset($_POST['submit'])) {
         let itemList=[];
         for (let index = 0; index < tbodyTable.rows.length; index++) {
             const element = tbodyTable.rows[index];
-            console.log(element.children[1].children[0].value)
+            // console.log(element.children[1].children[0].value)
             let item={
                 "idItem" : element.children[1].children[0].value,
                 "harga":element.children[3].innerHTML,
@@ -236,6 +236,8 @@ if (isset($_POST['submit'])) {
             "itemList":itemList,
             "supplier":document.getElementById('np_sup').value
         }
+
+        console.log(dataToPush)
         let url="http://localhost/ricemil/gudang/pengadaanstock/proses_add.php";
         $.ajax({
             type: "post",

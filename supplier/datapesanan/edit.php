@@ -88,35 +88,7 @@ if (isset($_GET['id'])) {
             ?>
     </select>
     
-    <div class="form-group">
-        <label for="namabarang">Pilih Supplier</label>
-        <!-- <input type="text" name='no_sup' class='form-control'> -->
-        <select name="np_sup" id="np_sup" class='form-control'>
-
-
-            <?php
-            $q = "SELECT phone,fname,lname from users WHERE level = 'supplier'";
-            $rs = mysqli_query($conn, $q);
-            // $rw = mysqli_fetch_assoc($rs);
-
-            // var_dump($rw);
-            // die;
-
-            while ($rw = mysqli_fetch_assoc($rs)) {
-            ?>
-                <option value="<?php echo $rw['phone'] ?>">
-                    <?php echo $rw['fname'] . " " . $rw['lname'] . " - " . $rw['phone'] ?>
-                </option>
-            <?php }
-
-            ?>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="namabarang">Memo</label>
-        <input type="text" name='msg' class='form-control'>
-        <!-- <input type="url" name="msg" class='form-control' id="msg" placeholder="https://example.com" pattern="https://.*" size="30" required> -->
-    </div>
+    
     <div class="form-group">
         <input type="submit" class='btn btn-success' id='submit' name='submit' value='submit' class='form-control'>
     </div>
@@ -181,7 +153,7 @@ if (isset($_GET['id'])) {
             success: function(response) {
                 console.log('response', response);
                 if(response.status == "OK"){
-                    window.location.href="http://localhost/ricemil/reseller/index.php?page=barang";
+                    window.location.href="http://localhost/ricemil/supplier/index.php?page=datapesanan";
                 }
             },
             error: function(error) {
