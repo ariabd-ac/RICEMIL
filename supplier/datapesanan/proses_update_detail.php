@@ -32,15 +32,21 @@
                 // <a href="https://meet.google.com/vmu-mxrt-pux" title="https://meet.google.com/vmu-mxrt-pux" target="_blank" rel="noopener noreferrer" class="_3-8er selectable-text copyable-text">https://meet.google.com/vmu-mxrt-pux</a>
                 $send->sendMessage($np_sup,  $linkMessage); //kie ngirim wa
     
-                $queryUpdatePhone="UPDATE td_pengadaan_stock SET supplier_nohp='$np_sup' WHERE Id='$idParentTrx'";
+                $queryUpdatePhone="UPDATE tb_pengadaan_stock SET supplier_nohp='$np_sup' WHERE Id='$idParentTrx'";
     
                 $execUpdatePhone=mysqli_query($conn,$queryUpdatePhone);
+
+                if(!$execUpdatePhone){
+                    die(mysqli_error($conn));
+                }
     
+                echo json_encode(array(
+                    "status"=>"OK",
+                    "Message"=>"Succes Update Data",
+                    "execUpdatePhone"=>$execUpdatePhone,
+                    ""
+                ));
             }
-            echo json_encode(array(
-                "status"=>"OK",
-                "Message"=>"Succes Update Data",
-            ));
         } catch (\Throwable $th) {
             throw $th;
         //     echo json_encode(array(

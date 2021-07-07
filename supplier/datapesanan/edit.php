@@ -153,6 +153,7 @@ if (isset($_GET['id'])) {
             success: function(response) {
                 console.log('response', response);
                 if(response.status == "OK"){
+                    alert("Sukses");
                     window.location.href="http://localhost/ricemil/supplier/index.php?page=datapesanan";
                 }
             },
