@@ -10,11 +10,16 @@
     while ($r = mysqli_fetch_assoc($res)) {
     ?>
         <div class="col-md-3" style="width:300px;">
-            <input type="checkbox" name="" id="<?php echo $r['Id_barang']; ?>" class="item-check" data-iditem="<?php echo $r['Id_barang']; ?>" data-nameitem="<?php echo $r['Nama_barang']; ?>" data-hargaitem="<?php echo $r['harga']; ?>">
             <div class="card">
+                <!-- <div class="card-header">
+                </div> -->
                 <div class="card-body">
+                    <input type="checkbox" name="" id="<?php echo $r['Id_barang']; ?>" class="item-check" data-iditem="<?php echo $r['Id_barang']; ?>" data-nameitem="<?php echo $r['Nama_barang']; ?>" data-hargaitem="<?php echo $r['harga']; ?>">
                     <div class='d-flex align-center justify-content-center'>
-                        <a class='bg-image hover-overlay' href="/ricemil/reseller/index.php?page=barang&modul=detail&id=<?php echo $r['Id_barang']; ?>" style="text-decoration: none;">
+                        <!-- <a class='bg-image hover-overlay' href="/ricemil/reseller/index.php?page=barang&modul=detail&id=<?php echo $r['Id_barang']; ?>" style="text-decoration: none;">
+                            <img src="http://localhost/ricemil/assets/images/produk/<?php echo $r['gambar'] ?>" alt="" width="100%" height="250px">
+                        </a> -->
+                        <a class='bg-image hover-overlay' href="#" style="text-decoration: none;">
                             <img src="http://localhost/ricemil/assets/images/produk/<?php echo $r['gambar'] ?>" alt="" width="100%" height="250px">
                         </a>
                     </div>
@@ -24,9 +29,9 @@
                         <p>Rp. <?php echo $r['harga'] ?></p>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <!-- <a class='btn btn-info' href="/ricemil/reseller/index.php?page=barang&modul=detail&id=<?php echo $r['Id_barang']; ?>">Detail</a> -->
-                </div>
+                <!-- <div class="card-footer">
+                    <a class='btn btn-info' href="/ricemil/reseller/index.php?page=barang&modul=detail&id=<?php echo $r['Id_barang']; ?>">Detail</a>
+                </div> -->
             </div>
         </div>
     <?php } ?>
@@ -71,8 +76,8 @@
                             <td scope="col" colspan="2" id="subTotal-td"></td>
                         </tr>
                         <tr class="table-default">
-                            <td scope="col" colspan="5">Diskon</td>
-                            <td scope="col" colspan="2"><input style="width:80px;" class='form-control' id="discount-inp" value="0"/></td>
+                            <td scope="col" colspan="5"><span style="display:none;">Diskon</span></td>
+                            <td scope="col" colspan="2"><input style="display:none;" style="width:80px;" class='form-control' id="discount-inp" value="0"/></td>
                         </tr>
                         <tr class="table-active">
                             <td scope="col" colspan="5">Total</td>

@@ -139,6 +139,9 @@ if (isset($_POST['save'])) {
                     include 'profile/index.php';
                   }
                   break;
+                case 'generatestruck':
+                  include '../generatepdf/index.php';
+                  break;
                 default:
 
                   break;

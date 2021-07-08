@@ -387,7 +387,11 @@
       success: function(response) {
         console.log('s', response);
         if (response.status == "OK") {
-          window.location.href = "http://localhost/ricemil/kasir/index.php?page=dashboard";
+          let id_trx=response.idtrx;
+          let dibayar=bayarElement.value
+          let discount= diskonElement.value
+
+          window.location.href = "http://localhost/ricemil/document/index.php?template=struck-kasir&id="+id_trx+"&dibayar="+dibayar+"&discount="+discount;
         }
       },
       error: function(error) {
