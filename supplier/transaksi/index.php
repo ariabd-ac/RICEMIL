@@ -1,5 +1,4 @@
-<div class="card">
-    <div class="card-body">
+
         <!-- <a class='btn btn-success' href='/ricemil/supplier/index.php?page=datapesanan&modul=add'>Tambah</a> -->
         <table class="table user-table">
             <thead>
@@ -44,5 +43,4 @@
                 ?>
             </tbody>
         </table>
-    </div>
-</div>
+    

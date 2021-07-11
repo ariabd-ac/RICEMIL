@@ -114,7 +114,41 @@ if ($_SESSION['level'] != 'gudang') {
                     } else {
                       include 'datastock/index.php';
                     }
-                  } else if ($page == "laporan") {
+                  }else if ($page == "laporanmasuk") {
+                    if (isset($_GET['modul'])) {
+                      $modul = $_GET['modul'];
+
+                      switch ($modul) {
+                        case 'add':
+                          include 'pengadaanstock/addpengadaanstock.php';
+                          break;
+                        case 'edit':
+                          # code...
+                          include 'pengadaanstock/editpengadaanstock.php';
+                          break;
+                        case 'delete':
+                          # code...
+
+                          if (isset($_GET['id'])) {
+                            $id = $_GET['id'];
+                            $query = "DELETE FROM tb_pengadaan_stock WHERE Id_barang='$id'";
+
+                            $insert = mysqli_query($conn, $query);
+                            if ($insert) {
+                              header('location:/ricemil/gudang/index.php?page=pengadaanstock');
+                            } else {
+                              die('error ' . mysqli_error($conn));
+                            }
+                          }
+                          break;
+                        default:
+                          include 'laporan/laporanmasuk.php';
+                          break;
+                      }
+                    } else {
+                      include 'laporan/laporanmasuk.php';
+                    }
+                  }else if ($page == "laporankeluar") {
                     if (isset($_GET['modul'])) {
                       $modul = $_GET['modul'];
 

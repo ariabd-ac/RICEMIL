@@ -8,7 +8,7 @@ session_start();
     $kembalian=0;
 ?>
 
-<h1 style="text-align:center;">Ricemil Jaya Berkelana</h1>
+<h1 style="text-align:center;">Grosir Amelia</h1>
 <hr>
 <table >
     <tr>
