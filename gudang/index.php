@@ -180,7 +180,7 @@ if ($_SESSION['level'] != 'gudang') {
                           break;
                       }
                     } else {
-                      include 'pengadaanstock/pengadaanstock.php';
+                      include 'laporan/laporankeluar.php';
                     }
                   } else if ($page == 'profile') {
                     if (isset($_GET['modul'])) {

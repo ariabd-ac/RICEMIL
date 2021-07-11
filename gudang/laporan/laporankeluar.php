@@ -9,13 +9,13 @@
     }
 
     if($startDate && $toDate){
-        $urlPrint="http://localhost/ricemil/document/index.php?template=laporanmasuk&startDate=$startDate&toDate=$toDate";
+        $urlPrint="http://localhost/ricemil/document/index.php?template=laporankeluar&startDate=$startDate&toDate=$toDate";
     }else{
-        $urlPrint="http://localhost/ricemil/document/index.php?template=laporanmasuk&startDate=";
+        $urlPrint="http://localhost/ricemil/document/index.php?template=laporankeluar&startDate=";
     }
 
 ?>
-<h1>Laporan Masuk barang</h1>
+<h1>Laporan Keluar barang</h1>
 <?php if($startDate && $toDate){ ?>
     <p><?php echo $header2?></p>
 <?php } ?>
@@ -63,14 +63,13 @@
     <tbody>
         <?php
         if($startDate && $toDate){
-            $query = "SELECT * FROM tb_pengadaan_stock_detail TPSD 
-                    LEFT JOIN tb_pengadaan_stock TPS ON TPS.Id=TPSD.id_pengadaan_stock
+            $query = "SELECT * FROM tb_transaksi_detail TPSD 
+                    LEFT JOIN tb_transaksi TPS ON TPS.Id_transaksi=TPSD.id_transaksi
                     LEFT JOIN tb_barang TB ON TB.Id_barang=TPSD.id_item
-                    WHERE DATE(TPS.tanggal_transaksi) BETWEEN '$startDate' AND '$toDate'";
-
+                    WHERE DATE(TPS.Tanggal_transaksi) BETWEEN '$startDate' AND '$toDate'";
         }else{
-            $query = "SELECT * FROM tb_pengadaan_stock_detail TPSD 
-                        LEFT JOIN tb_pengadaan_stock TPS ON TPS.Id=TPSD.id_pengadaan_stock
+            $query = "SELECT * FROM tb_transaksi_detail TPSD 
+                        LEFT JOIN tb_transaksi TPS ON TPS.Id_transaksi=TPSD.id_transaksi
                         LEFT JOIN tb_barang TB ON TB.Id_barang=TPSD.id_item";
         }
         
@@ -87,11 +86,11 @@
             // die;
         ?>
             <tr>
-                <td><?php echo $row['Id'] ?></td>
-                <td><?php echo $row['tanggal_transaksi'] ?></td>
+                <td><?php echo $row['Id_transaksi'] ?></td>
+                <td><?php echo $row['Tanggal_transaksi'] ?></td>
                 <td><?php echo $row['Nama_barang'] ?></td>
                 <td><?php echo $row['qty'] ?> Karung</td>
-                <td><?php echo $row['Total'] ?></td>
+                <td><?php echo $row['Total_bayar'] ?></td>
                 <!-- <td>
                     <a class='btn btn-info' href="/ricemil/gudang/index.php?page=pengadaanstock&modul=edit&id=<?php echo $row['Id']; ?>">Detail</a>
                 </td> -->
