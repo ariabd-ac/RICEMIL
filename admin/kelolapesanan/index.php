@@ -38,7 +38,7 @@
                         <td><?php echo $row['diskon']?></td>
                         <td><?php echo $row['total']  ?></td>
                         <td><?php echo $row['descr'] ?></td>
-                        <td><?php echo $row['is_approve'] ? 'Approved' :'Waiting to be Approved' ?></td>
+                        <td><?php echo $row['is_approve'] ? $row['is_approve'] == '-1' ? 'Foto Struk tidak sesuai' : 'Approved' :'Waiting to be Approved' ?></td>
                         <td>
                             <a class='btn btn-info' href="/ricemil/admin/index.php?page=kelolapesanan&modul=detail&id=<?php echo $row['Id_order'] ?>">Detail</a>
                         </td>

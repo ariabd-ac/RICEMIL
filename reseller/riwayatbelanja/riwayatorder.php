@@ -11,7 +11,7 @@
             $asal = $gambar['tmp_name'];
     
             if (move_uploaded_file($asal, $targetFile)) {
-                $query = "UPDATE tb_order_masuk SET struk_gambar='$namaGambar' WHERE Id_order='$id'";
+                $query = "UPDATE tb_order_masuk SET struk_gambar='$namaGambar',is_approve='0' WHERE Id_order='$id'";
                 if(mysqli_query($conn,$query)){
                     header('Location:/ricemil/reseller/index.php?page=riwayatbelanja');
                 }else{
@@ -88,6 +88,7 @@
                 <th class="border-top-0">Diskon</th>
                 <th class="border-top-0">Total</th>
                 <th class="border-top-0">Metode Bayar</th>
+                <th class="border-top-0">Status</th>
                 <th class="border-top-0">Upload Bukti Pembayaran</th>
                 
             </tr>
@@ -107,7 +108,7 @@
                     die('Err'.mysqli_error($conn));
                 }
                 while($row=mysqli_fetch_assoc($result)){
-                    if(!$row['is_approve']){
+                    if(!$row['is_approve'] || $row['is_approve'] == '-1'){
                         
                     ?>
                         <tr>
@@ -117,20 +118,16 @@
                             <td><?php echo $row['diskon']?></td>
                             <td><?php echo $row['total']  ?></td>
                             <td><?php echo $row['descr'] ?></td>
+                            <td><?php echo $row['is_approve'] ? $row['is_approve'] == '-1' ? 'Foto Struk Tidak Sesuai' : 'Menunggu Konfirmasi' : 'Menunggu Konfirmasi' ?></td>
                             <td>
                                 <?php
                                     if($row['metode_bayar'] != 1){
-                                        if($row['struk_gambar']){
-                                            echo 'Menunggu Konfirmasi Pembayaran';   
-                                        }else{
-                                            
-                                ?>      
-                                    <button type="button" class="btn btn-primary" onclick="openModal(<?php echo $row['Id_order']?>)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Upload
-                                    </button>  
-                                    
-                                <?php
-                                        }
+                                        ?>
+                                            <button type="button" class="btn btn-primary" onclick="openModal(<?php echo $row['Id_order']?>)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                Edit Struk
+                                            </button>
+                                        <?php
+                                           
                                     }else{
                                         echo 'Tidak memerlukan Aksi ini ('.$row['descr'].')';
                                     }

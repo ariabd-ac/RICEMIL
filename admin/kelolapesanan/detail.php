@@ -56,6 +56,15 @@ if (isset($_POST['submit'])) {
         die('error ' . mysqli_error($conn));
     }
 }
+
+if(isset($_POST['reject'])){
+    $queryUpdateStatusReject="UPDATE tb_order_masuk SET is_approve='-1' WHERE Id_order='$id'";
+    if(mysqli_query($conn,$queryUpdateStatusReject)){
+        header('location:/ricemil/admin/index.php?page=kelolapesanan');
+    }else{
+        die(mysqli_error($conn));
+    }
+}
 ?>
 
 
@@ -167,6 +176,7 @@ if (isset($_POST['submit'])) {
             <?php if(!$res['is_approve']) { ?>
             <div class="form-group">
                 <input type="submit" class='btn btn-success' name='submit' value='Approve' class='form-control'>
+                <input type="submit" class='btn btn-danger' name='reject' value='Reject' class='form-control'>
             </div>
             <?php } ?>
         </form>

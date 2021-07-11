@@ -24,7 +24,7 @@
             <td><?php echo $row['Id_barang'] ?></td>
             <td><?php echo $row['Nama_barang'] ?></td>
             <!-- <td><img src="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>" alt="alter" height="100px" width="100px"></td> -->
-            <td><?php echo $row['harga'] ?></td>
+            <td><?php echo $row['harga'] / 25 ?></td>
             <td>
               <button class='btn btn-info tambah-keranjang-kasir' data-idbarang="<?php echo $row['Id_barang'] ?>" data-namabarang="<?php echo $row['Nama_barang'] ?>" data-hargabarang="<?php echo $row['harga'] ?>">
                 Tambah
@@ -244,16 +244,17 @@
     let html = ''
     for (let index = 0; index < dataKeranjangItem.length; index++) {
       const data = dataKeranjangItem[index];
+      let hargaKg = Number(data.hargaBarang)/ 25; 
       html += `
                 <tr>
                     <td>${data.idBarang}</td>
                     <td>${data.namaBarang}</td>
-                    <td>${data.hargaBarang}</td>
+                    <td>${hargaKg}</td>
                     <td>
                         <input type="text" class='qtyKeranjang' value="${data.qty}" style='width:50px;' data-index='${index}'">
                     </td>
                     <td>
-                        <input id='subTotalKeranjang${data.idBarang}' value='${Number(data.qty) * Number(data.hargaBarang)}' type="text" disabled>
+                        <input id='subTotalKeranjang${data.idBarang}' value='${Number(data.qty) * Number(hargaKg)}' type="text" disabled>
                     </td>
                     <td>
                         <button class='btn btn-danger delete-keranjang-kasir' data-index='${index}'>

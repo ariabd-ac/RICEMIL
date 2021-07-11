@@ -182,7 +182,11 @@ if ($_SESSION['level'] != 'gudang') {
                     } else {
                       include 'laporan/laporankeluar.php';
                     }
-                  } else if ($page == 'profile') {
+                  }else if ($page == "hisrejected") {
+                      include 'historytransaksibarangkeluar/hisrejected.php';
+                  }else if ($page == "hisaccepted") {
+                    include 'historytransaksibarangkeluar/hisaccepted.php';
+                  }else if ($page == 'profile') {
                     if (isset($_GET['modul'])) {
                       $modul = $_GET['modul'];
                       switch ($modul) {
