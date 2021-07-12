@@ -31,6 +31,14 @@
             // echo json_encode($queryInsertDetail);
             $insertDetail=mysqli_query($conn,$queryInsertDetail);
 
+            if(!$insertDetail){
+                echo json_encode(array(
+                    "status"=>"GAGAL",
+                    "msg"=>mysqli_error($conn)
+                ));
+                die;
+            }
+
             // echo json_encode(mysqli_error($conn));
             // die;
             // $linkMessage = "SEGERA CEK LINK <a href='http://localhost/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=$last_id'>http://localhost/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=" . $last_id . "</a>";

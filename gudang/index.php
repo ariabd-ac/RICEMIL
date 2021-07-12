@@ -186,6 +186,41 @@ if ($_SESSION['level'] != 'gudang') {
                       include 'historytransaksibarangkeluar/hisrejected.php';
                   }else if ($page == "hisaccepted") {
                     include 'historytransaksibarangkeluar/hisaccepted.php';
+                  }else if ($page == "transaksisupplier") {
+                    if (isset($_GET['modul'])) {
+                      $modul = $_GET['modul'];
+
+                      switch ($modul) {
+                        case 'add':
+                          include 'pengadaanstock/addpengadaanstock.php';
+                          break;
+                        case 'edit':
+                          # code...
+                          include 'transaksisupplier/edit.php';
+                          break;
+                        case 'delete':
+                          # code...
+
+                          if (isset($_GET['id'])) {
+                            $id = $_GET['id'];
+                            $query = "DELETE FROM tb_pengadaan_stock WHERE Id_barang='$id'";
+
+                            $insert = mysqli_query($conn, $query);
+                            if ($insert) {
+                              header('location:/ricemil/gudang/index.php?page=pengadaanstock');
+                            } else {
+                              die('error ' . mysqli_error($conn));
+                            }
+                          }
+                          break;
+                        default:
+                        include 'transaksisupplier/index.php';
+                          break;
+                      }
+                    } else {
+                      include 'transaksisupplier/index.php';
+                    }
+                    
                   }else if ($page == 'profile') {
                     if (isset($_GET['modul'])) {
                       $modul = $_GET['modul'];

@@ -66,7 +66,8 @@
             $query = "SELECT * FROM tb_transaksi_detail TPSD 
                     LEFT JOIN tb_transaksi TPS ON TPS.Id_transaksi=TPSD.id_transaksi
                     LEFT JOIN tb_barang TB ON TB.Id_barang=TPSD.id_item
-                    WHERE DATE(TPS.Tanggal_transaksi) BETWEEN '$startDate' AND '$toDate'";
+                    WHERE DATE(TPS.Tanggal_transaksi) BETWEEN '$startDate' AND '$toDate'
+                    AND TPSD.status='2'";
         }else{
             $query = "SELECT * FROM tb_pengadaan_stock_detail TPSD 
                         LEFT JOIN tb_pengadaan_stock TPS ON TPS.Id=TPSD.id_pengadaan_stock

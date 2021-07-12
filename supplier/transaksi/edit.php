@@ -22,12 +22,16 @@ if (isset($_GET['id'])) {
 if(isset($_POST['submit'])){
     // die($_POST['status']);
     $statusPost=(int)$_POST['status'] + 1;
+
+    // die($statusPost."STATUS POST");
     
-    $queryUpdateStatus="UPDATE tb_pengadaan_stock_detail TAB SET TAB.status=(TAB.status + 1) WHERE TAB.id_pengadaan_stock='$id' AND TAB.appproved_by='$_SESSION[unique_id]'";
+    $queryUpdateStatus="UPDATE tb_pengadaan_stock_detail TAB SET TAB.status='$statusPost' WHERE TAB.id_pengadaan_stock='$id' AND TAB.appproved_by='$_SESSION[unique_id]'";
     $execUpdateStatus=mysqli_query($conn,$queryUpdateStatus);
 
     if(!$execUpdateStatus){
         die(mysqli_error($conn));
+    }else{
+        header('Location:/ricemil/admin/index.php?page=transaksi');
     }
 }
 
@@ -106,7 +110,7 @@ if(isset($_POST['submit'])){
     
     <?php if($_GET['status'] != 2){?>
         <div class="form-group">
-            <input type="hidden" name="status" value="<?php echo $status ?>">
+            <input type="hidden" name="status" value="<?php echo $_GET['status'] ? $_GET['status'] : 0 ?>">
             <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
         </div>
     <?php }?>

@@ -26,7 +26,7 @@ if (isset($_POST['save'])) {
     $idTrx = mysqli_insert_id($conn);
     for ($i = 0; $i < count($listData); $i++) {
       $idItem = $listData[$i]['idBarang'];
-      $harga = $listData[$i]['hargaBarang'];
+      $harga = $listData[$i]['hargaBarang'] / 25;
       // $nama = $listData[$i]['namaBarang'];
       $qty = $listData[$i]['qty'];
       $insertDetail = "INSERT INTO tb_transaksi_detail(id_transaksi,id_item,harga,qty) VALUES ('$idTrx','$idItem','$harga','$qty')";

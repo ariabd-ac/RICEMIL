@@ -66,11 +66,13 @@
             $query = "SELECT * FROM tb_transaksi_detail TPSD 
                     LEFT JOIN tb_transaksi TPS ON TPS.Id_transaksi=TPSD.id_transaksi
                     LEFT JOIN tb_barang TB ON TB.Id_barang=TPSD.id_item
-                    WHERE DATE(TPS.Tanggal_transaksi) BETWEEN '$startDate' AND '$toDate'";
+                    WHERE DATE(TPS.Tanggal_transaksi) BETWEEN '$startDate' AND '$toDate'
+                    AND TPS.status='4'";
         }else{
             $query = "SELECT * FROM tb_transaksi_detail TPSD 
                         LEFT JOIN tb_transaksi TPS ON TPS.Id_transaksi=TPSD.id_transaksi
-                        LEFT JOIN tb_barang TB ON TB.Id_barang=TPSD.id_item";
+                        LEFT JOIN tb_barang TB ON TB.Id_barang=TPSD.id_item
+                        WHERE TPS.status='4'";
         }
         
         $result = mysqli_query($conn, $query);

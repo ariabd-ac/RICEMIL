@@ -3,11 +3,12 @@
     <div class="navbar-header" data-logobg="skin6">
 
       <a class="navbar-brand ms-4" href="index.html">
-        <b class="logo-icon">
+        <!-- <b class="logo-icon">
           <img src="../assets/images/logo-light-icon.png" alt="homepage" class="dark-logo" />
-        </b>
-        <span class="logo-text">
-          <img src="../assets/images/logo-light-text.png" alt="homepage" class="dark-logo" />
+        </b> -->
+        <span class="logo-text" style='color:white;'>
+          Gudang
+          <!-- <img src="../assets/images/logo-light-text.png" alt="homepage" class="dark-logo" /> -->
         </span>
       </a>
       <a class="nav-toggler waves-effect waves-light text-white d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
@@ -24,20 +25,20 @@
       <!-- ============================================================== -->
       <!-- toggle and nav items -->
       <!-- ============================================================== -->
-      <ul class="navbar-nav me-auto mt-md-0 ">
+      <ul class="navbar-nav me-auto mt-md-0">
         <!-- ============================================================== -->
         <!-- Search -->
         <!-- ============================================================== -->
 
-        <li class="nav-item search-box">
+        <!-- <li class="nav-item search-box">
           <a class="nav-link text-muted" href="javascript:void(0)"><i class="ti-search"></i></a>
           <form class="app-search" style="display: none;">
             <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
           </form>
-        </li>
-        <li class="nav-item d-end">
+        </li> -->
+        <!-- <li class="nav-item d-end">
           <a class="nav-link" href="/ricemil/php/logout.php">Logout</a>
-        </li>
+        </li> -->
       </ul>
 
       <!-- ============================================================== -->
@@ -47,7 +48,9 @@
         <!-- ============================================================== -->
         <!-- User profile and search -->
         <!-- ============================================================== -->
-
+        <li class="nav-item d-end">
+          <a class="nav-link" href="/ricemil/php/logout.php">Logout</a>
+        </li>
       </ul>
     </div>
   </nav>

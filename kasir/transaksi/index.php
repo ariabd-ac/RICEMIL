@@ -55,7 +55,7 @@
                   <th class="border-top-0">#</th>
                   <th class="border-top-0">Nama Barang</th>
                   <th class="border-top-0">Harga</th>
-                  <th class="border-top-0">Jumlah</th>
+                  <th class="border-top-0">Kg</th>
                   <th class="border-top-0">Sub Total</th>
                   <th class="border-top-0">Action</th>
                 </tr>
@@ -254,7 +254,7 @@
                         <input type="text" class='qtyKeranjang' value="${data.qty}" style='width:50px;' data-index='${index}'">
                     </td>
                     <td>
-                        <input id='subTotalKeranjang${data.idBarang}' value='${Number(data.qty) * Number(hargaKg)}' type="text" disabled>
+                        <input id='subTotalKeranjang${data.idBarang}' style='width:100px;' value='${Number(data.qty) * Number(hargaKg)}' type="text" disabled>
                     </td>
                     <td>
                         <button class='btn btn-danger delete-keranjang-kasir' data-index='${index}'>
@@ -271,7 +271,7 @@
   // Hitung SubTotal Function
   function hitungSubtotal() {
     subTotalDetail.value = dataKeranjangItem.reduce((total, num) => {
-      return total + (num.qty * num.hargaBarang)
+      return total + (num.qty * (num.hargaBarang/25))
     }, 0)
 
     hitungTotal()
@@ -388,7 +388,7 @@
       success: function(response) {
         console.log('s', response);
         if (response.status == "OK") {
-          let id_trx=response.idtrx;
+          let id_trx=response.idTrx;
           let dibayar=bayarElement.value
           let discount= diskonElement.value
 

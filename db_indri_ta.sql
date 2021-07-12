@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2021 at 12:59 AM
+-- Generation Time: Jul 12, 2021 at 09:36 PM
 -- Server version: 5.7.34-log
 -- PHP Version: 7.4.13
 
@@ -41,8 +41,8 @@ CREATE TABLE `tb_barang` (
 --
 
 INSERT INTO `tb_barang` (`Id_barang`, `Nama_barang`, `stock`, `harga_beli`, `harga`, `gambar`) VALUES
-(3, 'Sabun', 26, 15000, 20000, '68796579_2433907643333859_4463231603417546752_n.jpg'),
-(4, 'henbody', 2147483627, 20000, 12323, 'gbr.png'),
+(3, 'Sabun', 25, 15000, 20000, 'IMG-20200129-WA0014.jpg'),
+(4, 'henbody', 2147483626, 20000, 12323, 'gbr.png'),
 (5, 'nnnn', 16, 0, 9999, 'b-parakankidang1.jpeg'),
 (6, 'Test barang', NULL, 0, 5000, '085220733720-16191440719251806262855064103899.jpg');
 
@@ -93,8 +93,9 @@ CREATE TABLE `tb_order_masuk` (
 --
 
 INSERT INTO `tb_order_masuk` (`Id_order`, `diskon`, `subtotal`, `date`, `total`, `is_approve`, `order_by`, `metode_bayar`, `struk_gambar`) VALUES
-(16, 6969, 76969, '2021-06-27 01:34:42', 70000, 1, '1326851081', '2', '085220733720-16191440719251806262855064103899.jpg'),
-(17, 4646, 34646, '2021-06-27 01:56:24', 30000, 1, '1326851081', '2', 'img-75000.jpg');
+(16, 6969, 76969, '2021-06-27 01:34:42', 70000, 0, '1326851081', '2', 'IMG-20200129-WA0015.jpg'),
+(17, 4646, 34646, '2021-06-27 01:56:24', 30000, 1, '1326851081', '2', 'img-75000.jpg'),
+(18, 0, 32323, '2021-07-09 02:31:21', 32323, 1, '1326851081', '2', NULL);
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,9 @@ INSERT INTO `tb_order_masuk_detail` (`id_detail`, `id_order_masuk`, `id_item`, `
 (27, '16', '3', 20000, 2),
 (28, '16', '4', 12323, 3),
 (29, '17', '4', 12323, 2),
-(30, '17', '6', 5000, 2);
+(30, '17', '6', 5000, 2),
+(31, '18', '3', 20000, 1),
+(32, '18', '4', 12323, 1);
 
 -- --------------------------------------------------------
 
@@ -152,12 +155,7 @@ CREATE TABLE `tb_pengadaan_stock` (
 --
 
 INSERT INTO `tb_pengadaan_stock` (`Id`, `tanggal_transaksi`, `Total`, `is_approve`, `supplier_nohp`) VALUES
-(38, '2021-07-07 02:38:06', 15000, NULL, '087888187620'),
-(39, '2021-07-07 02:39:30', 50000, NULL, '087888187620'),
-(40, '2021-07-07 02:40:36', 35000, NULL, '087888187620'),
-(41, '2021-07-07 02:42:15', 35000, NULL, '087888187620'),
-(42, '2021-07-07 02:42:48', 35000, NULL, '087888187620'),
-(43, '2021-07-07 02:43:48', 35000, NULL, '087888187620');
+(54, '2021-07-13 00:35:47', 90000, NULL, '083113729917');
 
 -- --------------------------------------------------------
 
@@ -171,24 +169,19 @@ CREATE TABLE `tb_pengadaan_stock_detail` (
   `id_item` varchar(40) NOT NULL,
   `harga` double NOT NULL,
   `qty` int(11) NOT NULL,
-  `appproved_by` varchar(40) DEFAULT NULL
+  `appproved_by` varchar(40) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
+  `is_rejected` tinyint(2) DEFAULT NULL,
+  `qty_rejected` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_pengadaan_stock_detail`
 --
 
-INSERT INTO `tb_pengadaan_stock_detail` (`id`, `id_pengadaan_stock`, `id_item`, `harga`, `qty`, `appproved_by`) VALUES
-(22, 39, '3', 15000, 2, NULL),
-(23, 39, '4', 20000, 1, NULL),
-(24, 40, '3', 15000, 1, NULL),
-(25, 40, '4', 20000, 1, NULL),
-(26, 41, '3', 15000, 1, NULL),
-(27, 41, '4', 20000, 1, NULL),
-(28, 42, '3', 15000, 1, NULL),
-(29, 42, '4', 20000, 1, NULL),
-(30, 43, '3', 15000, 1, '336577275'),
-(31, 43, '4', 20000, 1, NULL);
+INSERT INTO `tb_pengadaan_stock_detail` (`id`, `id_pengadaan_stock`, `id_item`, `harga`, `qty`, `appproved_by`, `status`, `is_rejected`, `qty_rejected`) VALUES
+(46, 54, '3', 15000, 2, '336577275', '2', NULL, NULL),
+(47, 54, '4', 20000, 3, '336577275', '2', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -264,7 +257,11 @@ CREATE TABLE `tb_transaksi` (
 
 INSERT INTO `tb_transaksi` (`Id_transaksi`, `Id_pelanggan`, `Tanggal_transaksi`, `diskon`, `subtotal`, `Total_bayar`, `status`, `order_by`, `metode_bayar`, `struk_gambar`) VALUES
 (11, '1326851081', '2021-06-27 01:36:20', 6969, 76969, '70000', '4', '1326851081', '2', '085220733720-16191440719251806262855064103899.jpg'),
-(12, '1326851081', '2021-06-27 01:57:51', 4646, 34646, '30000', '12', '1326851081', '2', 'img-75000.jpg');
+(12, '1326851081', '2021-06-27 01:57:51', 4646, 34646, '30000', NULL, '1326851081', '2', 'img-75000.jpg'),
+(13, '1326851081', '2021-07-11 19:08:25', 0, 32323, '32323', '1', '1326851081', '2', ''),
+(14, '1445894491', '2021-07-12 06:28:00', 0, 1600, NULL, NULL, NULL, NULL, NULL),
+(15, '1445894491', '2021-07-12 06:31:58', 0, 5000, NULL, NULL, NULL, NULL, NULL),
+(16, '1445894491', '2021-07-12 06:33:38', 0, 2000, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -288,7 +285,14 @@ INSERT INTO `tb_transaksi_detail` (`id_detail`, `id_transaksi`, `id_item`, `harg
 (7, '11', '3', 20000, 2),
 (8, '11', '4', 12323, 3),
 (9, '12', '4', 12323, 2),
-(10, '12', '6', 5000, 2);
+(10, '12', '6', 5000, 2),
+(11, '13', '3', 20000, 1),
+(12, '13', '4', 12323, 1),
+(13, '14', '3', 20000, 2),
+(14, '15', '6', 5000, 5),
+(15, '15', '3', 20000, 5),
+(16, '16', '3', 800, 2),
+(17, '16', '6', 200, 2);
 
 -- --------------------------------------------------------
 
@@ -436,13 +440,13 @@ ALTER TABLE `tb_laporan`
 -- AUTO_INCREMENT for table `tb_order_masuk`
 --
 ALTER TABLE `tb_order_masuk`
-  MODIFY `Id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `Id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tb_order_masuk_detail`
 --
 ALTER TABLE `tb_order_masuk_detail`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tb_pelanggan`
@@ -454,13 +458,13 @@ ALTER TABLE `tb_pelanggan`
 -- AUTO_INCREMENT for table `tb_pengadaan_stock`
 --
 ALTER TABLE `tb_pengadaan_stock`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `tb_pengadaan_stock_detail`
 --
 ALTER TABLE `tb_pengadaan_stock_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tb_pengiriman_produk`
@@ -478,13 +482,13 @@ ALTER TABLE `tb_rf_metodebayar`
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `Id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tb_transaksi_detail`
 --
 ALTER TABLE `tb_transaksi_detail`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`

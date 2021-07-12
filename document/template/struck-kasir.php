@@ -2,10 +2,16 @@
 session_start();
     $idtrx=$_GET['id'];
     $kasir=$_SESSION['unique_id'];
+
     $total=0;
     $diskon=$_GET['discount'];
     $dibayar=$_GET['dibayar'];
     $kembalian=0;
+
+    $nameUserQuery="SELECT CONCAT(fname,' ',lname) AS name FROM users WHERE unique_id='$kasir'";
+    $result=mysqli_fetch_assoc(mysqli_query($conn,$nameUserQuery));
+
+
 ?>
 
 <h1 style="text-align:center;">Grosir Amelia</h1>
@@ -14,7 +20,7 @@ session_start();
     <tr>
         <td >Kasir</td>
         <td >:</td>
-        <td ><?php echo $kasir ?></td>
+        <td ><?php echo $result['name'] ?></td>
     </tr>
     <tr>
         <td >Tanggal Transaksi</td>
@@ -28,7 +34,7 @@ session_start();
         <tr>
             <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">Item</td>
             <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">Harga</td>
-            <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">Jumlah</td>
+            <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">Kg</td>
             <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">SubTotal</td>
         </tr>
     </thead>
@@ -48,7 +54,7 @@ session_start();
             <tr>
                 <td style="text-align:left;"><?php echo $r['Nama_barang']?></td>
                 <td style="text-align:right;"><?php echo "Rp ". $r['harga']?></td>
-                <td style="text-align:center;"><?php echo $r['qty']?></td>
+                <td style="text-align:center;"><?php echo $r['qty']?> Kg</td>
                 <td style="text-align:right;"><?php echo "Rp ". ($r['harga'] * $r['qty'] )?></td>
             </tr>
         <?php 

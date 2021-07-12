@@ -30,6 +30,7 @@
             </ul>
           </li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ricemil/gudang/index.php?page=pengadaanstock" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Pengadaan Stock</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ricemil/gudang/index.php?page=transaksisupplier" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Transaksi Pengadaan Stock</span></a></li>
         <li class="sidebar-item "> 
             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi me-2 mdi-table">
                 </i><span class="hide-menu">History Penerimaan</span>
