@@ -1,6 +1,5 @@
 <?php
 
-
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
@@ -22,6 +21,7 @@ if (isset($_GET['id'])) {
         die('Err'.mysqli_error($conn));
     }
     $res=mysqli_fetch_assoc($result);
+
     
 }
 
@@ -73,33 +73,47 @@ if (isset($_POST['submit'])) {
                                 <input type="hidden" name='kodepesanan' class='form-control' value="<?php echo $res['Id_transaksi'] ?>">
                                 <input type="text" name='' class='form-control' value="<?php echo $res['Id_transaksi'] ?>" disabled>
                             </div>
-                            <div class="form-group">
-                                <label for="namabarang">Customer</label>
-                                <input type="text" name='namabarang' class='form-control' value="<?php echo $res['oleh'] ?>" disabled>
-                            </div>
+                            <?php
+                                if($res['oleh']){
+                                    ?>
+                                    <div class="form-group">
+                                        <label for="namabarang">Customer</label>
+                                        <input type="text" name='namabarang' class='form-control' value="<?php echo $res['oleh'] ?>" disabled>
+                                    </div>
+                                    <?php
+                                }
+                            ?>
                             <div class="form-group">
                                 <label for="namabarang">Tanggal Order</label>
                                 <input type="text" name='harga' class='form-control' value="<?php echo $res['date'] ?>" disabled>
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="namabarang">Metode Pembayaran</label>
-                                        <input type="text" name='harga' class='form-control' value="<?php echo $res['descr']?>" disabled>
-                                    </div>
-                                    <div class="col-md-6 d-flex align-items-end justify-content-center">
-                                        <?php
-                                            if($res['metode_bayar']=='2'){
-                                                ?>
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        Lihat Bukti Pembayaran
-                                                    </button>
+                            <?php
+                                if($res['oleh'] !== null){
+                                    ?>
+                                    
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="namabarang">Metode Pembayaran</label>
+                                                <input type="text" name='harga' class='form-control' value="<?php echo $res['descr']?>" disabled>
+                                            </div>
+                                            <div class="col-md-6 d-flex align-items-end justify-content-center">
                                                 <?php
-                                            }
-                                        ?>
+                                                    if($res['metode_bayar']=='2'){
+                                                        ?>
+                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                Lihat Bukti Pembayaran
+                                                            </button>
+                                                        <?php
+                                                    }
+                                                ?>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                    <?php
+                                }
+                            ?>
+                            
                         </div>
                         <div class="col-md-6">
                             <!-- <div class="form-group">
@@ -116,7 +130,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                 <label for="namabarang">Total</label>
-                                <input type="text" name='harga' class='form-control' value="<?php echo $res['total']?>" disabled>
+                                <input type="text" name='harga' class='form-control' value="Rp. <?php echo $res['subtotal'] - $res['diskon']?>" disabled>
                             </div>
                             
                         </div>

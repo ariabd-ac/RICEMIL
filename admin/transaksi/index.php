@@ -46,7 +46,7 @@ if(isset($_POST['submit'])){
                 <?php
                 //   die('Halo');
                     $query="SELECT 
-                            T.Tanggal_transaksi AS date,T.Total_bayar,T.status,T.Id_transaksi,T.subtotal,T.diskon,
+                            T.Tanggal_transaksi AS date,T.Total_bayar,T.status,T.Id_transaksi,T.subtotal,T.diskon,T.order_by,
                             CONCAT(U.fname,' ',U.lname) AS oleh
                             FROM tb_transaksi T
                             LEFT JOIN users U ON U.unique_id=T.Id_pelanggan
@@ -154,7 +154,7 @@ if(isset($_POST['submit'])){
                         die('Err'.mysqli_error($conn));
                     }
                     while($row=mysqli_fetch_assoc($result)){
-                        if($row['status']=='3' || $row['status']=='4'){?>
+                        if(($row['status']=='3' || $row['status']=='4') && $row['order_by'] !== null){?>
                             <tr>
                                 <td><?php echo $row['Id_transaksi']?></td>
                                 <td><?php echo $row['oleh'] ?></td>

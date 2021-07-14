@@ -196,7 +196,7 @@ if ($_SESSION['level'] != 'gudang') {
                           break;
                         case 'edit':
                           # code...
-                          include 'transaksisupplier/edit.php';
+                          include 'transaksisupplier/detail.php';
                           break;
                         case 'delete':
                           # code...

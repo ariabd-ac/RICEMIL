@@ -14,11 +14,11 @@ if (isset($_POST['update-users'])) {
   $level = $_POST['level'];
   $password = $_POST['password'];
   $alamat = $_POST['alamat'];
-
+  $phone= $_POST['handphone'];
 
   $encrypt_pass = md5($password);
 
-  $query = "UPDATE users SET username='$username',fname='$fname', lname = '$lname', email = '$email', level = '$level' , password = '$encrypt_pass' , alamat = '$alamat' WHERE user_id='$id'";
+  $query = "UPDATE users SET username='$username',fname='$fname', lname = '$lname',phone='$phone',email = '$email', level = '$level' , password = '$encrypt_pass' , alamat = '$alamat' WHERE user_id='$id'";
 
   $insert = mysqli_query($conn, $query);
   if ($insert) {
@@ -38,6 +38,7 @@ if (isset($_POST['update-users'])) {
     $lname = $hasil['lname'];
     $email = $hasil['email'];
     $level = $hasil['level'];
+    $phone = $hasil['phone'];
     $password = $hasil['password'];
     $alamat = $hasil['alamat'];
   } else {
@@ -61,6 +62,11 @@ if (isset($_POST['update-users'])) {
           <input type="text" name="fname" id="fname" class="form-control" placeholder="Enter frist name" aria-label="Username" value="<?php echo $fname ?>">
           <span class="input-group-text" id="basic-addon3">Last Name</span>
           <input type="text" name="lname" id="lname" class="form-control" placeholder="Enter last name" aria-label="Server" value="<?php echo $lname ?>">
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Handphone</span>
+          <input type="text" name="handphone" id="handphone" class="form-control" placeholder="Handphone" value="<?php echo $phone?>" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         <div class="input-group mb-3">

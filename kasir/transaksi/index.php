@@ -9,7 +9,8 @@
           <th class="border-top-0">#</th>
           <th class="border-top-0">Nama Barang</th>
           <!-- <th class="border-top-0">Gambar</th> -->
-          <th class="border-top-0">Harga</th>
+          <th class="border-top-0">Harga /Karung</th>
+          <th class="border-top-0">Harga /Kg</th>
           <th class="border-top-0">Action</th>
         </tr>
       </thead>
@@ -24,7 +25,8 @@
             <td><?php echo $row['Id_barang'] ?></td>
             <td><?php echo $row['Nama_barang'] ?></td>
             <!-- <td><img src="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>" alt="alter" height="100px" width="100px"></td> -->
-            <td><?php echo $row['harga'] / 25 ?></td>
+            <td><?php echo 'Rp.'.$row['harga'] ?></td>
+            <td><?php echo 'Rp.'.$row['harga'] / 25 ?></td>
             <td>
               <button class='btn btn-info tambah-keranjang-kasir' data-idbarang="<?php echo $row['Id_barang'] ?>" data-namabarang="<?php echo $row['Nama_barang'] ?>" data-hargabarang="<?php echo $row['harga'] ?>">
                 Tambah
@@ -54,8 +56,8 @@
                 <tr>
                   <th class="border-top-0">#</th>
                   <th class="border-top-0">Nama Barang</th>
-                  <th class="border-top-0">Harga</th>
-                  <th class="border-top-0">Kg</th>
+                  <th class="border-top-0">Harga / Kg</th>
+                  <th class="border-top-0">Qty</th>
                   <th class="border-top-0">Sub Total</th>
                   <th class="border-top-0">Action</th>
                 </tr>
@@ -392,7 +394,7 @@
           let dibayar=bayarElement.value
           let discount= diskonElement.value
 
-          window.location.href = "http://localhost/ricemil/document/index.php?template=struck-kasir&id="+id_trx+"&dibayar="+dibayar+"&discount="+discount;
+          window.open("http://localhost/ricemil/document/index.php?template=struck-kasir&id="+id_trx+"&dibayar="+dibayar+"&discount="+discount);
         }
       },
       error: function(error) {

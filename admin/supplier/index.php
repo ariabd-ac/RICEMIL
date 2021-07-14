@@ -10,6 +10,7 @@
           <th class="border-top-0">Username</th>
           <th class="border-top-0">Email</th>
           <th class="border-top-0">Alamat</th>
+          <th class="border-top-0">Action</th>
 
         </tr>
       </thead>
@@ -31,6 +32,9 @@
             <td><?= $res['username'] ?></td>
             <td><?= $res['email'] ?></td>
             <td><?= $res['alamat'] ?></td>
+            <td>
+              <a class='btn btn-info' href="/ricemil/admin/index.php?page=dtsupplier&modul=detail&id=<?php echo $res['unique_id'] ?>">Performa</a>
+            </td>
           </tr>
         <?php } ?>
       </tbody>

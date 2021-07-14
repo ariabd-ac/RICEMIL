@@ -22,7 +22,7 @@
 <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     Filter
 </button> -->
-<a href="<?php echo $urlPrint ?>" class="btn btn-primary" type="button">
+<a href="<?php echo $urlPrint ?>" target="_blank" class="btn btn-primary" type="button">
     Print
 </a>
 

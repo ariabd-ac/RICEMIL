@@ -50,7 +50,7 @@ if(isset($_POST['submit'])){
                                 <td><?php echo $row['date']?></td>
                                 <td><?php echo $row['subtotal']?></td>
                                 <td><?php echo $row['diskon']?></td>
-                                <td><?php echo $row['Total_bayar'] ?></td>
+                                <td><?php echo $row['subtotal'] - $row['diskon'] ?></td>
                                 <!-- <td>
                                     <form action="" method="post">
                                         <input type="hidden" value="<?php echo $row['Id_transaksi']?>" name='id'>
@@ -59,7 +59,7 @@ if(isset($_POST['submit'])){
                                     </form>
                                 </td> -->
                                 <td>
-                                    <a class='btn btn-info' href="/ricemil/admin/index.php?page=transaksi&modul=detail&id=<?php echo $row['Id_transaksi'] ?>">Detail</a>
+                                    <a class='btn btn-info' href="/ricemil/admin/index.php?page=transaksihis&modul=detail&id=<?php echo $row['Id_transaksi'] ?>">Detail</a>
                                 </td>
                             </tr>
                 <?php    

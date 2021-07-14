@@ -147,7 +147,7 @@ if ($_SESSION['level'] != 'admin') {
                     switch ($modul) {
                       case 'detail':
                         # code...
-                        include 'transaksi/detail.php';
+                        include 'transaksihis/detail.php';
                         break;
 
                       default:
@@ -176,12 +176,13 @@ if ($_SESSION['level'] != 'admin') {
                   break;
                 case 'dtsupplier':
                   if (isset($_GET['modul'])) {
+                    $modul=$_GET['modul'];
                     switch ($modul) {
-                      case 'value':
-
+                      case 'detail':
+                        include 'supplier/detail.php';
                         break;
                       default:
-                        include 'transaksi/index.php';
+                        include 'supplier/index.php';
                         break;
                     }
                   } else {

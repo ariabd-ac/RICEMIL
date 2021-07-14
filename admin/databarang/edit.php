@@ -16,7 +16,8 @@ if (isset($_POST['submit'])) {
     $gambar = $_FILES['gambar'];
     $root = realpath(dirname(__FILE__));
 
-    if ($gambar) {
+    
+    if ($gambar['name']) {
         $targetDir =  $_SERVER["DOCUMENT_ROOT"] . '/ricemil/assets/images/produk/';
 
         $targetFile = $targetDir . basename($gambar['name']);
@@ -25,16 +26,13 @@ if (isset($_POST['submit'])) {
         if (move_uploaded_file($asal, $targetFile)) {
             $succesUpload = true;
         } else {
-            die('error');
+            die('error Gambar');
         }
     }
+    $query = "UPDATE tb_barang SET Nama_barang='$namaBarang',harga='$harga' WHERE Id_barang='$id'";
     if ($succesUpload) {
         $query = "UPDATE tb_barang SET Nama_barang='$namaBarang',harga='$harga',gambar='$gambar[name]' WHERE Id_barang='$id'";
-    } else {
-        echo "<script>alert('Gagal Upload File')</script>";
-        die();
-        // $query = "INSERT INTO tb_barang (Nama_barang,harga) VALUES ('$namaBarang','$harga')";
-    }
+    } 
     
 
     $insert = mysqli_query($conn, $query);
