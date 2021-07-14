@@ -11,8 +11,8 @@ if (isset($_GET['id'])) {
                 FROM tb_pengadaan_stock TPS 
                 LEFT JOIN tb_pengadaan_stock_detail TPSD ON TPSD.id_pengadaan_stock=TPS.Id
                 LEFT JOIN tb_barang TB ON TPSD.id_item=TB.Id_barang
-                LEFT JOIN users U ON U.unique_id=TPSD.appproved_by"; 
-                // -- WHERE TPS.Id='$id' AND TPSD.appproved_by IS NULL";
+                LEFT JOIN users U ON U.unique_id=TPSD.appproved_by
+                WHERE TPS.Id='$id'";
     $result=mysqli_query($conn,$query);
 
     if(!$result){

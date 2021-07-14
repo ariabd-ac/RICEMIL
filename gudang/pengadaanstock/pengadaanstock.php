@@ -6,6 +6,8 @@
                 <tr>
                     <th class="border-top-0">#</th>
                     <th class="border-top-0">Tanggal Transaksi</th>
+                    <th class="border-top-0">Supplier</th>
+                    <!-- <th class="border-top-0">Status</th> -->
                     <th class="border-top-0">Total</th>
                     <th class="border-top-0">Action</th>
                 </tr>
@@ -16,7 +18,9 @@
                 //             LEFT JOIN tb_pengadaan_stock_detail TPSD ON TPS.Id=TPSD.id_pengadaan_stock
                 //             LEFT JOIN tb_barang TB ON TB.Id=TPSD.id_item
                 //             WHERE TPS.supplier_nohp=(SELECT phone FROM users WHERE unique_id='$_SESSION[unique_id]')";
-                $query = "SELECT * FROM tb_pengadaan_stock";
+                $query = "SELECT * FROM tb_pengadaan_stock TPS
+                            LEFT JOIN users U ON U.phone=TPS.supplier_nohp
+                            WHERE TPS.is_approve IS NULL";
                 // $query = "SELECT * FROM tb_pengadaan_stock TPS
                 //             WHERE TPS.supplier_nohp=(SELECT phone FROM users WHERE unique_id='$_SESSION[unique_id]')";
                 $result = mysqli_query($conn, $query);
@@ -26,6 +30,8 @@
                     <tr>
                         <td><?php echo $row['Id'] ?></td>
                         <td><?php echo $row['tanggal_transaksi'] ?></td>
+                        <td><?php echo $row['fname'].' '.$row['lname'] ?></td>
+                        <!-- <td><?php echo $row['status'] ?></td> -->
                         <td><?php echo $row['Total'] ?></td>
                         <td>
                             <a class='btn btn-info' href="/ricemil/gudang/index.php?page=pengadaanstock&modul=edit&id=<?php echo $row['Id']; ?>">Detail</a>

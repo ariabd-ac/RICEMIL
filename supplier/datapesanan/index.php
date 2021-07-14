@@ -16,9 +16,12 @@
                 //             LEFT JOIN tb_barang TB ON TB.Id=TPSD.id_item
                 //             WHERE TPS.supplier_nohp=(SELECT phone FROM users WHERE unique_id='$_SESSION[unique_id]')";
                 $query = "SELECT * FROM tb_pengadaan_stock TPS
-                            WHERE TPS.supplier_nohp=(SELECT phone FROM users WHERE unique_id='$_SESSION[unique_id]')";
+                            WHERE TPS.supplier_nohp=(SELECT phone FROM users WHERE unique_id='$_SESSION[unique_id]') AND TPS.is_approve IS NULL";
                 $result = mysqli_query($conn, $query);
-
+               
+                if(!$result){
+                    die(mysqli_error($conn));
+                }
                 while ($row = mysqli_fetch_assoc($result)) {
                 ?>
                     <tr>

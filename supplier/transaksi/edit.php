@@ -9,8 +9,8 @@ if (isset($_GET['id'])) {
                 TB.Nama_barang,TB.gambar,TB.Id_barang
                 FROM tb_pengadaan_stock TPS 
                 LEFT JOIN tb_pengadaan_stock_detail TPSD ON TPSD.id_pengadaan_stock=TPS.Id
-                LEFT JOIN tb_barang TB ON TPSD.id_item=TB.Id_barang"; 
-                // -- WHERE TPS.Id='$id' AND TPSD.appproved_by IS NULL";
+                LEFT JOIN tb_barang TB ON TPSD.id_item=TB.Id_barang 
+                WHERE TPS.Id='$id' AND TPSD.appproved_by ";
     $result=mysqli_query($conn,$query);
 
     if(!$result){
@@ -25,13 +25,14 @@ if(isset($_POST['submit'])){
 
     // die($statusPost."STATUS POST");
     
-    $queryUpdateStatus="UPDATE tb_pengadaan_stock_detail TAB SET TAB.status='$statusPost' WHERE TAB.id_pengadaan_stock='$id' AND TAB.appproved_by='$_SESSION[unique_id]'";
+    // $queryUpdateStatus="UPDATE tb_pengadaan_stock_detail TAB SET TAB.status='$statusPost' WHERE TAB.id_pengadaan_stock='$id' AND TAB.appproved_by='$_SESSION[unique_id]'";
+    $queryUpdateStatus="UPDATE tb_pengadaan_stock TAB SET TAB.status='$statusPost' WHERE TAB.Id='$id'";
     $execUpdateStatus=mysqli_query($conn,$queryUpdateStatus);
 
     if(!$execUpdateStatus){
         die(mysqli_error($conn));
     }else{
-        header('Location:/ricemil/admin/index.php?page=transaksi');
+        header('Location:/ricemil/supplier/index.php?page=transaksi');
     }
 }
 
@@ -59,7 +60,7 @@ if(isset($_POST['submit'])){
                 while ($row =mysqli_fetch_assoc($result)) {
                     // var_dump($row);
                     
-                    if($row['Id']== $id && $row['appproved_by'] == null){
+                    if($row['Id']== $id && $row['appproved_by'] != null){
                         $status=$row['status'] ? $row['status'] : 0;
                     $num++;
             ?>

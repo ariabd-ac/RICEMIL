@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2021 at 09:36 PM
+-- Generation Time: Jul 15, 2021 at 12:54 AM
 -- Server version: 5.7.34-log
 -- PHP Version: 7.4.13
 
@@ -41,10 +41,10 @@ CREATE TABLE `tb_barang` (
 --
 
 INSERT INTO `tb_barang` (`Id_barang`, `Nama_barang`, `stock`, `harga_beli`, `harga`, `gambar`) VALUES
-(3, 'Sabun', 25, 15000, 20000, 'IMG-20200129-WA0014.jpg'),
-(4, 'henbody', 2147483626, 20000, 12323, 'gbr.png'),
-(5, 'nnnn', 16, 0, 9999, 'b-parakankidang1.jpeg'),
-(6, 'Test barang', NULL, 0, 5000, '085220733720-16191440719251806262855064103899.jpg');
+(3, 'Beras Bulog Kualitas Oke', 25, 15000, 230000, 'IMG-20200129-WA0013.jpg'),
+(4, 'Beras Pandan', 2147483626, 20000, 240000, 'gbr.png'),
+(5, 'Beras Sin-chan', 16, 0, 250000, 'b-parakankidang1.jpeg'),
+(6, 'Beras apakarepe', NULL, 0, 210000, 'IMG-20200129-WA0012.jpg');
 
 -- --------------------------------------------------------
 
@@ -88,15 +88,6 @@ CREATE TABLE `tb_order_masuk` (
   `struk_gambar` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_order_masuk`
---
-
-INSERT INTO `tb_order_masuk` (`Id_order`, `diskon`, `subtotal`, `date`, `total`, `is_approve`, `order_by`, `metode_bayar`, `struk_gambar`) VALUES
-(16, 6969, 76969, '2021-06-27 01:34:42', 70000, 0, '1326851081', '2', 'IMG-20200129-WA0015.jpg'),
-(17, 4646, 34646, '2021-06-27 01:56:24', 30000, 1, '1326851081', '2', 'img-75000.jpg'),
-(18, 0, 32323, '2021-07-09 02:31:21', 32323, 1, '1326851081', '2', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -110,18 +101,6 @@ CREATE TABLE `tb_order_masuk_detail` (
   `harga` double NOT NULL,
   `qty` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_order_masuk_detail`
---
-
-INSERT INTO `tb_order_masuk_detail` (`id_detail`, `id_order_masuk`, `id_item`, `harga`, `qty`) VALUES
-(27, '16', '3', 20000, 2),
-(28, '16', '4', 12323, 3),
-(29, '17', '4', 12323, 2),
-(30, '17', '6', 5000, 2),
-(31, '18', '3', 20000, 1),
-(32, '18', '4', 12323, 1);
 
 -- --------------------------------------------------------
 
@@ -147,15 +126,17 @@ CREATE TABLE `tb_pengadaan_stock` (
   `tanggal_transaksi` datetime DEFAULT CURRENT_TIMESTAMP,
   `Total` double DEFAULT NULL,
   `is_approve` tinyint(1) DEFAULT NULL,
-  `supplier_nohp` varchar(40) NOT NULL
+  `supplier_nohp` varchar(40) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_pengadaan_stock`
 --
 
-INSERT INTO `tb_pengadaan_stock` (`Id`, `tanggal_transaksi`, `Total`, `is_approve`, `supplier_nohp`) VALUES
-(54, '2021-07-13 00:35:47', 90000, NULL, '083113729917');
+INSERT INTO `tb_pengadaan_stock` (`Id`, `tanggal_transaksi`, `Total`, `is_approve`, `supplier_nohp`, `status`) VALUES
+(55, '2021-07-14 23:32:03', 250000, 1, '087888187620', 3),
+(61, '2021-07-15 03:14:45', 0, NULL, '087847274085', 0);
 
 -- --------------------------------------------------------
 
@@ -180,8 +161,9 @@ CREATE TABLE `tb_pengadaan_stock_detail` (
 --
 
 INSERT INTO `tb_pengadaan_stock_detail` (`id`, `id_pengadaan_stock`, `id_item`, `harga`, `qty`, `appproved_by`, `status`, `is_rejected`, `qty_rejected`) VALUES
-(46, 54, '3', 15000, 2, '336577275', '2', NULL, NULL),
-(47, 54, '4', 20000, 3, '336577275', '2', NULL, NULL);
+(48, 55, '3', 15000, 10, '336577275', '1', 1, 5),
+(49, 55, '4', 20000, 5, '336577275', '1', 1, 2),
+(54, 61, '4', 20000, 5, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -256,12 +238,10 @@ CREATE TABLE `tb_transaksi` (
 --
 
 INSERT INTO `tb_transaksi` (`Id_transaksi`, `Id_pelanggan`, `Tanggal_transaksi`, `diskon`, `subtotal`, `Total_bayar`, `status`, `order_by`, `metode_bayar`, `struk_gambar`) VALUES
-(11, '1326851081', '2021-06-27 01:36:20', 6969, 76969, '70000', '4', '1326851081', '2', '085220733720-16191440719251806262855064103899.jpg'),
-(12, '1326851081', '2021-06-27 01:57:51', 4646, 34646, '30000', NULL, '1326851081', '2', 'img-75000.jpg'),
-(13, '1326851081', '2021-07-11 19:08:25', 0, 32323, '32323', '1', '1326851081', '2', ''),
-(14, '1445894491', '2021-07-12 06:28:00', 0, 1600, NULL, NULL, NULL, NULL, NULL),
-(15, '1445894491', '2021-07-12 06:31:58', 0, 5000, NULL, NULL, NULL, NULL, NULL),
-(16, '1445894491', '2021-07-12 06:33:38', 0, 2000, NULL, NULL, NULL, NULL, NULL);
+(18, '1445894491', '2021-07-14 07:49:52', 600, 37600, NULL, '4', NULL, NULL, NULL),
+(19, '1445894491', '2021-07-14 07:51:53', 0, 20000, NULL, '4', NULL, NULL, NULL),
+(20, '1445894491', '2021-07-14 07:51:56', 0, 20000, NULL, '4', NULL, NULL, NULL),
+(21, '1445894491', '2021-07-14 07:55:35', 0, 30000, NULL, '4', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -282,17 +262,11 @@ CREATE TABLE `tb_transaksi_detail` (
 --
 
 INSERT INTO `tb_transaksi_detail` (`id_detail`, `id_transaksi`, `id_item`, `harga`, `qty`) VALUES
-(7, '11', '3', 20000, 2),
-(8, '11', '4', 12323, 3),
-(9, '12', '4', 12323, 2),
-(10, '12', '6', 5000, 2),
-(11, '13', '3', 20000, 1),
-(12, '13', '4', 12323, 1),
-(13, '14', '3', 20000, 2),
-(14, '15', '6', 5000, 5),
-(15, '15', '3', 20000, 5),
-(16, '16', '3', 800, 2),
-(17, '16', '6', 200, 2);
+(20, '18', '3', 9200, 2),
+(21, '18', '4', 9600, 2),
+(22, '19', '5', 10000, 2),
+(23, '20', '5', 10000, 2),
+(24, '21', '5', 10000, 3);
 
 -- --------------------------------------------------------
 
@@ -323,8 +297,9 @@ INSERT INTO `users` (`user_id`, `unique_id`, `username`, `fname`, `lname`, `emai
 (6, 1326851081, 'reseller', 'reseller', 'reseller', 'reseller@gmail.com', '', '9efc4ac970619de711752d818c29884a', 'reseller', 'reseller'),
 (7, 336577275, 'supplier', 'supplier', 'supplier', 'admin@gmail.com', '087888187620', '99b0e8da24e29e4ccb5d7d76e677c2ac', 'supplier', 'supplier'),
 (9, 1445894491, 'kasir', 'kasir', '123', 'kasir123@gmail.com', '082113779918', 'c7911af3adbd12a035b289556d96470a', 'kasir', 'kasir'),
-(10, 971221366, 'supplier2', 'supplier2', '2', 'supplier2@gmail.com', '083113729917', '99b0e8da24e29e4ccb5d7d76e677c2ac', 'supplier', 'supplier'),
-(11, 912680155, 'supplier3', 'supplier3', '3', 'supplier3@gmail.com', '085156843174', '99b0e8da24e29e4ccb5d7d76e677c2ac', 'supplier', 'supplier');
+(10, 971221366, 'supplier2', 'supplier2', '2', 'supplier2@gmail.com', '087847274085', '99b0e8da24e29e4ccb5d7d76e677c2ac', 'supplier', 'supplier'),
+(11, 912680155, 'supplier3', 'supplier3', '3', 'supplier3@gmail.com', '085156843174', '99b0e8da24e29e4ccb5d7d76e677c2ac', 'supplier', 'supplier'),
+(12, 1469616296, 'indri', 'Indri', 'Simalakama', 'indrisimalakama@gmail.com', '083241961774', '71f7be7b8496f7ece8454b1bcdcd2162', 'Lemah Duwur Tegal', 'gudang');
 
 --
 -- Indexes for dumped tables
@@ -458,13 +433,13 @@ ALTER TABLE `tb_pelanggan`
 -- AUTO_INCREMENT for table `tb_pengadaan_stock`
 --
 ALTER TABLE `tb_pengadaan_stock`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `tb_pengadaan_stock_detail`
 --
 ALTER TABLE `tb_pengadaan_stock_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `tb_pengiriman_produk`
@@ -482,19 +457,19 @@ ALTER TABLE `tb_rf_metodebayar`
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `Id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `Id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tb_transaksi_detail`
 --
 ALTER TABLE `tb_transaksi_detail`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

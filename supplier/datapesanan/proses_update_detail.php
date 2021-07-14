@@ -12,8 +12,9 @@
             $itemListUnchecked=isset($_POST['uncheckedList']) ? $_POST['uncheckedList'] : [] ;
             $supplier=$_SESSION['unique_id'];
             $query="UPDATE tb_pengadaan_stock_detail SET appproved_by='$supplier' WHERE id IN($itemList)";
+            $queryUpdateApprove="UPDATE tb_pengadaan_stock SET is_approve='1' WHERE Id='$idParentTrx'";
             $exec=mysqli_query($conn,$query);
-    
+            $exec2=mysqli_query($conn,$queryUpdateApprove);
             if(!$exec){
                 echo mysqli_error($conn);
                 die;
@@ -27,46 +28,34 @@
                 $serializeData=mysqli_fetch_assoc($execGetSuppNo);
     
                 $np_sup=$serializeData['phone'];
-    
-    
-                // $linkMessage = "MOHON CEK DISINI YA http://127.0.0.1/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=$idParentTrx,THANK YOU";
-                // // <a href="https://meet.google.com/vmu-mxrt-pux" title="https://meet.google.com/vmu-mxrt-pux" target="_blank" rel="noopener noreferrer" class="_3-8er selectable-text copyable-text">https://meet.google.com/vmu-mxrt-pux</a>
-                // $send->sendMessage($np_sup,  $linkMessage); //kie ngirim wa
-    
                 // $queryUpdatePhone="UPDATE tb_pengadaan_stock SET supplier_nohp='$np_sup' WHERE Id='$idParentTrx'";
+                $total=0;
+                $queryInsertNewTrx="INSERT INTO tb_pengadaan_stock (Total,supplier_nohp) VALUES ('$total','$np_sup')";
+                $execNewTrx=mysqli_query($conn,$queryInsertNewTrx);
 
+                if(!$execNewTrx){
+                    die(mysqli_error($conn));
+                }
+
+                $last_id = mysqli_insert_id($conn);
+                $queryInsertDetail="INSERT INTO tb_pengadaan_stock_detail (id_pengadaan_stock,id_item,harga,qty)  
+                        SELECT '$last_id',tb2.id_item,tb2.harga,tb2.qty FROM tb_pengadaan_stock_detail tb2 WHERE tb2.id_pengadaan_stock='$idParentTrx' AND tb2.appproved_by IS NULL";
+                
+                $insertDetail=mysqli_query($conn,$queryInsertDetail);
+
+                if(!$insertDetail){
+                    echo json_encode(array(
+                        "status"=>"GAGAL",
+                        "msg"=>mysqli_error($conn)
+                    ));
+                    die;
+                }
+
+                $linkMessage = "MOHON CEK DISINI YA http://127.0.0.1/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=$$last_id,THANK YOU";
+                // <a href="https://meet.google.com/vmu-mxrt-pux" title="https://meet.google.com/vmu-mxrt-pux" target="_blank" rel="noopener noreferrer" class="_3-8er selectable-text copyable-text">https://meet.google.com/vmu-mxrt-pux</a>
+                $send->sendMessage($np_sup,  $linkMessage); //kie ngirim wa
     
-                // $execUpdatePhone=mysqli_query($conn,$queryUpdatePhone);
 
-                // if(!$execUpdatePhone){
-                //     die(mysqli_error($conn));
-                // }
-                // where are we posting to?
-                $url = 'http://foo.com/script.php';
-
-                // what post fields?
-                $fields = array(
-                    'field1' => $field1,
-                    'field2' => $field2,
-                );
-
-                // build the urlencoded data
-                $postvars = http_build_query($fields);
-
-                // open connection
-                $ch = curl_init();
-
-                // set the url, number of POST vars, POST data
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_POST, count($fields));
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
-
-                // execute post
-                $result = curl_exec($ch);
-
-                // close connection
-                curl_close($ch);
-    
             }
             echo json_encode(array(
                 "status"=>"OK",
