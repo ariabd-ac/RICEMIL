@@ -106,6 +106,18 @@ if ($_SESSION['level'] != 'supplier') {
                         include 'datapesanan/index.php';
                       }
                       break;
+                      case 'databarang':
+                        if (isset($_GET['modul'])) {
+                          $modul = $_GET['modul'];
+                          switch ($modul) {
+                            case 'edit':
+                              include 'databarang/edit.php';
+                              break;
+                          }
+                        } else {
+                          include 'databarang/index.php';
+                        }
+                        break;
                       case 'transaksi':
                         if (isset($_GET['modul'])) {
                           $modul = $_GET['modul'];
