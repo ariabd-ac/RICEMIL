@@ -115,6 +115,12 @@ if(isset($_POST['submit'])){
             <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
         </div>
     <?php }?>
+    <?php if($_GET['status'] == 3){?>
+        <div class="form-group">
+            <!-- <input type="hidden" name="status" value="<?php echo $_GET['status'] ? $_GET['status'] : 0 ?>"> -->
+            <a href="<?php echo $base_url.'/document/index.php?template=struck-supplier&id='.$_GET['id'] ?>" class='btn btn-success' target='_blank' name='' class='form-control'>Cetak Invoice</a>
+        </div>
+    <?php }?>
 </form>
 <script>
 
