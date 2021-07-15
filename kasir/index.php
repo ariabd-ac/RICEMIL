@@ -20,7 +20,8 @@ if (isset($_POST['save'])) {
   $date     = date("Y/m/d h:i:s");
 
 
-  $queryInser = "INSERT INTO tb_transaksi(Id_pelanggan,Tanggal_transaksi,subtotal,diskon,status) VALUES ('$user','$date','$subTotalDetail','$diskon','4')";
+  $queryInser = "INSERT INTO tb_transaksi(Tanggal_transaksi,subtotal,diskon,status) VALUES ('$date','$subTotalDetail','$diskon','4')";
+  // $queryInser = "INSERT INTO tb_transaksi(Id_pelanggan,Tanggal_transaksi,subtotal,diskon,status) VALUES ('$user','$date','$subTotalDetail','$diskon','4')";
   $insert = mysqli_query($conn, $queryInser);
   if ($insert) {
     $idTrx = mysqli_insert_id($conn);
