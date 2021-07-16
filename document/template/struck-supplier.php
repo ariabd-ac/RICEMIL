@@ -62,7 +62,7 @@ session_start();
             }
             $no=0;
             while($r=mysqli_fetch_assoc($exec)){
-            $total=$total + ($r['harga'] * $r['qty']);
+            $total=$total + ($r['harga'] * ($r['qty'] - $r['qty_rejected']));
             $no=$no+1;
         ?>
             <tr>

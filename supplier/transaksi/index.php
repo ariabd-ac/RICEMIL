@@ -24,7 +24,7 @@
                 }
                 while ($row = mysqli_fetch_assoc($result)) {
 
-                    $statusList=['Diproses','Dikirim','Diterima','Detail','Detail'];
+                    $statusList=['Diproses','Dikirim','Diterima','Telah Selesai','Telah Selesai'];
                     $status=$row['status'] !== null && $row['status'] !== "" ? $row['status'] :0;
                 ?>
                     <tr>
@@ -33,7 +33,7 @@
                         <td><?php echo $row['Total'] ?></td>
                         <td><?php echo $statusList[$status] ?></td>
                         <td>
-                            <a class='btn btn-info' href="/ricemil/supplier/index.php?page=transaksi&modul=edit&id=<?php echo $row['Id']; ?>&status=<?php echo $status ?>"><?php echo $statusList[$status + 1] ?></a>                            
+                            <a class='btn btn-info' href="/ricemil/supplier/index.php?page=transaksi&modul=edit&id=<?php echo $row['Id']; ?>&status=<?php echo $status ?>">Detail</a>                            
                         </td>
                     </tr>
                 <?php

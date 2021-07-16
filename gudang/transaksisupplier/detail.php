@@ -82,10 +82,10 @@ if(isset($_POST['reject'])){
                     <td><img src="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>" width="50px" height="50px" alt=""></td>
                     <td><?= $row['harga']?></td>
                     <td><?= $row['qty']?></td>
-                    <td><?= $row['harga'] * $row['qty']?></td>
+                    <td><?= $row['harga'] * ($row['qty'] - $row['qty_rejected'])?></td>
                     <td><?= $row['qty_rejected'] ?></td>
                     <?php
-                        if($row['qty_rejected'] == null || $row['qty_rejected'] == 0){
+                        if(($row['qty_rejected'] == null || $row['qty_rejected'] == 0) && $_GET['status'] == 2){
                             ?>
                                 <td>
                                     <button type="button" class="btn btn-primary" onclick="openModal(<?php echo $row['id_detail_pengadaan_stock']?>)" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -136,7 +136,7 @@ if(isset($_POST['reject'])){
     <form action="" method="post" enctype="multipart/form-data">
         <label for="jumlah_reject">Jumlah</label>
         <input type="text" name="jml_reject" id="" class='form-control'>         
-        <input type="text" id="id_detail" name="id_detail" id="" class='form-control'>         
+        <input type="hidden" id="id_detail" name="id_detail" id="" class='form-control'>         
       </div>
       <div class="modal-footer">
         <input type="submit" value="Return" name="reject" class="btn btn-primary">

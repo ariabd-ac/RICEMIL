@@ -109,7 +109,7 @@ if(isset($_POST['submit'])){
             ?>
     </select>
     
-    <?php if($_GET['status'] <= 2){?>
+    <?php if($_GET['status'] < 2){?>
         <div class="form-group">
             <input type="hidden" name="status" value="<?php echo $_GET['status'] ? $_GET['status'] : 0 ?>">
             <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
