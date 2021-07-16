@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2021 at 12:54 AM
+-- Generation Time: Jul 16, 2021 at 02:39 AM
 -- Server version: 5.7.34-log
 -- PHP Version: 7.4.13
 
@@ -41,7 +41,7 @@ CREATE TABLE `tb_barang` (
 --
 
 INSERT INTO `tb_barang` (`Id_barang`, `Nama_barang`, `stock`, `harga_beli`, `harga`, `gambar`) VALUES
-(3, 'Beras Bulog Kualitas Oke', 25, 15000, 230000, 'IMG-20200129-WA0013.jpg'),
+(3, 'Beras Bulog', 25, 15000, 230000, 'IMG-20200129-WA0013.jpg'),
 (4, 'Beras Pandan', 2147483626, 20000, 240000, 'gbr.png'),
 (5, 'Beras Sin-chan', 16, 0, 250000, 'b-parakankidang1.jpeg'),
 (6, 'Beras apakarepe', NULL, 0, 210000, 'IMG-20200129-WA0012.jpg');
@@ -57,6 +57,29 @@ CREATE TABLE `tb_data_stock` (
   `Id_barang` varchar(20) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_harga_supplier`
+--
+
+CREATE TABLE `tb_harga_supplier` (
+  `id` int(11) NOT NULL,
+  `id_supplier` int(11) NOT NULL,
+  `id_item` int(11) NOT NULL,
+  `harga` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_harga_supplier`
+--
+
+INSERT INTO `tb_harga_supplier` (`id`, `id_supplier`, `id_item`, `harga`) VALUES
+(1, 1, 2, 2000),
+(2, 336577275, 3, 40000),
+(3, 336577275, 4, 30000),
+(4, 971221366, 4, 50000);
 
 -- --------------------------------------------------------
 
@@ -318,6 +341,12 @@ ALTER TABLE `tb_data_stock`
   ADD PRIMARY KEY (`Id_stock`);
 
 --
+-- Indexes for table `tb_harga_supplier`
+--
+ALTER TABLE `tb_harga_supplier`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_laporan`
 --
 ALTER TABLE `tb_laporan`
@@ -404,6 +433,12 @@ ALTER TABLE `tb_barang`
 --
 ALTER TABLE `tb_data_stock`
   MODIFY `Id_stock` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_harga_supplier`
+--
+ALTER TABLE `tb_harga_supplier`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_laporan`

@@ -115,7 +115,7 @@ if (isset($_POST['submit'])) {
 
 
             <?php
-            $q = "SELECT phone,fname,lname from users WHERE level = 'supplier'";
+            $q = "SELECT phone,fname,lname,unique_id from users WHERE level = 'supplier'";
             $rs = mysqli_query($conn, $q);
             // $rw = mysqli_fetch_assoc($rs);
 
@@ -124,7 +124,7 @@ if (isset($_POST['submit'])) {
 
             while ($rw = mysqli_fetch_assoc($rs)) {
             ?>
-                <option value="<?php echo $rw['phone'] ?>">
+                <option value="<?php echo $rw['phone'] ?>" data-uniqueid='<?php echo $rw['unique_id']?>'>
                     <?php echo $rw['fname'] . " " . $rw['lname'] . " - " . $rw['phone'] ?>
                 </option>
             <?php }
@@ -218,6 +218,69 @@ if (isset($_POST['submit'])) {
         listDataBarangEl.style.display='none';
     }
 
+
+    function getHargaSupplier(){
+        let optionSelected=document.getElementById('np_sup').options.selectedIndex
+        let id_supplier=document.getElementById('np_sup').options[optionSelected].dataset.uniqueid;
+        console.log(id_supplier);
+        let itemList=[];
+        for (let index = 0; index < tbodyTable.rows.length; index++) {
+            const element = tbodyTable.rows[index];
+            // console.log(element.children[1].children[0].value)
+            itemList.push(element.children[1].children[0].value)
+        }
+
+        let data={
+            idSupplier:id_supplier,
+            itemList:itemList
+        }
+        let url="http://localhost/ricemil/gudang/pengadaanstock/getHarga.php";
+        $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            dataType: "json",
+            success: function(response) {
+                console.log(response);
+                let indexToDelete=[]
+                // response.map((res)=>{     
+                    
+                    for (let index = 0; index < tbodyTable.rows.length; index++) {
+                        const element = tbodyTable.rows[index];
+                        // console.log(element.children[1].children[0].value)
+                        let idFromTd=element.children[1].children[0].value
+                        let qty=element.children[4].children[0].value
+                        
+                        let check=response.find(res=>{
+                            return res.id_item == idFromTd
+                        })
+                        console.log(check,'harga')
+                        // harga=res.id_item == idFromTd && res.harga;
+                        if(check){
+                            element.children[4].children[0].dataset.harga=check.harga
+                            element.children[3].innerHTML =check.harga
+                            element.children[5].innerHTML =Number(check.harga * qty)
+                        }else{
+                            alert('supplier belum setting harga utk item tersebut')
+                            tbodyTable.deleteRow(index)
+                        }
+                    }
+
+                    
+                // })
+ 
+                
+            },
+            error: function(error) {
+                console.log('err', error.responseText);
+            }
+        });
+
+
+        // console.log(ev.options[ev.selectedindex].dataset.uniqueid,'comboBox');
+
+    }
+
     function postData(param){
         let itemList=[];
         for (let index = 0; index < tbodyTable.rows.length; index++) {
@@ -279,6 +342,11 @@ if (isset($_POST['submit'])) {
         const target=e.target;
         if(target.classList.contains('select-item')){
             selectChange(target)
+            getHargaSupplier()
+        }
+
+        if(target.id == 'np_sup'){
+            getHargaSupplier()
         }
 
         if(target.classList.contains('inpt-qty')){
