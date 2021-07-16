@@ -21,6 +21,13 @@ if ($_SESSION['level'] != 'gudang') {
 </head>
 
 <body>
+  
+<div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
   <?php
   // include './_partials/preloader.php';
   ?>
@@ -244,9 +251,9 @@ if ($_SESSION['level'] != 'gudang') {
                       include 'transaksi/index.php';
                     }
                   }
+                }else{
+                  include 'dashboard.php';
                 }
-
-
                 ?>
               </div>
             </div>
@@ -262,6 +269,20 @@ if ($_SESSION['level'] != 'gudang') {
   <?php
   include './_partials/script.php';
   ?>
+  
+<script>
+    var data = {
+      series: [5, 3, 4]
+    };
+
+    var sum = function(a, b) { return a + b };
+
+    new Chartist.Pie('.ct-chart', data, {
+      labelInterpolationFnc: function(value) {
+        return Math.round(value / data.series.reduce(sum) * 100) + '%';
+      }
+    });
+</script>
 </body>
 
 </html>
