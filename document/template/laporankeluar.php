@@ -56,7 +56,7 @@ session_start();
             <th style="border-bottom:1px solid black;">Tanggal Transaksi</th>
             <th style="border-bottom:1px solid black;">Nama Barang</th>
             <th style="border-bottom:1px solid black;">Jumlah</th>
-            <th style="border-bottom:1px solid black;">Total</th>
+            <!-- <th style="border-bottom:1px solid black;">Total</th> -->
         </tr>
     </thead>
     <tbody>
@@ -81,8 +81,8 @@ session_start();
                 <td style='text-align:center;'><?php echo $row['Id_transaksi'] ?></td>
                 <td style='text-align:center;'><?php echo $row['Tanggal_transaksi'] ?></td>
                 <td style='text-align:center;'><?php echo $row['Nama_barang'] ?></td>
-                <td style='text-align:center;'><?php echo $row['qty'] ?> Karung</td>
-                <td style='text-align:right;'><?php echo $row['Total_bayar'] ?></td>
+                <td style='text-align:center;'><?php echo $row['qty'].' '.($row['Id_pelanggan'] ? 'Karung' : 'Kg') ?></td>
+                <!-- <td style='text-align:right;'><?php echo $row['Total_bayar'] ?></td> -->
                 
             </tr>
         <?php

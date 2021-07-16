@@ -23,7 +23,16 @@ if (isset($_GET['id'])) {
 if(isset($_POST['submit'])){
     // die($_POST['status']);
     $statusPost=(int)$_POST['status'] + 1;
-
+    die($_GET['status']);
+    if($_GET['status'] == '2'){   
+        die("MASUK IF");
+        $s="UPDATE tb_barang SET stock=(stock + ($sR[qty]  $sR[qty_rejected]) WHERE Id_barang IN (SELECT id_item,harga,qty,qty_rejected FROM tb_pengadaan_stock_detail WHERE id_pengadaan_stock='$_GET[id]' AND approved_by <> NULL)";
+        $execS=mysqli_query($conn,$s);
+        
+        if($execS){
+           die('err'.mysqli_error($conn));
+        }
+    }
     // die($statusPost."STATUS POST");
     
     $queryUpdateStatus="UPDATE tb_pengadaan_stock_detail TAB SET TAB.status='$statusPost' WHERE TAB.id_pengadaan_stock='$id' AND TAB.appproved_by='$_SESSION[unique_id]'";

@@ -221,6 +221,8 @@ if ($_SESSION['level'] != 'admin') {
 
                   break;
               }
+            }else{
+              include 'dashboard.php';
             }
             ?>
           </div>

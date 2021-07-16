@@ -147,6 +147,8 @@ if (isset($_POST['save'])) {
 
                   break;
               }
+            }else{
+              include 'transaksi/index.php';
             }
             ?>
           </div>

@@ -145,7 +145,7 @@
           <div class="row">
             <div class="col-md-12 d-flex justify-content-end">
               <input type="submit" onclick="save()" value="Simpan" id="save" class='btn btn-primary' style="margin-right:5px;">
-              <button type="button" class='btn btn-primary'>Reset</button>
+              <!-- <button type="button" class='btn btn-primary'>Reset</button> -->
             </div>
           </div>
         </div>
@@ -393,7 +393,8 @@
           let id_trx=response.idTrx;
           let dibayar=bayarElement.value
           let discount= diskonElement.value
-
+          
+          window.location.href="http://localhost/ricemil/kasir/index.php?page=kasir";
           window.open("http://localhost/ricemil/document/index.php?template=struck-kasir&id="+id_trx+"&dibayar="+dibayar+"&discount="+discount);
         }
       },

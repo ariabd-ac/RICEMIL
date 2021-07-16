@@ -26,6 +26,32 @@ if(isset($_POST['submit'])){
     // die($statusPost."STATUS POST");
     
     // $queryUpdateStatus="UPDATE tb_pengadaan_stock_detail TAB SET TAB.status='$statusPost' WHERE TAB.id_pengadaan_stock='$id' AND TAB.appproved_by='$_SESSION[unique_id]'";
+    
+    
+    if($_GET['status'] == '2'){   
+        // die("MASUK IF");
+        
+        $selct="SELECT id_item,harga,qty,qty_rejected FROM tb_pengadaan_stock_detail WHERE id_pengadaan_stock='$_GET[id]' AND appproved_by IS NOT NULL";
+        $ex=mysqli_query($conn,$selct);
+        if(!$ex){
+            die('err'.mysqli_error($conn));
+        }
+        // die("OKE");
+
+        while($sR=mysqli_fetch_assoc($ex)){
+            $penambah= $sR['qty'] - $sR['qty_rejected'];
+            // die("Panambah".$penambah);
+            $s="UPDATE tb_barang SET stock=(stock + $penambah) WHERE Id_barang = '$sR[id_item]'";
+            $execS=mysqli_query($conn,$s);
+            if(!$execS){
+               die('err'.mysqli_error($conn));
+            }
+        }
+
+        // die("LOLOS LOOPING");
+        
+    }
+
     $queryUpdateStatus="UPDATE tb_pengadaan_stock TAB SET TAB.status='$statusPost' WHERE TAB.Id='$id'";
     $execUpdateStatus=mysqli_query($conn,$queryUpdateStatus);
 

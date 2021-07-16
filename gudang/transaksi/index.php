@@ -153,7 +153,7 @@ if(isset($_POST['submit'])){
                         die('Err'.mysqli_error($conn));
                     }
                     while($row=mysqli_fetch_assoc($result)){
-                        if($row['status']=='3' || $row['status']=='4'){?>
+                        if(($row['status']=='3' || $row['status']=='4') && $row['oleh'] !== NULL){?>
                             <tr>
                                 <td><?php echo $row['Id_transaksi']?></td>
                                 <td><?php echo $row['oleh'] ?></td>

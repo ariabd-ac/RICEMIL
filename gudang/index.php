@@ -22,12 +22,12 @@ if ($_SESSION['level'] != 'gudang') {
 
 <body>
   
-<div class="preloader">
+<!-- <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
-    </div>
+    </div> -->
   <?php
   // include './_partials/preloader.php';
   ?>
