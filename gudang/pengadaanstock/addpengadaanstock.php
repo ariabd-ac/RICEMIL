@@ -13,7 +13,12 @@ if (isset($_POST['submit'])) {
     $msg = $_POST['msg'];
 
 
-    $query = "INSERT INTO tb_pengadaan_stock (Nama_barang,Harga,Jumlah) VALUES ('$namaBarang','$harga','$jumlah')";
+    $no_po="PO".date('Ymd-Hi');
+    echo json_encode(array(
+        "no_po"=>$no_po
+    ));
+    die;
+    $query = "INSERT INTO tb_pengadaan_stock (Nama_barang,Harga,Jumlah,no_po) VALUES ('$namaBarang','$harga','$jumlah','$no_po')";
 
     $insert = mysqli_query($conn, $query);
     if ($insert) {

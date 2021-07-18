@@ -90,6 +90,7 @@ if (isset($_GET['id'])) {
     
     
     <div class="form-group">
+        <a href="<?php echo $base_url.'/document/index.php?template=purchase_order&id='.$_GET['id'] ?>" class='btn btn-success' target='_blank' name='' class='form-control'>Cetak PO</a>
         <input type="submit" class='btn btn-success' id='submit' name='submit' value='submit' class='form-control'>
     </div>
 </form>
@@ -175,12 +176,12 @@ if (isset($_GET['id'])) {
             console.log(id_detail)
             return true;
         }
-        e.preventDefault();
         if(target.classList.contains('btn-add')){
             addRow()
         }
-
+        
         if(target.id == 'submit'){
+            e.preventDefault();
             postData();
         }
     })

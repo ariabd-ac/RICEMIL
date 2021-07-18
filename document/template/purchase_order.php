@@ -11,8 +11,9 @@ session_start();
 
     $nameUserSupplier="SELECT CONCAT(fname,' ',lname) AS name FROM users WHERE phone=(SELECT supplier_nohp FROM tb_pengadaan_stock WHERE id='$id')";
     $res=mysqli_fetch_assoc(mysqli_query($conn,$nameUserSupplier));
-
     $queryPO="SELECT no_po FROM tb_pengadaan_stock WHERE id='$id'";
+    
+   
     $noPo=mysqli_fetch_assoc(mysqli_query($conn,$queryPO))['no_po'];
 ?>
 
@@ -20,9 +21,9 @@ session_start();
 <hr>
 <table style='width:100%'>
     <tr>
-        <td nowrap>No PO</td>
+        <td nowrap>Gudang</td>
         <td nowrap>:</td>
-        <td nowrap><?php echo $noPo ?></td>
+        <td nowrap><?php echo $result['name'] ?></td>
         <td style='width:50%'></td>
         <td nowrap>Supplier</td>
         <td nowrap>:</td>
@@ -33,9 +34,9 @@ session_start();
         <td  nowrap>:</td>
         <td nowrap><?php echo date('d M Y') ?></td>
         <td nowrap></td>
-        <td nowrap>No Invoice</td>
+        <td nowrap>No PO</td>
         <td nowrap>:</td>
-        <td nowrap><?php echo str_replace('PO','INV',$noPo)?></td>
+        <td nowrap><?php echo $noPo?></td>
     </tr>
 </table>
 
@@ -46,20 +47,20 @@ session_start();
             <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">Nama Barang</td>
             <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">Harga</td>
             <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">Qty</td>
-            <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">Jumlah Reject</td>
+            <!-- <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">Jumlah Reject</td> -->
             <td style="text-align:center;border-top:1px solid black;border-bottom:1px solid black;">SubTotal</td>
         </tr>
     </thead>
     <tbody>
         <?php
             $query = "SELECT 
-                    TPS.Total,TPS.tanggal_transaksi,TPS.Id,
-                    TPSD.harga,TPSD.qty,TPSD.appproved_by,TPSD.id_pengadaan_stock,TPSD.id AS id_detail_pengadaan_stock,TPSD.status,TPSD.qty_rejected,
-                    TB.Nama_barang,TB.gambar,TB.Id_barang
-                    FROM tb_pengadaan_stock TPS 
-                    LEFT JOIN tb_pengadaan_stock_detail TPSD ON TPSD.id_pengadaan_stock=TPS.Id AND TPSD.appproved_by IS NOT NULL
-                    LEFT JOIN tb_barang TB ON TPSD.id_item=TB.Id_barang 
-                    WHERE TPS.Id='$id'";
+            TPS.Total,TPS.tanggal_transaksi,TPS.Id,
+            TPSD.harga,TPSD.qty,TPSD.appproved_by,TPSD.id_pengadaan_stock,TPSD.id AS id_detail_pengadaan_stock,TPSD.status,TPSD.qty_rejected,
+            TB.Nama_barang,TB.gambar,TB.Id_barang
+            FROM tb_pengadaan_stock TPS 
+            LEFT JOIN tb_pengadaan_stock_detail TPSD ON TPSD.id_pengadaan_stock=TPS.Id
+            LEFT JOIN tb_barang TB ON TPSD.id_item=TB.Id_barang 
+            WHERE TPS.Id='$id'";
             $exec=mysqli_query($conn,$query);
             if(!$exec){
                 die(mysqli_error($conn));
@@ -74,7 +75,7 @@ session_start();
                 <td style="text-align:left;"><?php echo $r['Nama_barang']?></td>
                 <td style="text-align:right;"><?php echo "Rp ". $r['harga']?></td>
                 <td style="text-align:center;"><?php echo $r['qty']?></td>
-                <td style="text-align:right;"><?php echo $r['qty_rejected']?></td>
+                <!-- <td style="text-align:right;"><?php echo $r['qty_rejected']?></td> -->
                 <td style="text-align:right;"><?php echo "Rp ". ($r['harga'] * ($r['qty'] -  $r['qty_rejected'] ) )?></td>
             </tr>
         <?php 
@@ -111,7 +112,7 @@ session_start();
 <br>
 <table style='width:100%'>
     <tr>
-        <td style='text-align:center;'>Dicetak Oleh</td>
+        <td style='text-align:center;'>Gudang</td>
         <td style='width:50%'></td>
         <td style='text-align:center;'>Admin</td>
     </tr>

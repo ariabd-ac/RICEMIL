@@ -30,7 +30,9 @@
                 $np_sup=$serializeData['phone'];
                 // $queryUpdatePhone="UPDATE tb_pengadaan_stock SET supplier_nohp='$np_sup' WHERE Id='$idParentTrx'";
                 $total=0;
-                $queryInsertNewTrx="INSERT INTO tb_pengadaan_stock (Total,supplier_nohp) VALUES ('$total','$np_sup')";
+                $no_po="PO".date('Ymd-Hi');
+                $queryInsertNewTrx="INSERT INTO tb_pengadaan_stock (Total,supplier_nohp,no_po) VALUES ('$total','$np_sup','$no_po')";
+
                 $execNewTrx=mysqli_query($conn,$queryInsertNewTrx);
 
                 if(!$execNewTrx){
@@ -54,7 +56,6 @@
                 $linkMessage = "MOHON CEK DISINI YA http://127.0.0.1/ricemil/supplier/index.php?page=datapesanan&modul=konf&id=$$last_id,THANK YOU";
                 // <a href="https://meet.google.com/vmu-mxrt-pux" title="https://meet.google.com/vmu-mxrt-pux" target="_blank" rel="noopener noreferrer" class="_3-8er selectable-text copyable-text">https://meet.google.com/vmu-mxrt-pux</a>
                 $send->sendMessage($np_sup,  $linkMessage); //kie ngirim wa
-    
 
             }
             echo json_encode(array(

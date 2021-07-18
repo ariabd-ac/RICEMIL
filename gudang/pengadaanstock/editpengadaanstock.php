@@ -104,7 +104,9 @@ if(isset($_POST['submit'])){
                }
             ?>
     </select>
-    
+    <div class="form-group">
+    <a href="<?php echo $base_url.'/document/index.php?template=purchase_order&id='.$_GET['id'] ?>" class='btn btn-success' target='_blank' name='' class='form-control'>Cetak PO</a>
+    </div>
     
 </form>
 <script>

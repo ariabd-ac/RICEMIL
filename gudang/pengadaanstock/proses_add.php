@@ -8,8 +8,12 @@
         $np_sup=$_POST['supplier'];
         // echo json_encode($listItem);
         // die;
-
-        $queryInsert="INSERT INTO tb_pengadaan_stock (Total,supplier_nohp) VALUES ('$total','$np_sup')";
+        $no_po="PO".date('Ymd-Hi');
+    // echo json_encode(array(
+    //     "no_po"=>$no_po
+    // ));
+    // die;
+        $queryInsert="INSERT INTO tb_pengadaan_stock (Total,supplier_nohp,no_po) VALUES ('$total','$np_sup','$no_po')";
         
         
         $insert = mysqli_query($conn, $queryInsert);
