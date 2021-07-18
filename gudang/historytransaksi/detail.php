@@ -3,9 +3,14 @@
 $id;
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+
+    $isRejected=NULL;
+    if(isset($_GET['rejected'])){
+        $isRejected=TRUE;
+    }
     $query = "SELECT 
                 TPS.Total,TPS.tanggal_transaksi,TPS.Id,
-                TPSD.harga,TPSD.qty,TPSD.appproved_by,TPSD.id_pengadaan_stock,TPSD.id AS id_detail_pengadaan_stock,TPSD.status,TPSD.qty_rejected,
+                TPSD.harga,TPSD.qty,TPSD.appproved_by,TPSD.id_pengadaan_stock,TPSD.id AS id_detail_pengadaan_stock,TPSD.status,TPSD.qty_rejected,TPSD.is_rejected,
                 TB.Nama_barang,TB.gambar,TB.Id_barang
                 FROM tb_pengadaan_stock TPS 
                 LEFT JOIN tb_pengadaan_stock_detail TPSD ON TPSD.id_pengadaan_stock=TPS.Id
@@ -18,62 +23,6 @@ if (isset($_GET['id'])) {
     }
 }
 
-
-if(isset($_POST['submit'])){
-    // die($_POST['status']);
-    $statusPost=(int)$_POST['status'] + 1;
-
-    // die($statusPost."STATUS POST");
-    
-    // $queryUpdateStatus="UPDATE tb_pengadaan_stock_detail TAB SET TAB.status='$statusPost' WHERE TAB.id_pengadaan_stock='$id' AND TAB.appproved_by='$_SESSION[unique_id]'";
-    
-    
-    if($_GET['status'] == '2'){   
-        // die("MASUK IF");
-        
-        $selct="SELECT id_item,harga,qty,qty_rejected FROM tb_pengadaan_stock_detail WHERE id_pengadaan_stock='$_GET[id]' AND appproved_by IS NOT NULL";
-        $ex=mysqli_query($conn,$selct);
-        if(!$ex){
-            die('err'.mysqli_error($conn));
-        }
-        // die("OKE");
-
-        while($sR=mysqli_fetch_assoc($ex)){
-            $penambah= $sR['qty'] - $sR['qty_rejected'];
-            // die("Panambah".$penambah);
-            $s="UPDATE tb_barang SET stock=(stock + $penambah) WHERE Id_barang = '$sR[id_item]'";
-            $execS=mysqli_query($conn,$s);
-            if(!$execS){
-               die('err'.mysqli_error($conn));
-            }
-        }
-
-        // die("LOLOS LOOPING");
-        
-    }
-
-    $queryUpdateStatus="UPDATE tb_pengadaan_stock TAB SET TAB.status='$statusPost' WHERE TAB.Id='$id'";
-    $execUpdateStatus=mysqli_query($conn,$queryUpdateStatus);
-
-    if(!$execUpdateStatus){
-        die(mysqli_error($conn));
-    }else{
-        header('Location:/ricemil/gudang/index.php?page=transaksisupplier');
-    }
-}
-
-if(isset($_POST['reject'])){
-    $id_detail=$_POST['id_detail'];
-    $jml_reject=$_POST['jml_reject'];
-
-    $q="UPDATE tb_pengadaan_stock_detail SET is_rejected='1',qty_rejected='$jml_reject' WHERE id='$id_detail'";
-    $ex=mysqli_query($conn,$q);
-    if(!$ex){
-        die(mysqli_error($conn));
-    }else{
-        header("Location:/ricemil/gudang/index.php?page=transaksisupplier&modul=edit&id=".$id."&status=".$_GET['status']."");
-    }
-}
     
 ?>
 
@@ -89,42 +38,41 @@ if(isset($_POST['reject'])){
                 <th class="border-top-0">Harga</th>
                 <th class="border-top-0">Qty</th>
                 <th class="border-top-0">SubTotal</th>
-                <th class="border-top-0">Qty reject</th>
             </tr>
         </thead>
         <tbody id="tbodyTable">
             <?php
                 $num=0;
                 while ($row =mysqli_fetch_assoc($result)) {
-                    // var_dump($row);
-                    
-                    if($row['Id']== $id && $row['appproved_by'] != null){
-                        $status=$row['status'] ? $row['status'] : 0;
-                    $num++;
-            ?>
-                <tr>
-                    <td><?= $row['Id'] ?></td>
-                    <td><?= $row['Nama_barang']?></td>
-                    <td><img src="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>" width="50px" height="50px" alt=""></td>
-                    <td><?= $row['harga']?></td>
-                    <td><?= $row['qty']?></td>
-                    <td><?= $row['harga'] * ($row['qty'] - $row['qty_rejected'])?></td>
-                    <td><?= $row['qty_rejected'] ?></td>
-                    <?php
-                        if(($row['qty_rejected'] == null || $row['qty_rejected'] == 0) && $_GET['status'] == 2){
-                            ?>
-                                <td>
-                                    <button type="button" class="btn btn-primary" onclick="openModal(<?php echo $row['id_detail_pengadaan_stock']?>)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Ajukan Return
-                                    </button>
-                                </td>
-                            <?php
+                    if($isRejected){
+                        if($row['appproved_by'] != null && $isRejected == $row['is_rejected']){    
+                        $num++;
+                        ?>
+                            <tr>
+                                <td><?= $row['Id'] ?></td>
+                                <td><?= $row['Nama_barang']?></td>
+                                <td><img src="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>" width="50px" height="50px" alt=""></td>
+                                <td><?= $row['harga']?></td>
+                                <td><?= $isRejected ? $row['qty_rejected'] : ($row['qty'] - $row['qty_rejected'] )?></td>
+                                <td><?= $row['harga'] * ($row['qty'] - $row['qty_rejected'])?></td>
+                            </tr>
+                        <?php   
                         }
-                    ?>
-
-                </tr>
-            <?php   
-        }
+                    }else{
+                        if($row['appproved_by'] != null){    
+                            $num++;
+                            ?>
+                                <tr>
+                                    <td><?= $row['Id'] ?></td>
+                                    <td><?= $row['Nama_barang']?></td>
+                                    <td><img src="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>" width="50px" height="50px" alt=""></td>
+                                    <td><?= $row['harga']?></td>
+                                    <td><?= $isRejected ? $row['qty_rejected'] : ($row['qty'] - $row['qty_rejected'] )?></td>
+                                    <td><?= $row['harga'] * ($row['qty'] - $row['qty_rejected'])?></td>
+                                </tr>
+                            <?php   
+                        }
+                    }
                 }
             ?>
         </tbody>
@@ -136,16 +84,8 @@ if(isset($_POST['reject'])){
         </tfoot>
     </table>    
     <div class="form-group">
-    <?php if($_GET['status'] == 2){?>
-            <input type="hidden" name="status" value="<?php echo $_GET['status'] ? $_GET['status'] : 0 ?>">
-            <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>
-        
-    <?php }?>
-    <?php if($_GET['status'] == 3){?>
-            <!-- <input type="hidden" name="status" value="<?php echo $_GET['status'] ? $_GET['status'] : 0 ?>"> -->
-            <a href="<?php echo $base_url.'/document/index.php?template=struck-supplier&id='.$_GET['id'] ?>" class='btn btn-success' target='_balnk' name='' class='form-control'>Cetak Invoice</a>
-    <?php }?>
     <a href="<?php echo $base_url.'/document/index.php?template=purchase_order&id='.$_GET['id'] ?>" class='btn btn-success' target='_blank' name='' class='form-control'>Cetak PO</a>
+    <a href="<?php echo $base_url.'/document/index.php?template=struck-supplier&id='.$_GET['id'] ?>" class='btn btn-success' target='_balnk' name='' class='form-control'>Cetak Invoice</a>
     </div>
 </form>
 

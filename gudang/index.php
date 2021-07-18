@@ -189,10 +189,12 @@ if ($_SESSION['level'] != 'gudang') {
                     } else {
                       include 'laporan/laporankeluar.php';
                     }
-                  }else if ($page == "hisrejected") {
-                      include 'historytransaksibarangkeluar/hisrejected.php';
-                  }else if ($page == "hisaccepted") {
-                    include 'historytransaksibarangkeluar/hisaccepted.php';
+                  }else if ($page == "histransaksisupplier") {
+                    if(isset($_GET['modul']) == 'detail'){
+                      include 'historytransaksi/detail.php';
+                    }else{
+                      include 'historytransaksi/history.php';
+                    }
                   }else if ($page == "transaksisupplier") {
                     if (isset($_GET['modul'])) {
                       $modul = $_GET['modul'];

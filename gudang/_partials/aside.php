@@ -37,13 +37,13 @@
             </a>
             <ul class="collapse first-level" aria-expanded="false">
               <li class="sidebar-item">
-                <a class="sidebar-link" href="/ricemil/gudang/index.php?page=hisaccepted">
+                <a class="sidebar-link" href="/ricemil/gudang/index.php?page=histransaksisupplier">
                   <i class="mdi me-2 mdi-table"></i>
                   <span class="hide-menu">Accepted</span>
                 </a>
               </li>
               <li class="sidebar-item">
-                <a class="sidebar-link" href="/ricemil/gudang/index.php?page=hisrejected">
+                <a class="sidebar-link" href="/ricemil/gudang/index.php?page=histransaksisupplier&rejected">
                   <i class="mdi me-2 mdi-table"></i>
                   <span class="hide-menu">Rejected</span>
                 </a>
