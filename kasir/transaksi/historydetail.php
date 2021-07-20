@@ -56,15 +56,15 @@ if (isset($_POST['submit'])) {
                                 <input type="hidden" name='kodepesanan' class='form-control' value="<?php echo $res['Id_transaksi'] ?>">
                                 <input type="text" name='' class='form-control' value="<?php echo $res['Id_transaksi'] ?>" disabled>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="namabarang">Customer</label>
                                 <input type="text" name='namabarang' class='form-control' value="<?php echo $res['oleh'] ?>" disabled>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="namabarang">Tanggal Order</label>
                                 <input type="text" name='harga' class='form-control' value="<?php echo $res['date'] ?>" disabled>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="namabarang">Metode Pembayaran</label>
@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
                                         ?>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-md-6">
                             <!-- <div class="form-group">
@@ -99,7 +99,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                 <label for="namabarang">Total</label>
-                                <input type="text" name='harga' class='form-control' value="<?php echo $res['total']?>" disabled>
+                                <input type="text" name='harga' class='form-control' value="<?php echo $res['subtotal'] - $res['diskon'] ?>" disabled>
                             </div>
                             
                         </div>

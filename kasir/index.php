@@ -45,21 +45,7 @@ if (isset($_POST['save'])) {
         );
       }
 
-      // if ($insertDetailExec) {
-      //   $updateQuey = "UPDATE tb_barang tb SET tb.stock=(tb.stock - $qty) WHERE tb.Id_barang='$idItem'";
-      //   $updateExec = mysqli_query($conn, $updateQuey);
-      //   if ($updateExec) {
-      //     $response = array(
-      //       "status" => "OK",
-      //       "idTrx" => $idTrx
-      //     );
-      //   } else {
-      //     $response = array(
-      //       "status" => "Fail",
-      //       "idTrx" => $idTrx
-      //     );
-      //   }
-      // }
+     
     }
   } else {
     $response = array(
@@ -113,9 +99,13 @@ if (isset($_POST['save'])) {
               switch ($page) {
                 case 'kasir':
                   if (isset($_GET['modul'])) {
+                    $modul=$_GET['modul'];
                     switch ($modul) {
-                      case 'value':
-
+                      case 'historytransaksi':
+                        include 'transaksi/history.php';
+                        break;
+                      case 'historytransaksidetail':
+                        include 'transaksi/historydetail.php';
                         break;
                       default:
                         include 'transaksi/index.php';

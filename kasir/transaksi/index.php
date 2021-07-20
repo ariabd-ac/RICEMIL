@@ -394,8 +394,8 @@
           let dibayar=bayarElement.value
           let discount= diskonElement.value
           
-          window.location.href="http://localhost/ricemil/kasir/index.php?page=kasir";
           window.open("http://localhost/ricemil/document/index.php?template=struck-kasir&id="+id_trx+"&dibayar="+dibayar+"&discount="+discount);
+          window.location.href="http://localhost/ricemil/kasir/index.php?page=kasir";
         }
       },
       error: function(error) {
