@@ -56,7 +56,6 @@
             <th class="border-top-0">Tanggal Transaksi</th>
             <th class="border-top-0">Nama Barang</th>
             <th class="border-top-0">Jumlah</th>
-            <th class="border-top-0">Total</th>
             <!-- <th class="border-top-0">Action</th> -->
         </tr>
     </thead>
@@ -82,17 +81,16 @@
         }
 
 
-
+        $num=0;
         while ($row = mysqli_fetch_assoc($result)) {
-            // var_dump($row);
-            // die;
+            $num=$num+1;
         ?>
             <tr>
-                <td><?php echo $row['Id_transaksi'] ?></td>
+                <td><?php echo $num ?></td>
                 <td><?php echo $row['Tanggal_transaksi'] ?></td>
                 <td><?php echo $row['Nama_barang'] ?></td>
-                <td><?php echo $row['qty'] ?> Karung</td>
-                <td><?php echo $row['Total_bayar'] ?></td>
+                <td><?php echo $row['qty'] ?><?php echo $row['Id_pelanggan'] ? " Karung":" Kg";?> </td>
+                
                 <!-- <td>
                     <a class='btn btn-info' href="/ricemil/gudang/index.php?page=pengadaanstock&modul=edit&id=<?php echo $row['Id']; ?>">Detail</a>
                 </td> -->

@@ -81,16 +81,15 @@
         }
 
 
-
+        $num=0;
         while ($row = mysqli_fetch_assoc($result)) {
-            // var_dump($row);
-            // die;
+            $num=$num+1;
         ?>
             <tr>
-                <td><?php echo $row['Id'] ?></td>
+                <td><?php echo $num ?></td>
                 <td><?php echo $row['tanggal_transaksi'] ?></td>
                 <td><?php echo $row['Nama_barang'] ?></td>
-                <td><?php echo $row['qty'] ?> Karung</td>
+                <td><?php echo $row['qty'] - $row['qty_rejected'] ?> Karung</td>
                 <td><?php echo $row['Total'] ?></td>
                 <!-- <td>
                     <a class='btn btn-info' href="/ricemil/gudang/index.php?page=pengadaanstock&modul=edit&id=<?php echo $row['Id']; ?>">Detail</a>

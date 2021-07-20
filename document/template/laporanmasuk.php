@@ -69,16 +69,15 @@ session_start();
         }
 
 
-
+        $num=0;
         while ($row = mysqli_fetch_assoc($result)) {
-            // var_dump($row);
-            // die;
+            $num=$num+1;
         ?>
             <tr>
-                <td style='text-align:center;'><?php echo $row['Id'] ?></td>
+                <td style='text-align:center;'><?php echo $num ?></td>
                 <td style='text-align:center;'><?php echo $row['tanggal_transaksi'] ?></td>
                 <td style='text-align:center;'><?php echo $row['Nama_barang'] ?></td>
-                <td style='text-align:center;'><?php echo $row['qty'] ?> Karung</td>
+                <td style='text-align:center;'><?php echo $row['qty'] - $row['qty_rejected'] ?> Karung</td>
                 <td style='text-align:right;'><?php echo $row['Total'] ?></td>
                 
             </tr>

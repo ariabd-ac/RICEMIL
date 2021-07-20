@@ -8,7 +8,7 @@
         <tr>
           <th class="border-top-0">#</th>
           <th class="border-top-0">Nama Barang</th>
-          <!-- <th class="border-top-0">Gambar</th> -->
+          <th class="border-top-0">Stock Tersedia</th>
           <th class="border-top-0">Harga /Karung</th>
           <th class="border-top-0">Harga /Kg</th>
           <th class="border-top-0">Action</th>
@@ -20,17 +20,27 @@
         $result = mysqli_query($conn, $query);
 
         while ($row = mysqli_fetch_assoc($result)) {
+          $karung =floor($row['stock'] /25) > 0 ? floor($row['stock'] /25)." Karung":"Stock Kosong";
+          $kg=$row['stock'] % 25 > 0 ? ($row['stock'] % 25)." Kg" : "";
         ?>
           <tr>
             <td><?php echo $row['Id_barang'] ?></td>
             <td><?php echo $row['Nama_barang'] ?></td>
-            <!-- <td><img src="http://localhost/ricemil/assets/images/produk/<?php echo $row['gambar'] ?>" alt="alter" height="100px" width="100px"></td> -->
+            <td><?php echo $karung." ".$kg ?></td>
             <td><?php echo 'Rp.'.$row['harga'] ?></td>
             <td><?php echo 'Rp.'.$row['harga'] / 25 ?></td>
             <td>
-              <button class='btn btn-info tambah-keranjang-kasir' data-idbarang="<?php echo $row['Id_barang'] ?>" data-namabarang="<?php echo $row['Nama_barang'] ?>" data-hargabarang="<?php echo $row['harga'] ?>">
+              <?php if($karung === "Stock Kosong"){ ?>
+              <button class='btn btn-info tambah-keranjang-kasir' data-idbarang="<?php echo $row['Id_barang'] ?>" data-namabarang="<?php echo $row['Nama_barang'] ?>" data-hargabarang="<?php echo $row['harga'] ?>" disabled>
                 Tambah
               </button>
+              <?php }else{
+                ?>
+                <button class='btn btn-info tambah-keranjang-kasir' data-idbarang="<?php echo $row['Id_barang'] ?>" data-namabarang="<?php echo $row['Nama_barang'] ?>" data-hargabarang="<?php echo $row['harga'] ?>">
+                Tambah
+              </button>
+                <?php
+              }?>
             </td>
           </tr>
         <?php
