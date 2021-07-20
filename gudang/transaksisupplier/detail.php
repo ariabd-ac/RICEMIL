@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
         // die("OKE");
 
         while($sR=mysqli_fetch_assoc($ex)){
-            $penambah= $sR['qty'] - $sR['qty_rejected'];
+            $penambah= ($sR['qty'] - $sR['qty_rejected']) * 25;
             // die("Panambah".$penambah);
             $s="UPDATE tb_barang SET stock=(stock + $penambah) WHERE Id_barang = '$sR[id_item]'";
             $execS=mysqli_query($conn,$s);

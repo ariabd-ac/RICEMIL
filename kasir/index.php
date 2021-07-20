@@ -30,6 +30,14 @@ if (isset($_POST['save'])) {
       $harga = $listData[$i]['hargaBarang'] / 25;
       // $nama = $listData[$i]['namaBarang'];
       $qty = $listData[$i]['qty'];
+
+      //update stock
+      $s="UPDATE tb_barang SET stock=(stock - $qty) WHERE Id_barang = '$idItem'";
+      $execS=mysqli_query($conn,$s);
+      if(!$execS){
+         die('err'.mysqli_error($conn));
+      }
+      // end update stock
       $insertDetail = "INSERT INTO tb_transaksi_detail(id_transaksi,id_item,harga,qty) VALUES ('$idTrx','$idItem','$harga','$qty')";
       $insertDetailExec = mysqli_query($conn, $insertDetail);
       // ==================================================================

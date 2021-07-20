@@ -8,7 +8,9 @@
     }
 
     while ($r = mysqli_fetch_assoc($res)) {
+        if(floor($r['stock'] / 25 ) > 0){
     ?>
+
         <div class="col-md-3" style="width:300px;">
             <div class="card">
                 <!-- <div class="card-header">
@@ -25,7 +27,7 @@
                     </div>
                     <div class="desc">
                         <h4><?php echo $r['Nama_barang'] ?></h4>
-                        <p>Stock <?php echo $r['stock'] ?></p>
+                        <p>Stock <?php echo floor($r['stock'] / 25 )." Karung" ?></p>
                         <p>Rp. <?php echo $r['harga'] ?></p>
                     </div>
                 </div>
@@ -34,7 +36,9 @@
                 </div> -->
             </div>
         </div>
-    <?php } ?>
+<?php
+        }
+     } ?>
 </div>
 
 <!-- Button trigger modal -->

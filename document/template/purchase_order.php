@@ -11,10 +11,12 @@ session_start();
 
     $nameUserSupplier="SELECT CONCAT(fname,' ',lname) AS name FROM users WHERE phone=(SELECT supplier_nohp FROM tb_pengadaan_stock WHERE id='$id')";
     $res=mysqli_fetch_assoc(mysqli_query($conn,$nameUserSupplier));
-    $queryPO="SELECT no_po FROM tb_pengadaan_stock WHERE id='$id'";
-    
+    $queryPO="SELECT no_po,tanggal_pengiriman,tanggal_transaksi FROM tb_pengadaan_stock WHERE id='$id'";
+    $resultPengadaanStock=mysqli_fetch_assoc(mysqli_query($conn,$queryPO));
    
-    $noPo=mysqli_fetch_assoc(mysqli_query($conn,$queryPO))['no_po'];
+    $noPo=$resultPengadaanStock['no_po'];
+    $tanggalTransaksi=strtotime($resultPengadaanStock['tanggal_transaksi']);
+    $tanggalPengiriman=strtotime($resultPengadaanStock['tanggal_pengiriman']);
 ?>
 
 <h1 style="text-align:center;">Grosir Amelia</h1>
@@ -32,14 +34,23 @@ session_start();
     <tr>
         <td  nowrap>Tanggal Transaksi</td>
         <td  nowrap>:</td>
-        <td nowrap><?php echo date('d M Y') ?></td>
+        <td nowrap><?php echo date('d M Y',$tanggalTransaksi) ?></td>
         <td nowrap></td>
         <td nowrap>No PO</td>
         <td nowrap>:</td>
         <td nowrap><?php echo $noPo?></td>
     </tr>
+    <tr>
+        <td  nowrap>Tanggal Pengiriman</td>
+        <td  nowrap>:</td>
+        <td nowrap><?php echo date('d M Y',$tanggalPengiriman) ?></td>
+        <td nowrap></td>
+        <td nowrap></td>
+        <td nowrap></td>
+        <td nowrap></td>
+    </tr>
 </table>
-
+<br>
 <table style="width:100%">
     <thead>
         <tr>
@@ -112,7 +123,7 @@ session_start();
 <br>
 <table style='width:100%'>
     <tr>
-        <td style='text-align:center;'>Gudang</td>
+        <td style='text-align:center;'></td>
         <td style='width:50%'></td>
         <td style='text-align:center;'>Admin</td>
     </tr>
@@ -122,7 +133,7 @@ session_start();
         <td></td>
     </tr>
     <tr>
-        <td style='text-align:center;'><?php echo $result['name'] ?></td>
+        <td style='text-align:center;'></td>
         <td></td>
         <td style='text-align:center;'>---------</td>
     </tr>

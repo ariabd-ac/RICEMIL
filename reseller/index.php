@@ -24,7 +24,8 @@ if(isset($_POST['save'])){
         $insertDetail="INSERT INTO tb_order_masuk_detail(id_order_masuk,id_item,harga,qty) VALUES ('$idTrx','$idItem','$harga','$qty')";
         $insertDetailExec = mysqli_query($conn, $insertDetail);
         if($insertDetailExec){
-          $updateQuey = "UPDATE tb_barang tb SET tb.stock=(tb.stock - $qty) WHERE tb.Id_barang='$idItem'";
+          $qtyKarung=$qty*25;
+          $updateQuey = "UPDATE tb_barang tb SET tb.stock=(tb.stock - $qtyKarung) WHERE tb.Id_barang='$idItem'";
           $updateExec = mysqli_query($conn, $updateQuey);
           if($updateExec){
             $response=array(

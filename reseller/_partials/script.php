@@ -183,7 +183,10 @@
                             <td scope="row">${index+1}</td>
                             <td>${dt.nameItem}</td>
                             <td>${dt.hargaItem}</td>
-                            <td><input style="width:50px;" class='inp-qty' type="number" data-iditem="${dt.idItem}" value="${dt.itemQty}"></td>
+                            <td>
+                                <input style="width:50px;" class='inp-qty' type="number" data-iditem="${dt.idItem}" value="${dt.itemQty}">
+                                <span> Karung</span>
+                            </td>
                             <td>${dt.hargaItem * dt.itemQty}</td>
                             
                         </tr>

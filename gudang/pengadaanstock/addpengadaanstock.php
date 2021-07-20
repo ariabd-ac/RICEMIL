@@ -137,11 +137,16 @@ if (isset($_POST['submit'])) {
             ?>
         </select>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="namabarang">Memo</label>
         <input type="text" name='msg' class='form-control'>
-        <!-- <input type="url" name="msg" class='form-control' id="msg" placeholder="https://example.com" pattern="https://.*" size="30" required> -->
+        <input type="url" name="msg" class='form-control' id="msg" placeholder="https://example.com" pattern="https://.*" size="30" required>
+    </div> -->
+    <div class="form-group">
+        <label for="namabarang">Tanggal Pengiriman</label>
+        <input type="date" name='tanggal_pengiriman' id="tanggal_pengiriman" class='form-control'>
     </div>
+
     <div class="form-group">
         <input type="submit" class='btn btn-success' id='submit' name='submit' value='submit' class='form-control'>
     </div>
@@ -298,11 +303,13 @@ if (isset($_POST['submit'])) {
             }
             itemList.push(item)
         }
+        let tanggalPengiriman=document.getElementById('tanggal_pengiriman').value;
         let dataToPush={
             "submit":"submit",
             "total":totalVal.innerHTML,
             "itemList":itemList,
-            "supplier":document.getElementById('np_sup').value
+            "supplier":document.getElementById('np_sup').value,
+            "tanggal_pengiriman":tanggalPengiriman
         }
 
         console.log(dataToPush)
@@ -331,14 +338,16 @@ if (isset($_POST['submit'])) {
     // click event on container gudang
     containerGudang[0].addEventListener('click',(e)=>{
         
-        e.preventDefault();
+       
         const target=e.target;
 
         if(target.classList.contains('btn-add')){
+            e.preventDefault();
             addRow()
         }
 
         if(target.id == 'submit'){
+            e.preventDefault();
             postData();
         }
     })

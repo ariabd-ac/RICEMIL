@@ -46,7 +46,7 @@ if(isset($_POST['submit'])){
                             ?>
                             <tr>
                                 <td><?php echo $row['Id_transaksi']?></td>
-                                <td><?php echo $row['oleh'] ?></td>
+                                <td><?php echo $row['oleh'] == NULL ? "Kasir" : $row['oleh'] ?></td>
                                 <td><?php echo $row['date']?></td>
                                 <td><?php echo $row['subtotal']?></td>
                                 <td><?php echo $row['diskon']?></td>

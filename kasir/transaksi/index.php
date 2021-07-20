@@ -253,7 +253,8 @@
                     <td>${data.namaBarang}</td>
                     <td>${hargaKg}</td>
                     <td>
-                        <input type="text" class='qtyKeranjang' value="${data.qty}" style='width:50px;' data-index='${index}'">
+                        <input type="text" class='qtyKeranjang' value="${data.qty}" style='width:50px;' data-index='${index}'" placeholder="kg">
+                        <span> Kg</span>
                     </td>
                     <td>
                         <input id='subTotalKeranjang${data.idBarang}' style='width:100px;' value='${Number(data.qty) * Number(hargaKg)}' type="text" disabled>
@@ -362,16 +363,7 @@
     let diskon = document.getElementById('diskon');
     let itemList = [];
 
-    // let data = {
-    //   save: "save",
-    //   subTotalDetail: subTotalDetail.value,
-    //   total: total.value,
-    //   diskon: diskon.value,
-    //   itemList: dataKeranjangItem,
-    //   // metodeBayar: metodeBayar
-    // }
 
-    // console.log('d', data);
 
 
 
