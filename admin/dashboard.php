@@ -1,3 +1,29 @@
+<?php
+    include_once "../config/koneksi.php";
+    $queryTrx="SELECT 
+           (SELECT COUNT(Id_transaksi) FROM tb_transaksi WHERE status IS NULL) AS totalPesan,
+           (SELECT COUNT(Id_transaksi) FROM tb_transaksi WHERE status=2) AS totalDikirim,
+           (SELECT COUNT(Id_transaksi) FROM tb_transaksi WHERE status=4) AS totalSelesai";
+
+    $execTrx=mysqli_fetch_assoc(mysqli_query($conn,$queryTrx));
+
+    $queryUsr="SELECT 
+           (SELECT COUNT(user_id) FROM users WHERE level='gudang') AS totalGudang,
+           (SELECT COUNT(user_id) FROM users WHERE level='reseller') AS totalReseller,
+           (SELECT COUNT(user_id) FROM users WHERE level='admin') AS totalAdmin,
+           (SELECT COUNT(user_id) FROM users WHERE level='kasir') AS totalKasir,
+           (SELECT COUNT(user_id) FROM users WHERE level='supplier') AS totalSupplier";
+
+    $execUsr=mysqli_fetch_assoc(mysqli_query($conn,$queryUsr));
+    // die(var_dump($execUsr));
+?>
+<span style='display:none' id='totalGudang'><?php echo $execUsr['totalGudang']; ?></span>
+<span style='display:none' id='totalReseller'><?php echo $execUsr['totalReseller']; ?></span>
+<span style='display:none' id='totalAdmin'><?php echo $execUsr['totalAdmin']; ?></span>
+<span style='display:none' id='totalKasir'><?php echo $execUsr['totalKasir']; ?></span>
+<span style='display:none' id='totalSupplier'><?php echo $execUsr['totalSupplier']; ?></span>
+
+
 <div class="card">
     <div class="card-body">
     <div class="page-breadcrumb">
@@ -26,80 +52,199 @@
                 <!-- ============================================================== -->
                 <!-- Sales chart -->
                 <!-- ============================================================== -->
-        <div class="row">
-            <!-- Column -->
-            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                Transaksi
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-header text-center">Pesanan</div>
+                                            <div class="card-body text-center align-items-center bg-info">
+                                                <h2 class="h2">
+                                                    <?php echo $execTrx['totalPesan'] ?>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-header text-center">Dalam Pengiriman</div>
+                                            <div class="card-body text-center align-items-center bg-warning">
+                                                <h2 class="h2">
+                                                    <?php echo $execTrx['totalDikirim'] ?>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card bg-succes">
+                                            <div class="card-header text-center">Selesai</div>
+                                            <div class="card-body text-center align-items-center bg-danger">
+                                                <h2 class="h2">
+                                                    <?php echo $execTrx['totalSelesai'] ?>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Users
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myChartDonut"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="d-flex flex-wrap align-items-center">
-                                    <div>
-                                        <h3 class="card-title">Sales Overview</h3>
-                                        <h6 class="card-subtitle">Ample Admin Vs Pixel Admin</h6>
-                                    </div>
-                                    <div class="ms-lg-auto mx-sm-auto mx-lg-0">
-                                        <ul class="list-inline d-flex">
-                                            <li class="me-4">
-                                                <h6 class="text-success"><i
-                                                        class="fa fa-circle font-10 me-2 "></i>Ample</h6>
-                                            </li>
-                                            <li>
-                                                <h6 class="text-info"><i
-                                                        class="fa fa-circle font-10 me-2"></i>Pixel</h6>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            <div class="col-md-12">
+                                <canvas id="myChart"></canvas>
                             </div>
-                            <div class="col-12">
-                                <div class="amp-pxl" style="height: 360px;">
-                                    <div class="chartist-tooltip"></div>
-                                </div>
-                            </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Our Visitors </h3>
-                        <h6 class="card-subtitle">Different Devices Used to Visit</h6>
-                        <div id="visitor"
-                            style="height: 290px; width: 100%; max-height: 290px; position: relative;"
-                            class="c3">
-                            <div class="c3-tooltip-container"
-                                style="position: absolute; pointer-events: none; display: none;">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <hr class="mt-0 mb-0">
-                    </div>
-                    <div class="card-body text-center ">
-                        <ul class="list-inline d-flex justify-content-center align-items-center mb-0">
-                            <li class="me-4">
-                                <h6 class="text-info"><i class="fa fa-circle font-10 me-2 "></i>Mobile</h6>
-                            </li>
-                            <li class="me-4">
-                                <h6 class=" text-primary"><i class="fa fa-circle font-10 me-2"></i>Desktop</h6>
-                            </li>
-                            <li class="me-4">
-                                <h6 class=" text-success"><i class="fa fa-circle font-10 me-2"></i>Tablet</h6>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-            <div class="ct-chart ct-perfect-fourth"></div>
-            </div>
-        </div>
+                      
+        
 
     </div>
 </div>
- 
+<?php
+    
+    $query="SELECT DATE_FORMAT(Tanggal_transaksi, '%m') AS Month, SUM(subtotal-diskon) AS dt
+            FROM tb_transaksi
+            GROUP BY DATE_FORMAT(Tanggal_transaksi, '%m')";
+    $exec=mysqli_query($conn,$query);
+    if(!$exec){
+        die("ERR".mysqli_error($conn));
+    }
+
+?>
+<ul style='display:none'>
+    <?php
+        while($r=mysqli_fetch_assoc($exec)){
+            ?>
+                <li class='list-data' data-dt="<?php echo $r['dt']?>" data-month="<?php echo $r['Month']?>"><?php echo $r['dt']?>-<?php echo $r['Month']?></li>
+            <?php
+        }
+    ?>
+</ul>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+    let dataList=document.getElementsByClassName('list-data');
+    const labels = [
+        'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+    ];
+    let monthIndex=[]
+    let dt=[]
+    
+    for (let index = 0; index < dataList.length; index++) {
+        const element = dataList[index];
+        console.log(element)
+        dt.push(element.dataset.dt)
+        let bulan=element.dataset.month
+        monthIndex.push(labels[Number(bulan > 0 ?bulan.replace("0",'') : bulan)-1]);
+    }
+
+    console.log(monthIndex)
+    console.log(dt)
+
+    
+    const data = {
+        labels: monthIndex,
+        datasets: [{
+            label: 'Data Pendapatan',
+            backgroundColor: 'rgb(132, 99, 255)',
+            borderColor: 'rgb(132, 99, 255)',
+            data: dt,
+        },{
+            label: 'Data Pegeluaran',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [60000,100000],
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data,
+        options: {}
+    };
+
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+    let totalReseller =document.getElementById('totalReseller').innerText
+    let totalGudang =document.getElementById('totalGudang').innerText
+    let totalAdmin =document.getElementById('totalAdmin').innerText
+    let totalKasir =document.getElementById('totalKasir').innerText
+    let totalSupplier=document.getElementById('totalSupplier').innerText
+
+    console.log("user",totalReseller)
+
+    const dataDonut = {
+        labels: [
+            'Reseller',
+            'Gudang',
+            'Admin',
+            'Kasir',
+            'Supplier'
+        ],
+        datasets: [{
+            label: 'Users',
+            data: [
+                totalReseller ,
+                totalGudang ,
+                totalAdmin ,
+                totalKasir ,
+                totalSupplier ],
+            backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgb(255, 105, 86)',
+            'rgb(105, 205, 100)'
+            ],
+            hoverOffset: 4
+        }]
+    };
+    
+
+    const configDonut = {
+        type: 'doughnut',
+        data: dataDonut,
+    };
+
+    var myChart = new Chart(
+        document.getElementById('myChartDonut'),
+        configDonut
+    );
+</script>
    
