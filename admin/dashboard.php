@@ -121,9 +121,10 @@
 </div>
 <?php
     
-    $query="SELECT DATE_FORMAT(Tanggal_transaksi, '%m') AS Month, SUM(subtotal-diskon) AS dt
+    $query="SELECT DATE_FORMAT(Tanggal_transaksi, '%m') AS Month, SUM(subtotal-diskon) AS dt,
+            DATE_FORMAT(Tanggal_transaksi, '%d/%m/%Y') AS perday
             FROM tb_transaksi
-            GROUP BY DATE_FORMAT(Tanggal_transaksi, '%m')";
+            GROUP BY DATE_FORMAT(Tanggal_transaksi, '%d-%m-%Y')";
     $exec=mysqli_query($conn,$query);
     if(!$exec){
         die("ERR".mysqli_error($conn));
@@ -134,7 +135,7 @@
     <?php
         while($r=mysqli_fetch_assoc($exec)){
             ?>
-                <li class='list-data' data-dt="<?php echo $r['dt']?>" data-month="<?php echo $r['Month']?>"><?php echo $r['dt']?>-<?php echo $r['Month']?></li>
+                <li class='list-data' data-dt="<?php echo $r['dt']?>" data-date="<?php echo $r['perday']?>" data-month="<?php echo $r['Month']?>"><?php echo $r['dt']?>-<?php echo $r['Month']?></li>
             <?php
         }
     ?>
@@ -162,6 +163,7 @@
     ];
     let monthIndex=[]
     let dt=[]
+    let date=[]
     
     for (let index = 0; index < dataList.length; index++) {
         const element = dataList[index];
@@ -169,6 +171,7 @@
         dt.push(element.dataset.dt)
         let bulan=element.dataset.month
         monthIndex.push(labels[Number(bulan > 0 ?bulan.replace("0",'') : bulan)-1]);
+        date.push(element.dataset.date)
     }
 
     console.log(monthIndex)
@@ -176,7 +179,7 @@
 
     
     const data = {
-        labels: monthIndex,
+        labels: date,
         datasets: [{
             label: 'Data Pendapatan',
             backgroundColor: 'rgb(132, 99, 255)',
