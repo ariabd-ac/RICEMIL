@@ -11,7 +11,6 @@
           <th class="border-top-0">Email</th>
           <th class="border-top-0">Alamat</th>
           <th class="border-top-0">Action</th>
-
         </tr>
       </thead>
       <tbody>

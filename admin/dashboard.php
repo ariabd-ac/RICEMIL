@@ -42,19 +42,31 @@
             <div class="col-md-6 col-4 align-self-center">
                 <div class="text-end upgrade-btn">
                     
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
-
-
+    
+    
     <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Sales chart -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="card">
+        <!-- ============================================================== -->
+        <!-- Sales chart -->
+        <!-- ============================================================== -->
+        <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                        <!-- chart transaksi -->
+                    <div class="card">
                             <div class="card-header">
                                 Transaksi
                             </div>
@@ -72,7 +84,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <div class="card-header text-center">Dalam Pengiriman</div>
+                                            <div class="card-header text-center">Dikirim</div>
                                             <div class="card-body text-center align-items-center bg-warning">
                                                 <h2 class="h2">
                                                     <?php echo $execTrx['totalDikirim'] ?>
@@ -93,8 +105,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
+                        <!-- chart transaksi -->
+
+                        <!-- chart users -->
                         <div class="card">
                             <div class="card-header">
                                 Users
@@ -103,17 +116,10 @@
                                 <canvas id="myChartDonut"></canvas>
                             </div>
                         </div>
+                        <!-- chart users -->
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <canvas id="myChart"></canvas>
-                            </div>
-                        </div>  
-                    </div>
-                </div>
+                
                       
         
 

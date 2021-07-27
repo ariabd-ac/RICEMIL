@@ -19,7 +19,7 @@ continueBtn.onclick = () => {
         let data = xhr.response;
         console.log('data:', data)
         if (data === "success") {
-          location.href = "./reseller/index.php";
+          location.href = "./reseller/index.php";//redirect halaman utama
         } else {
           errorText.style.display = "block";
           errorText.textContent = data;

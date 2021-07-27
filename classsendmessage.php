@@ -6,6 +6,18 @@ class Whatsapp
     // public $base_url = 'http://localhost:3000/'; // masukan link
     public $base_url = 'http://wa-api.tripujiindri.website/'; // masukan link
 
+    // sistem monitoring ketinggionan air randusanga IOT
+
+
+    //   sensor
+
+    //|| tangan +++++ 20 cm
+    //||
+    //|| === 4 cm ===
+    //||
+    //|| ~~~~~~~~~~~ 2cm
+    //||
+    //|||||||||||||||||||||||||
 
     private function connect($x, $n = '')
     {

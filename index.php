@@ -50,7 +50,7 @@ if (isset($_SESSION['unique_id']) && $_SESSION['level']  == 'admin') {
                 </div>
                 <div class="content-bottom animate__animated animate__fadeInRight">
                     <button type="submit">Sign</button>
-                    <h4>Not yet signed up?<a href="./register.php"> Sign up</a></h4>
+                    <h4>Not yet signed up?<a href="./register.php">Sign up</a></h4>
                 </div>
             </form>
         </div>

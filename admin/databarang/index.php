@@ -14,8 +14,9 @@
             </thead>
             <tbody>
                 <?php
-                $query = "SELECT * FROM tb_barang";
-                $result = mysqli_query($conn, $query);
+                // variabel tempan menyimpan data
+                $query = "SELECT * FROM tb_barang"; //query
+                $result = mysqli_query($conn, $query); //eksekusi query
 
                 while ($row = mysqli_fetch_assoc($result)) {
                 ?>
