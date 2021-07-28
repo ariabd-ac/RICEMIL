@@ -21,19 +21,19 @@ continueBtn.onclick = () => {
         console.log('status', data);
         if (data === "reseller") {
           location.href = "./reseller/";
-        } if (data === "admin") {
+        }else if (data === "admin") {
           location.href = "./admin/";
-        } if (data === "gudang") {
+        }else if (data === "gudang") {
           location.href = "./gudang/";
-        } if (data === "kasir") {
+        }else if (data === "kasir") {
           location.href = "./kasir/";
-        } if (data === "supplier") {
+        }else if (data === "supplier") {
           location.href = "./supplier/";
         }
 
         else {
           errorText.style.display = "block";
-          errorText.textContent = data;
+          errorText.innerHTML = data+".<br/>Please contact administrator if you have forgotten your password";
         }
       }
     }

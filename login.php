@@ -31,7 +31,7 @@
         </div>
         <div class="pwd animate__animated animate__fadeInLeft">
           <div class=""></div>
-          <a href="#" class="forget-pwd">Fotget password</a>
+          <a href="forget_password.php" class="forget-pwd">Fotget passworddddd</a>
         </div>
         <div class="content-bottom animate__animated animate__fadeInRight">
           <button type="submit">Sign</button>

@@ -375,9 +375,6 @@
         let itemList = [];
 
 
-
-
-
         $.ajax({
           type: "post",
           url: url,
