@@ -45,15 +45,21 @@ if (isset($_POST['submit'])) {
         <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="namabarang">Nama Barang</label>
-                <input type="text" name='namabarang' class='form-control'>
+                <input type="text" name='namabarang' class='form-control' required
+                        oninvalid="this.setCustomValidity('Nama Barang Wajib diisi')"
+                        oninput="this.setCustomValidity('')">
             </div>
             <div class="form-group">
                 <label for="namabarang">Harga Barang</label>
-                <input type="number" name='harga' class='form-control'>
+                <input type="number" name='harga' class='form-control' required
+                        oninvalid="this.setCustomValidity('Harga Barang Wajib diisi')"
+                        oninput="this.setCustomValidity('')">
             </div>
             <div class="form-group">
                 <label for="namabarang">Gambar</label>
-                <input type="file" name='gambar' class='form-control'>
+                <input type="file" name='gambar' class='form-control' required
+                oninvalid="this.setCustomValidity('Gambar Wajib diisi')"
+                        oninput="this.setCustomValidity('')">
             </div>
             <div class="form-group">
                 <input type="submit" class='btn btn-success' name='submit' value='submit' class='form-control'>

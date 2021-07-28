@@ -48,28 +48,46 @@ if (isset($_POST['simpan-users'])) {
         <hr>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Username</span>
-          <input type="text" name="username" id="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+          <input type="text" name="username" id="username" class="form-control" 
+                  oninvalid="this.setCustomValidity('Username Wajib diisi')" required
+                  oninput="this.setCustomValidity('')"  
+                placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         
 
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon3">Frist Name</span>
-          <input type="text" name="fname" id="fname" class="form-control" placeholder="Enter frist name" aria-label="Username">
+          <input type="text" name="fname" id="fname" class="form-control" 
+                oninvalid="this.setCustomValidity('Nama Depan Wajib diisi')" required
+                oninput="this.setCustomValidity('')"
+                placeholder="Enter frist name" aria-label="Username">
           <span class="input-group-text" id="basic-addon3">Last Name</span>
-          <input type="text" name="lname" id="lname" class="form-control" placeholder="Enter last name" aria-label="Server">
+          <input type="text" name="lname" id="lname" class="form-control" 
+                  oninvalid="this.setCustomValidity('Nama Belakang Wajib diisi')" required
+                  oninput="this.setCustomValidity('')"
+                  placeholder="Enter last name" aria-label="Server">
         </div>
 
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Handphone</span>
-          <input type="text" name="handphone" id="handphone" class="form-control" placeholder="Handphone" aria-label="Username" aria-describedby="basic-addon1">
+          <input type="text" name="handphone" id="handphone" class="form-control" 
+          oninvalid="this.setCustomValidity('No Handphone Wajib diisi')" 
+          oninput="this.setCustomValidity('')" required
+          placeholder="Handphone" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon3">Email</span>
-          <input type="text" name="email" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <input type="text" name="email" class="form-control" 
+            oninvalid="this.setCustomValidity('Email Wajib diisi')"
+                                  oninput="this.setCustomValidity('')" required
+          placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
           <span class="input-group-text" id="basic-addon2">Status user</span>
-          <select class="form-select" aria-label="Default select example" name="level">
+          <select class="form-select" 
+          oninvalid="this.setCustomValidity('Status User Wajib diisi')"
+          oninput="this.setCustomValidity('')"   required
+          aria-label="Default select example" name="level">
             <option selected>Status</option>
             <option value="kasir">Kasir</option>
             <option value="gudang">Gudang</option>
@@ -81,7 +99,10 @@ if (isset($_POST['simpan-users'])) {
 
         <div class="input-group mb-3">
           <span class="input-group-text">Password</span>
-          <input type="password" name="password" id="password" class="form-control" aria-label="Amount (to the nearest dollar)">
+          <input type="password" name="password" id="password" 
+                oninvalid="this.setCustomValidity('Password Wajib diisi')"
+                oninput="this.setCustomValidity('')" required
+                class="form-control" aria-label="Amount (to the nearest dollar)">
         </div>
 
         <div class="input-group">

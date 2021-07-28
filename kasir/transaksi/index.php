@@ -361,48 +361,53 @@
   // }
 
   async function save() {
-    let url = "http://localhost/ricemil/kasir/";
+    if(bayarElement.value > 0){
+      let url = "http://localhost/ricemil/kasir/";
     // let subTotal = await getSubTotal()
     // let total = await getTotal(subTotal)
     // let metodeBayar = document.getElementById('metodeBayar').value
 
 
-    let subTotalDetail = document.getElementById('subtotal');
-    // let qty = document.getElementById('qty');
-    let total = document.getElementById('total');
-    let diskon = document.getElementById('diskon');
-    let itemList = [];
+        let subTotalDetail = document.getElementById('subtotal');
+        // let qty = document.getElementById('qty');
+        let total = document.getElementById('total');
+        let diskon = document.getElementById('diskon');
+        let itemList = [];
 
 
 
 
 
-    $.ajax({
-      type: "post",
-      url: url,
-      data: {
-        save: "save",
-        subTotalDetail: subTotalDetail.value,
-        total: total.value,
-        diskon: diskon.value,
-        itemList: dataKeranjangItem,
-        // metodeBayar: metodeBayar
-      },
-      dataType: "json",
-      success: function(response) {
-        console.log('s', response);
-        if (response.status == "OK") {
-          let id_trx=response.idTrx;
-          let dibayar=bayarElement.value
-          let discount= diskonElement.value
-          
-          window.open("http://localhost/ricemil/document/index.php?template=struck-kasir&id="+id_trx+"&dibayar="+dibayar+"&discount="+discount);
-          window.location.href="http://localhost/ricemil/kasir/index.php?page=kasir";
-        }
-      },
-      error: function(error) {
-        console.log('err', error.responseText);
-      }
-    });
+        $.ajax({
+          type: "post",
+          url: url,
+          data: {
+            save: "save",
+            subTotalDetail: subTotalDetail.value,
+            total: total.value,
+            diskon: diskon.value,
+            itemList: dataKeranjangItem,
+            // metodeBayar: metodeBayar
+          },
+          dataType: "json",
+          success: function(response) {
+            console.log('s', response);
+            if (response.status == "OK") {
+              let id_trx=response.idTrx;
+              let dibayar=bayarElement.value
+              let discount= diskonElement.value
+              
+              window.open("http://localhost/ricemil/document/index.php?template=struck-kasir&id="+id_trx+"&dibayar="+dibayar+"&discount="+discount);
+              window.location.href="http://localhost/ricemil/kasir/index.php?page=kasir";
+            }
+          },
+          error: function(error) {
+            console.log('err', error.responseText);
+          }
+        });
+    }else{
+      window.alert("Harap Masukan Pembayaran !!!")
+    }
+    
   }
 </script>

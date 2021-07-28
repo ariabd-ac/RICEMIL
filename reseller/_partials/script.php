@@ -94,7 +94,12 @@
         }
 
         if(target.id=="save"){
-            save();
+            // console.log(document.getElementById('metodeBayar').value,"VALUE SELECT");
+            // if(document.getElementById('metodeBayar').value !== NULL){
+                save();
+            // }else{
+            //     alert("Harap Pilih Metode Pembayaran")
+            // }
         }
         
     })
@@ -102,9 +107,13 @@
     modalBodyKeranjang.addEventListener('click',(e)=>{
         const target=e.target
         
-
+        console.log(document.getElementById('metodeBayar').value,"VALUE SELECT");
         if(target.id=="save"){
-            save();
+            if(document.getElementById('metodeBayar').value != 0){
+                save();
+            }else{
+                window.alert("Harap Pilih Metode Pembayaran");
+            }
         }
         
     })

@@ -348,7 +348,11 @@ if (isset($_POST['submit'])) {
 
         if(target.id == 'submit'){
             e.preventDefault();
-            postData();
+            if(tbodyTable.rows.length > 0){
+                postData();
+            }else{
+                alert("Anda belum menentukan barang,barang masih kosong")
+            }
         }
     })
       // change event on container gudang
