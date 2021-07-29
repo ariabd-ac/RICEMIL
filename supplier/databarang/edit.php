@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
     if(!$execAct){
         die("ERROR ==>".mysqli_error($conn));
     }else{
-        header('location:/ricemil/supplier/index.php');
+        header('location:/ricemil/supplier/index.php?page=databarang');
     }
     
 } else {
